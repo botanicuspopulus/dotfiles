@@ -1,0 +1,124 @@
+[credential]
+	helper = store
+	# Enable HTTP(S) auth credential caching
+	# for 60 seconds (requires git 1.7.9+)
+	helper = cache --timeout 60
+
+[user]
+	name = William Smith
+	email = william@williamgsmith.co.za
+
+[init]
+  defaultBranch = main
+
+[push]
+  default = current
+  followTags = true
+  recurseSubmodules = check # See: https://stackoverflow.com/questions/5814319/git-submodules-push
+
+[core]
+	pager = delta
+  whitespace = trailing-space,space-before-tab
+	excludesfile = ~/.config/git/.gitignore
+
+	# do not quote non-ascii characters; display unicode as-is
+	quotepath = false
+	editor = nvim
+	attributesFile = ~/.config/git/gitattributes
+
+[advice]
+  statusHints = false
+  pushNonFastFastforward = false
+
+[log]
+	mailmap = true
+
+[alias]
+  prune = fetch --prune
+	undo = reset --soft HEAD^
+	d = difftool
+	reword = commit --amend
+	fuck = reset --hard
+	amend = commit --amend --no-edit
+	wip = !git add --all && git commit am 'WIP'
+	popwip = !git log -1 --pretty=%B | grep -q '^WIP$' && git reset HEAD^ || echo 'HEAD is not a WIP commit'
+	pt = !git tag -l | xargs tag -d && git fetch -t # prune tags.
+
+	root = rev-parse --show-toplevel
+	rt = !git fetch origin tip:tip | git rebase tip
+	unstage = reset HEAD --
+	recent = for-each-ref --count=10 --sort=committerdate refs/heads/ --format="%(refname:short)"
+	today = !git log --all --since=00:00:00 --oneline --no-merges --author=${1-$(git config user.email)}
+
+	history = log --graph --decoreate \
+		--pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%aan>%Creset' \
+		--abbrev-commit --date=short --date-order
+
+	partial-clone = clone --filter=blob:ncredential]
+  alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+
+[branch]
+  sort = authordate
+  autosetuprebase = always
+
+[delta]
+  navigate = true
+  features = side-by-side line-numbers decorations
+  whitespace-error-style = 22 reverse
+  light = false
+
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#668a00"
+  hunk-header-style = file line-number syntax
+
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[diff]
+  renames = copies
+  mnemonicprefix = true # [i]index, [w]ord tree, [c]ommit, [o]bjec
+  colorMoved = default
+
+[grep]
+  lineNumber = true
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[merge]
+  stat = true
+  conflictstyle = diff3
+
+[mergetool]
+  prompt = false
+
+[fetch]
+  # https://spin.atomic.com/2020/05/05/git-configurations-default
+  prune = true
+
+[pull]
+  # https://spin.atomic.com/2020/05/05/git-configurations-default
+  rebase = true
+
+[rebase]
+  autoStash = false
+
+[remote "origin"]
+  tagopt = --tags
+
+[rerere] # See rerere docs at https://git-scm.com/blog/2010/03/08/rerere.html
+  enabled = true
+
+[status]
+  showUntrackedFiles = all
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

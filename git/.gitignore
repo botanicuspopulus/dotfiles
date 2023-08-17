@@ -1,0 +1,55 @@
+# Global gitignore
+
+.antidote
+.antidote/
+
+.cache/
+.external/
+.plugins/
+.zcompcache/
+.zcompdump*
+.zdirs
+.zhistory
+.zplugins/
+.zsh_history
+.zsh_plugins.zsh
+.zsh_sessions/
+*.cache
+*.bak
+*.local
+*.local.zsh
+*.zwc
+*.zwc.old
+.zplugins.zsh
+~*
+.zlocal
+
+# Vim
+.*.s[a-w][a-z]
+Session.vim
+.netrwhist
+.XTabline*
+
+# Linux
+.fuse_hidden*
+.nfs*
+
+# Windows
+Thumbs.db
+
+# IDE Stuff
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+tags
+.vimspector.json
+
+# Python Venv
+.venv*
+.mypy_cache
+__pycache__
+*.py[cod]
+.condaenv
