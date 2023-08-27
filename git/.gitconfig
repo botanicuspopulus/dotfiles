@@ -1,15 +1,19 @@
+[init]
+  defaultBranch=master
+
 [credential]
-	helper = store
-	# Enable HTTP(S) auth credential caching
-	# for 60 seconds (requires git 1.7.9+)
-	helper = cache --timeout 60
+ helper = store
+ # Enable HTTP(S) auth credential caching
+ # for 60 seconds (requires git 1.7.9+)
+ helper = cache --timeout 60
+
+[commit]
+  verbose = true
+  template = ~/.config/git/.gittemplates/commit
 
 [user]
-	name = William Smith
-	email = william@williamgsmith.co.za
-
-[init]
-  defaultBranch = main
+ name = William Smith
+ email = william@williamgsmith.co.za
 
 [push]
   default = current
@@ -17,82 +21,93 @@
   recurseSubmodules = check # See: https://stackoverflow.com/questions/5814319/git-submodules-push
 
 [core]
-	pager = delta
+  pager = delta
   whitespace = trailing-space,space-before-tab
-	excludesfile = ~/.config/git/.gitignore
-
-	# do not quote non-ascii characters; display unicode as-is
-	quotepath = false
-	editor = nvim
-	attributesFile = ~/.config/git/gitattributes
+  excludesfile = ~/.config/git/.gitignore
+  # do not quote non-ascii characters; display unicode as-is
+  quotepath = false
+  editor = nvim
+  attributesFile = ~/.config/git/gitattributes
 
 [advice]
   statusHints = false
   pushNonFastFastforward = false
 
 [log]
-	mailmap = true
+ mailmap = true
 
 [alias]
   prune = fetch --prune
-	undo = reset --soft HEAD^
-	d = difftool
-	reword = commit --amend
-	fuck = reset --hard
-	amend = commit --amend --no-edit
-	wip = !git add --all && git commit am 'WIP'
-	popwip = !git log -1 --pretty=%B | grep -q '^WIP$' && git reset HEAD^ || echo 'HEAD is not a WIP commit'
-	pt = !git tag -l | xargs tag -d && git fetch -t # prune tags.
+  undo = reset --soft HEAD^
+  d = difftool
+  reword = commit --amend
+  fuck = reset --hard
+  amend = commit --amend --no-edit
+  wip = !git add --all && git commit am 'WIP'
+  popwip = !git log -1 --pretty=%B | grep -q '^WIP$' && git reset HEAD^ || echo 'HEAD is not a WIP commit'
+  pt = !git tag -l | xargs tag -d && git fetch -t # prune tags.
 
-	root = rev-parse --show-toplevel
-	rt = !git fetch origin tip:tip | git rebase tip
-	unstage = reset HEAD --
-	recent = for-each-ref --count=10 --sort=committerdate refs/heads/ --format="%(refname:short)"
-	today = !git log --all --since=00:00:00 --oneline --no-merges --author=${1-$(git config user.email)}
+  root = rev-parse --show-toplevel
+  rt = !git fetch origin tip:tip | git rebase tip
+  unstage = reset HEAD --
+  recent = for-each-ref --count=10 --sort=committerdate refs/heads/ --format="%(refname:short)"
+  today = !git log --all --since=00:00:00 --oneline --no-merges --author=${1-$(git config user.email)}
 
-	history = log --graph --decoreate \
-		--pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%aan>%Creset' \
-		--abbrev-commit --date=short --date-order
+  history = log --graph --decoreate \
+   --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%aan>%Creset' \
+   --abbrev-commit --date=short --date-order
 
-	partial-clone = clone --filter=blob:ncredential]
+  partial-clone = clone --filter=blob:ncredential]
   alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 
-[branch]
-  sort = authordate
-  autosetuprebase = always
+[include]
+  path=$HOME/.config/dotfiles/themes/delta/tokyonight_night.gitconfig
 
 [delta]
-  navigate = true
-  features = side-by-side line-numbers decorations
-  whitespace-error-style = 22 reverse
+  side-by-side = false
+  decorations = true
+  width = variable
+  hyperlinks = true
+  true-color = always
+  relative-paths = true
   light = false
+  hyperlinks-file-link-format = "http://o/file/{path}:{line}"
 
 [delta "decorations"]
   commit-decoration-style = blue ol
   commit-style = raw
-  file-style = omit
+  file-style = omit blue
   hunk-header-decoration-style = blue box
   hunk-header-file-style = red
-  hunk-header-line-number-style = "#668a00"
+  hunk-header-line-number-style = "#067a00"
   hunk-header-style = file line-number syntax
-
-[delta "interactive"]
-  keep-plus-minus-markers = false
+  grep-file-style = red
 
 [diff]
   renames = copies
   mnemonicprefix = true # [i]index, [w]ord tree, [c]ommit, [o]bjec
   colorMoved = default
+  algorithm = histogram
 
 [grep]
   lineNumber = true
 
 [interactive]
-  diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only
 
 [merge]
+  ff = false
   stat = true
   conflictstyle = diff3
+  tool = mergetool
+
+[mergetool "mergetool"]
+  cmd = nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+  trustExitCode = true
+
+[difftool]
+  prompt = false
+  trustExitCode = true
 
 [mergetool]
   prompt = false
@@ -108,8 +123,6 @@
 [rebase]
   autoStash = false
 
-[remote "origin"]
-  tagopt = --tags
 
 [rerere] # See rerere docs at https://git-scm.com/blog/2010/03/08/rerere.html
   enabled = true
@@ -117,8 +130,11 @@
 [status]
   showUntrackedFiles = all
 
+[color "blame"]
+  highlightRecent = white,1 month ago,yellow,1 week ago,red
+
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+ process = git-lfs filter-process
+ required = true
+ clean = git-lfs clean -- %f
+ smudge = git-lfs smudge -- %f

@@ -40,7 +40,7 @@ gui:
 git:
   paging:
     colorArg: always
-    pager: delta --syntax-theme "tokyonight-night" --paging=never
+    pager: delta --syntax-theme "tokyonight_night" --paging=never
     useConfig: false
   commit:
     signOff: false
@@ -215,5 +215,4 @@ customCommands:
     command: 'gh browse "{{.SelectedLocalCommit.Sha}}"'
     context: "commits"
 services: {}
-notARepository: skip
 promptToReturnFromSubprocess: true
