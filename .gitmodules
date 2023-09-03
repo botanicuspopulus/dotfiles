@@ -1,3 +1,11 @@
 [submodule "cheat/cheatsheets/community"]
 	path = cheat/cheatsheets/community
 	url = https://github.com/cheat/cheatsheets.git
+
+[submodule "nvim"]
+	path = nvim
+	url = git@github.com:botanicuspopulus/NvimConfig.git
+
+[submodule "zsh"]
+	path = zsh
+	url = git@github.com:botanicuspopulus/zsh_dotfiles.git
