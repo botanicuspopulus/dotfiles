@@ -1,0 +1,13 @@
+include ./config.d/*
+include /etc/sway/config.d/*
+
+set $term alacritty
+gaps inner 8
+
+default_border pixel 2
+
+# Bindings
+bar {
+  swaybar_command waybar
+}
+

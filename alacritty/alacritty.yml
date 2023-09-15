@@ -1,0 +1,65 @@
+# yamllint disable rule:braces rule:commas rule:colons rule:comments-indentation
+---
+window:
+  padding:
+    x: 0
+    y: 0
+
+  dynamic_padding: true
+
+  dynamic_title: true
+
+  opacity: 1.0
+
+  decorations: none
+
+draw_bold_text_with_bright_colors: true
+
+scrolling:
+  history: 10000
+
+  multiplier: 3
+
+font:
+  normal: 
+    family: Lekton Nerd Font
+    style: Regular
+  bold: 
+    family: Lekton Nerd Font
+    style: Bold
+  italic:
+    family: Lekton Nerd Font
+    style: Italic
+
+  size: 12
+
+  offset:
+    x: 0
+    y: 0
+
+  glyph_offset:
+    x: 0
+    y: 0
+
+mouse:
+  hide_when_typing: true
+
+selection:
+  save_to_clipboard: true
+
+cursor:
+  thickness: 0.18
+
+shell:
+  program: /usr/bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux new -A -salacritty"
+
+startup_mode: Fullscreen
+
+key_bindings:
+  - { key: Paste, action: Paste }
+  - { key: Copy, action: Copy }
+  - { key: L, mods: Control, action: ClearLogNotice }
