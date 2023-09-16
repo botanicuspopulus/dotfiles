@@ -1,31 +1,24 @@
 {
   "layer": "top",
+  "height": 30,
   "position": "top",
-  "modules-left": [ "sway/workspaces", "sway/mode", "sway/window" ],
-  "modules-center": [ "clock" ]
-  "modules-right": ["wlr/taskbar", "pulseaudio", "memory", "cpu", "temperature", "network", "tray", "battery"],
+  "modules-left": [ "sway/workspaces", "sway/mode", "sway/scratchpad" ],
+  "modules-center": [ "sway/window" ],
+  "modules-right": [ "mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "battery", "clock", "tray"],
   "sway/window": {
     "max-length": 50
   },
   "clock": {
     "format": "{:%a, %d. %b %H:%M}",
-    "tooltip": false,
+    "tooltip": false
   },
   "sway/workspaces": {
     "format": "{}",
     "smooth-scrolling-threshold": 1.5,
-    "enable-bar-scroll": fase
+    "enable-bar-scroll": false
   },
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
-  },
-  "wlr/taskbar": {
-    "format": "{icon}",
-    "icon-size": 14,
-    "icon-theme": "Numix-Circle",
-    "tooltip-format": "{title}",
-    "on-click": "activate",
-    "on-click-middle": "close"
   },
   "memory": {
     "interval": 30,
@@ -66,23 +59,6 @@
     },
     "format": "{icon} {capacity}%",
     "format-icons" : ["", "", "", "", ""]
-  }
-  }
-  "pulseaudio": {
-    "format": "{volume}% {icon}",
-    "format-bluetooth": "{volume}% {icon}",
-    "format-muted": "",
-    "format-icons": {
-        "headphone": "",
-        "hands-free": "",
-        "headset": "",
-        "phone": "",
-        "portable": "",
-        "car": "",
-        "default": ["", ""]
-    },
-    "scroll-step": 1,
-    "on-click": "pavucontrol"
   },
   "custom/scratchpad-indicator": {
     "interval": 3,

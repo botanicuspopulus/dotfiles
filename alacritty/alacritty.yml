@@ -22,13 +22,13 @@ scrolling:
 
 font:
   normal: 
-    family: Lekton Nerd Font
+    family: Lekton Nerd Font Mono
     style: Regular
   bold: 
-    family: Lekton Nerd Font
+    family: Lekton Nerd Font Mono
     style: Bold
   italic:
-    family: Lekton Nerd Font
+    family: Lekton Nerd Font Mono
     style: Italic
 
   size: 12
