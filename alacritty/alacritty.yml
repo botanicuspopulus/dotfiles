@@ -59,6 +59,9 @@ shell:
 
 startup_mode: Fullscreen
 
+env:
+  TERM: xterm-256color
+
 key_bindings:
   - { key: Paste, action: Paste }
   - { key: Copy, action: Copy }

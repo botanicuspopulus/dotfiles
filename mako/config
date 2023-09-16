@@ -1,10 +1,22 @@
 font=Lekton Nerd Font Mono
+width=350
+padding=10
+margin=30
+border-size=2
+border-radius=5
+
+background-color=#1d202f
+border-color=#f7768e
+text-color=#c0caf5
+
+default-timeout=7000
+on-button-middle=exec makoctl menu -n "$id" wofi --bemenu -p 'Select Action: '
 markup=1
 max-visible=5
-default-timeout=7000
-margin=30
-padding=10
-ignore-timeout=1
 layer=overlay
 
-border-radius=5
+[urgency=high]
+border-color=#f7768e
+ignore-timeout=1
+
+
