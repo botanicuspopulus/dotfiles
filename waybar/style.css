@@ -7,12 +7,19 @@
 }
 
 window#waybar {
-    background: transparent;
-    color: #c0caf5;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+  transition-duration: 0s;
+  background: transparent;
+  color: #c0caf5;
 }
 
 tooltip {
   background: #1d202f;
+  margin: 5px;
+  margin-left: 6px;
   border-radius: 15px;
   border-width: 2px;
   border-style: solid;
@@ -25,9 +32,13 @@ tooltip {
 	margin-left: 10px;
 	border-radius: 5px;
 }
+
 #workspaces button {
     padding: 5px 10px;
     color: #c0caf5;
+    border: 3px solid rgba(9, 85, 225, 0);
+    border-radius: 10px;
+    min-width: 33px;
 }
 
 #workspaces button.focused {
@@ -36,16 +47,45 @@ tooltip {
     border-radius: 5px;
 }
 
+#workspaces button.urgent {
+  background-color: #a96d1f;
+  color: white;
+}
+
 #workspaces button:hover {
+	box-shadow: inherit;
 	background-color: #7dcfff;
 	color: #24283b;
 	border-radius: 5px;
 }
 
-#custom-date, #clock, #battery, #pulseaudio, #network {
+#custom-date, 
+#clock, 
+#battery, 
+#pulseaudio, 
+#network,
+#cpu,
+#tray,
+#custom-media,
+#memory,
+#temperature {
 	background-color: #24283b;
 	padding: 5px 10px;
 	margin: 5px 0px;
+}
+
+#custom-media {
+  color: #9ece6a;
+  border-radius: 5px;
+}
+
+#tray {
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  padding: 5px 10px;
 }
 
 #custom-date {
@@ -61,34 +101,44 @@ tooltip {
 	margin-bottom: 5px;
 	margin-left: 0px;
 	padding: 5px 10px;
+	padding-right: 12px;
+	font-size: 20px;
 }
 
 #clock {
-    color: #b48ead;
-    border-radius: 0px 5px 5px 0px;
-    margin-right: 10px;
+  color: #b48ead;
+  border-radius: 0px 5px 5px 0px;
+  margin-right: 10px;
 }
 
 #battery {
-    color: #9ece6a;
-    padding: 0px 8px;
-    margin: 8px 0px;
-    background-color: #24283b
+  color: #9ece6a;
+  background-color: #24283b
 }
 
 #battery.charging {
     color: #9ece6a;
 }
 
+#battery.warning {
+  color: #a96d1f;
+}
+
+#battery.critical {
+  color: #f7768e;
+}
+
 #battery.warning:not(.charging) {
     background-color: #f7768e;
     color: #24283b;
-    border-radius: 5px 5px 5px 5px;
 }
 
 #network {
 	color: #f7768e;
 	border-radius: 5px 0px 0px 5px;
+}
+
+#cpu {
 }
 
 #pulseaudio {

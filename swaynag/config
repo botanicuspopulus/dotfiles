@@ -1,15 +1,16 @@
-[mtype]
-background=#1b1414
-border=#285577
-button-background=#31363b
-text=#ffffff
-font=Lekton Nerd Font Mono 14
-edge=top
+[type]
+font=Lekton Nerd Font Mono 10
+dismiss-button=Dismiss
+background=24283B
+border=285577
+border-bottom=414868
+button-background=31363b
+text=c0caf5
+edge=bottom
 message-padding=8
 button-padding=6
-button-gap=10
+button-gap=5
 button-margin-right=4
 button-dismiss-gap=6
 details-border-size=2
 button-border-size=0
-button-bottom-size=0
