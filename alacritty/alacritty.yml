@@ -2,16 +2,16 @@
 ---
 window:
   padding:
-    x: 0
-    y: 0
+    x: 5
+    y: 5
 
   dynamic_padding: true
 
   dynamic_title: true
 
-  opacity: 1.0
+  opacity: 0.9
 
-  decorations: none
+  decorations: Full
 
 draw_bold_text_with_bright_colors: true
 
@@ -31,7 +31,7 @@ font:
     family: Lekton Nerd Font Mono
     style: Italic
 
-  size: 12
+  size: 8
 
   offset:
     x: 0
