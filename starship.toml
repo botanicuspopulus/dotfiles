@@ -21,9 +21,9 @@ $status\
 $character """
 
 [character]
-success_symbol = "[❯](bold bright-blue)[❯](bold blue)"
-error_symbol = "[❯](bold bright-red)[❯](bold blue)"
-vimcmd_symbol = "[](bold blue)[](bold cyan)"
+success_symbol = "[󰅂](bold bright-blue)[󰅂](bold blue)"
+error_symbol = "[󰅂](bold bright-red)[󰅂](bold blue)"
+vimcmd_symbol = "[󰅁](bold blue)[󰅁](bold cyan)"
 
 [directory]
 truncation_length = 1

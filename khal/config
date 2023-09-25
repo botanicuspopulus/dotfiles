@@ -1,0 +1,30 @@
+[calendars]
+
+[[my_calendar_local]]
+path = ~/Documents/calendars/*
+type = discover
+
+[[my_contacts_local]]
+path = ~/Documents/Contacts/*
+type = discover
+
+[locale]
+timeformat = %H:%M
+dateformat = %d/%m/%Y
+longdateformat = %d/%m/%Y
+datetimeformat = %d/%m/%Y %H:%M
+longdatetimeformat = %d/%m/%Y %H:%M
+
+[default]
+highlight_event_days = True
+show_all_days = True
+
+[view]
+frame = color
+theme = dark
+
+[hightlight_days]
+color = ''
+default_color = yellow
+method = foreground
+multiple = ''

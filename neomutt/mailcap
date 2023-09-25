@@ -1,0 +1,22 @@
+# MS Word documents
+application/msword; $DOTFILES/office/view-attachment.sh %s "-" '/usr/bin/libreoffice'
+application/vnd.ms-excel; $DOTFILES/office/view-attachment.sh %s "-" '/usr/bin/libreoffice'
+application/vnd.openxmlformats-officedocument.presentationml.presentation; $DOTFILES/office/view-attachment.sh %s "-" '/usr/bin/libreoffice'
+application/vnd.oasis.opendocument.text; $DOTFILES/office/view-attachment.sh %s "-" '/usr/bin/libreoffice'
+
+# HTML
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+text/plain; nvim %s
+
+# PDFs
+application/pdf; /usr/bin/zathura %s pdf
+
+# Images
+image/png; /usr/bin/feh %s
+image/jpeg; /usr/bin/feh %s
+
+# Show calendar invites
+text/calendar; render-calendar-attachment.py %s; copiousoutput;
+application/ics; mutt-viewical; copiousoutput
+
+
