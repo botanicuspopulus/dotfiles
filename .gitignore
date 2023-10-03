@@ -1,3 +1,5 @@
 lazygit/state.yml
-neomutt/accounts
-**/__pycache__
+neomutt/accounts/
+**/__pycache__/
+**/__init__.py
+**/.generated_settings/

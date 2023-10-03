@@ -1,5 +1,8 @@
 # yamllint disable rule:braces rule:commas rule:colons rule:comments-indentation
 ---
+import:
+  - ~/dotfiles/themes/alacritty/tokyonight_night.yml
+
 window:
   padding:
     x: 5
