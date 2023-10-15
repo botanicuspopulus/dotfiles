@@ -1,9 +1,11 @@
 include ./config.d/*
 include /etc/sway/config.d/*
 
-focus_follows_mouse no
+focus_follows_mouse yes
 
 gaps inner 5
+
+smart_gaps on
 
 default_border pixel 2
 smart_borders on
@@ -17,14 +19,8 @@ bar {
 
 exec wl-paste -t text --watch clipman store --no-persist
 
-exec_always ~/.config/bin/import-gsettings
-exec_always killall pulseaudio
-exec_always sh -c "pulseaudio --daemonize"
-exec mako
-
 exec swayidle -w \
   timeout 600 $lock \
   timeout 570 'swaymsg "output * dpms off"' \
   resume 'swaymsg "output * dpms on"' \
   before-sleep $lock
-

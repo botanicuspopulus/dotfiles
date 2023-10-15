@@ -2,72 +2,97 @@ add_newline = false
 command_timeout = 10000
 
 format="""
+$battery\
 $username\
 $hostname\
 $directory\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
 $cmake\
 $nodejs\
 $python\
 $vagrant\
 $docker_context\
 $env_var\
-$battery\
 $time\
 $status\
-$character """
+$character"""
+
+right_format = """
+$git_status\
+$git_metrics\
+$git_state\
+$git_commit\
+$git_branch\
+"""
 
 [character]
-success_symbol = "[󰅂](bold bright-blue)[󰅂](bold blue)"
-error_symbol = "[󰅂](bold bright-red)[󰅂](bold blue)"
-vimcmd_symbol = "[󰅁](bold blue)[󰅁](bold cyan)"
+success_symbol = '[](bold bright-blue)[](bold blue) '
+error_symbol = '[](bold bright-red)[](bold blue) '
+vimcmd_symbol = '[](bold bright-cyan)[](bold blue) '
+vimcmd_replace_symbol = '[](bold bright-purple)[](bold blue) '
+vimcmd_replace_one_symbol = '[](bold bright-green)[](bold blue) '
 
 [directory]
-truncation_length = 1
-style = 'blue'
-format = '[󰉋](style) [$path]($style)[$read_only]($read_only_style)'
-read_only = " 󰌾"
-truncation_symbol = ""
+truncation_length = 2
+style = 'bold blue'
+format = '[ ](style) [$path]($style)[$read_only]($read_only_style) '
+read_only = " "
+truncation_symbol = ".../"
+home_symbol = " "
 
 [battery]
-full_symbol = "󰁹"
-charging_symbol = "󰂄"
-discharging_symbol = "󰂃"
-empty_symbol = "󰂎"
+full_symbol = '󰁹 '
+charging_symbol = '󰂄 '
+discharging_symbol = '󰂃 '
+empty_symbol = '󰂎 '
+format='[$symbol\($percentage\)]($style) '
+
+[[battery.display]]
+threshold = 10
+style = 'bold red'
+
+[[battery.display]]
+threshold = 20
+style = 'bold orange'
+
+[[battery.display]]
+threshold = 30
+style = 'bold yellow'
+
+[[battery.display]]
+threshold = 99
+style = 'bold green'
 
 [git_branch]
-format = "[$symbol$branch]($style) "
-symbol = "  "
+format = '[$symbol$branch]($style) '
+symbol = ' '
 
 [git_state]
-format = '\(:[$state( $progress_current/$progress_total)]($style)\)'
+format = '\(:[$state( $progress_current/$progress_total)]($style)\) '
 
 [git_status]
-format = '(:[$all_status$ahead_behind]($style)) '
-conflicted = '\[ﲅ [$count](bright-white bold)\]'
-ahead = '\[[﯁ ](bright-blue)[$count](bright-white bold)\]'
-behind = '\[[﮾ ]](white)[$count](bright-white bold)\]'
-diverged = '\[[ ](purple)|[ ﯁ ](bright-blue)[$ahead_count][ ﮾ ](white)[$behind_count](bright-white)\]'
-untracked = '\[ [$count](bright-white bold)\]'
-stashed = '\[[](yellow) [$count](bright-white bold)\]'
-modified = '\[ (bright-yellow)[$count](bright-white bold)\]'
-staged = '\[[ ](bright-green)[$count](bright-white bold)\]'
-renamed = '\[[ ](bright-cyan) [$count](bright-white bold)\]'
-deleted = '\[ [$count](bright-white bold)\]'
+format = '([$all_status$ahead_behind]($style)) '
+conflicted = '\[ﲅ  [$count](bright-white bold)\] '
+ahead = '\[[󱦲 ](bright-blue)[$count](bright-white bold)\] '
+behind = '\[[󱦳 ]](white)[$count](bright-white bold)\] '
+diverged = '\[[ ](purple)|[󱦲 ](bright-blue)[$ahead_count][󱦳 ](white)[$behind_count](bright-white)\] '
+untracked = '\[ [$count](bright-white bold)\] '
+stashed = '\[[ ](yellow) [$count](bright-white bold)\] '
+modified = '\[🔭 (bright-yellow)[$count](bright-white bold)\] '
+staged = '\[[ﱐ ](bright-green)[$count](bright-white bold)\] '
+renamed = '\[[ ](bright-cyan) [$count](bright-white bold)\] '
+deleted = '\[ [$count](bright-white bold)\] '
 
 [git_commit]
 commit_hash_length = 8
-style = "bold white"
+style = 'bold white'
+tag_symbol = ' 󰓹 '
 
 [python]
-format  = 'via [${symbol}${pyenv_prefix}\($virtualenv\) ]($style)'
+format  = 'via [${symbol}${pyenv_prefix}\($virtualenv\) ]($style) '
 
 [hostname]
 disabled = true
 
 [status]
 disabled = false
-symbol = ' ✘'
+symbol = '🤡 '
