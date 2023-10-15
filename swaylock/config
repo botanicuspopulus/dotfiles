@@ -1,9 +1,16 @@
 ignore-empty-password
-show-keyboard-layout
-indicator-caps-lock
 
+clock
+timestr=%R
+
+fade-in=0.2
+
+show-keyboard-layout
+
+indicator
 color=24283b
 font="Lekton Nerd Font 14"
+indicator-caps-lock
 indicator-radius=80
 indicator-thickness=20
 key-hl-color=bb9af7
