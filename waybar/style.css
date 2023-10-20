@@ -15,7 +15,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Lekton Nerd Font Mono;
+    font-family: Lekton Nerd Font Propo;
     font-size: 16px;
     min-height: 0;
 }
@@ -69,7 +69,7 @@ tooltip {
 #workspaces {
   margin-top: 5px;
   margin-bottom: 5px;
-  background-color: @color7;
+  background-color: @color5;
 }
 
 #workspaces:first-child {
@@ -92,7 +92,7 @@ tooltip {
 }
 
 #workspaces button.focused {
-  color: @color5;
+  color: @color7;
   background-color: @color4;
   border-radius: 7px;
 }
@@ -126,6 +126,10 @@ tooltip {
   margin: 5px 0px;
 }
 
+#temperature.critical {
+  color: @color10;
+}
+
 #cpu-format-icon {
   color: @color11;
 }
@@ -147,7 +151,6 @@ tooltip {
   padding-left: 10px;
 }
 
-
 #tray {
   border-radius: 7px;
   margin-top: 5px;
@@ -156,20 +159,6 @@ tooltip {
   margin-left: 0px;
   padding: 5px 10px;
 }
-
-#custom-powermenu {
-	color: @color5;
-	background-color: @color9;
-	border-radius: 7px;
-	margin-right: 0px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 0px;
-	padding: 5px 10px;
-	padding-right: 12px;
-	font-size: 20px;
-}
-
 
 #battery {
   color: @color3;
@@ -208,3 +197,17 @@ tooltip {
 #pulseaudio {
 	color: @color11;
 }
+
+#custom-powermenu {
+	color: @color5;
+	background-color: @color9;
+	border-radius: 7px;
+	margin-right: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	padding: 5px 10px;
+	padding-right: 12px;
+	font-size: 20px;
+}
+

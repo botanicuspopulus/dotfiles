@@ -1,5 +1,5 @@
 add_newline = false
-command_timeout = 10000
+command_timeout = 4000
 
 format="""
 $battery\
@@ -23,20 +23,25 @@ $git_state\
 $git_commit\
 $git_branch\
 """
+[username]
+style_user = "green bold"
+style_root = "black bold"
+format = "[$user]($style)"
+disabled = false
+show_always = false
 
 [character]
 success_symbol = '[](bold bright-blue)[](bold blue) '
 error_symbol = '[](bold bright-red)[](bold blue) '
 vimcmd_symbol = '[](bold bright-cyan)[](bold blue) '
-vimcmd_replace_symbol = '[](bold bright-purple)[](bold blue) '
-vimcmd_replace_one_symbol = '[](bold bright-green)[](bold blue) '
 
 [directory]
 truncation_length = 2
+truncation_symbol = ".../"
+truncate_to_repo = true
 style = 'bold blue'
 format = '[ ](style) [$path]($style)[$read_only]($read_only_style) '
 read_only = " "
-truncation_symbol = ".../"
 home_symbol = " "
 
 [battery]
@@ -91,7 +96,9 @@ tag_symbol = ' 󰓹 '
 format  = 'via [${symbol}${pyenv_prefix}\($virtualenv\) ]($style) '
 
 [hostname]
-disabled = true
+ssh_only = true
+format = "@[hostname:](blue)"
+disabled = false
 
 [status]
 disabled = false

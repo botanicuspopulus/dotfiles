@@ -5,7 +5,7 @@ set my_name = "William Smith"
 set imap_check_subscribed
 
 # Set preferred view modes
-auto_view text/html text/calender application ics # view html automatically
+auto_view         text/html text/calender application ics # view html automatically
 alternative_order text/html text/plain text/enriched text/*
 
 # main options
