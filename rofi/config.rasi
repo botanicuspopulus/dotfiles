@@ -1,14 +1,6 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Configuration For Rofi Version: 1.7.3
- **/
-
 configuration {
 	/*---------- General setting ----------*/
-	modi: "drun,run,filebrowser,window";
+	modi: "drun,run,filebrowser,window,calc";
 	case-sensitive: false;
 	cycle: true;
 	filter: "";
@@ -16,9 +8,7 @@ configuration {
 	normalize-match: true;
 	show-icons: true;
 	icon-theme: "Papirus";
-/*	cache-dir: ;*/
 	steal-focus: false;
-/*	dpi: -1;*/
 
 	/*---------- Matching setting ----------*/
 	matching: "normal";
@@ -39,11 +29,9 @@ configuration {
 	drun-use-desktop-cache: false;
 	drun-reload-desktop-cache: false;
 	drun {
-		/** Parse user desktop files. */
 		parse-user:   true;
-		/** Parse system desktop files. */
 		parse-system: true;
-    }
+  }
 
 	/*---------- Run settings ----------*/
 	run-command: "{cmd}";
@@ -79,16 +67,15 @@ configuration {
 	display-drun: "Apps";
 	display-combi: "Combi";
 	display-keys: "Keys";
+	display-calc: "Calc";
 	display-filebrowser: "Files";
 
 	/*---------- Misc setting ----------*/
 	terminal: "rofi-sensible-terminal";
-	font: "Mono 12";
+	font: "Lekton Nerd Font Propo 12";
 	sort: false;
 	threads: 0;
 	click-to-exit: true;
-/*	ignored-prefixes: "";*/
-/*	pid: "/run/user/1000/rofi.pid";*/
 
 	/*---------- File browser settings ----------*/
     filebrowser {

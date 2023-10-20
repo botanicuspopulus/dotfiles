@@ -4,10 +4,12 @@ include /etc/sway/config.d/*
 focus_follows_mouse yes
 
 gaps inner 5
+gaps outer 0
 
 smart_gaps on
 
 default_border pixel 2
+default_floating_border normal
 smart_borders on
 
 seat * hide_cursor 8000

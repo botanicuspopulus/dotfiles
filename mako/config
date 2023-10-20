@@ -1,13 +1,16 @@
 anchor=top-right
-font=Lekton Nerd Font Mono
+font=Lekton Nerd Font Propo 14
+format=<b>%a </b> %s\n%b
+sort=-tiem
 width=350
-padding=10
-margin=0,20,20
+padding=0,5,10
+margin=5
 border-size=2
-border-radius=5
+border-radius=7
+icons=0
+max-icon-size=64
 
 background-color=#24283b
-border-color=#414868
 text-color=#c0caf5
 
 default-timeout=7000
@@ -16,8 +19,15 @@ markup=1
 max-visible=5
 layer=overlay
 
+[urgency=normal]
+border-color=#7aa2f7
+
 [urgency=high]
 border-color=#f7768e
 ignore-timeout=1
+
+[summary~="log-.*"]
+border-color=#9ece6a
+
 
 
