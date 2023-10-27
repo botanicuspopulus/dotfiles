@@ -1,5 +1,5 @@
 [menu]
-executable = 'wofi'
+executable = 'rofi'
 args = [
   '-dmenu',
   '-markup-rows',

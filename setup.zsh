@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-
 ln -s $(pwd)/zsh/.zshenv $HOME
 
 source $HOME/.zshenv

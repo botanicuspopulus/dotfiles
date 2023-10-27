@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Current Theme
-dir="$HOME/.config/rofi/powermenu"
+dir="$HOME/dotfiles/rofi/powermenu"
 theme='powermenu-style'
 
 # CMDs
@@ -9,13 +9,13 @@ uptime="$(uptime -p | sed -e 's/up //g')"
 host=$(hostname)
 
 # Options
-shutdown=' Shutdown'
-reboot=' Reboot'
-lock=' Lock'
-suspend=' Suspend'
-logout=' Logout'
-yes=' Yes'
-no=' No'
+shutdown='󰐥 Shutdown'
+reboot='󰜉 Reboot'
+lock='󰌾 Lock'
+suspend='󰒲 Suspend'
+logout='󰍃 Logout'
+yes='🆗 Yes'
+no='󰜺 No'
 
 # Rofi CMD
 rofi_cmd() {
@@ -60,7 +60,7 @@ run_cmd() {
       systemctl suspend
     elif [[ $1 == '--logout' ]]; then
       if [[ "$DESKTOP_SESSION" == 'sway' ]]; then
-        swaymsg --exit
+        sway exit
       elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
         qdbus org.kde.ksmserver /KSMServer logout 0 0 0
       fi

@@ -1,0 +1,47 @@
+@import "colors.rasi"
+
+textbox-prompt-colon {
+    enabled:          true;
+    padding:          4px 12px;
+    expand:           false;
+    border-radius:    30%;
+    background-color: @urgent;
+    text-color:       @background-colour;
+}
+
+entry {
+    enabled:           true;
+    padding:           5px 0px;
+    background-color:  inherit;
+    text-color:        inherit;
+    cursor:            text;
+    placeholder-color: inherit;
+}
+
+num-filtered-rows {
+    enabled:          true;
+    expand:           false;
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+textbox-num-sep {
+    enabled:          true;
+    expand:           false;
+    str:              "/";
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+num-rows {
+    enabled:          true;
+    expand:           false;
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+case-indicator {
+    enabled:          true;
+    background-color: inherit;
+    text-color:       inherit;
+}

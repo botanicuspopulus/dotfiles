@@ -3,33 +3,33 @@
 @import "colors/tokyonight.rasi"
 
 * {
-    border-colour:               var(selected);
-    handle-colour:               var(selected);
-    background-colour:           var(background);
-    foreground-colour:           var(foreground);
-    alternate-background:        var(background-alt);
-    normal-background:           var(background);
-    normal-foreground:           var(foreground);
+    border-colour:               @selected;
+    handle-colour:               @selected;
+    background-colour:           @background;
+    foreground-colour:           @foreground;
+    alternate-background:        @background-alt;
+    normal-background:           @background;
+    normal-foreground:           @foreground;
 
-    urgent-background:           var(urgent);
-    urgent-foreground:           var(background);
+    urgent-background:           @urgent;
+    urgent-foreground:           @background;
 
-    active-background:           var(active);
-    active-foreground:           var(foreground);
+    active-background:           @active;
+    active-foreground:           @foreground;
 
-    selected-normal-background:  var(selected);
-    selected-normal-foreground:  var(foreground);
+    selected-normal-background:  @selected;
+    selected-normal-foreground:  @foreground;
 
-    selected-urgent-background:  var(active);
-    selected-urgent-foreground:  var(foreground);
+    selected-urgent-background:  @active;
+    selected-urgent-foreground:  @foreground;
 
-    selected-active-background:  var(urgent);
-    selected-active-foreground:  var(foreground);
+    selected-active-background:  @urgent;
+    selected-active-foreground:  @foreground;
 
-    alternate-normal-background: var(background);
-    alternate-normal-foreground: var(foreground);
-    alternate-urgent-background: var(urgent);
-    alternate-urgent-foreground: var(foreground);
-    alternate-active-background: var(active);
-    alternate-active-foreground: var(foreground);
+    alternate-normal-background: @background;
+    alternate-normal-foreground: @foreground;
+    alternate-urgent-background: @urgent;
+    alternate-urgent-foreground: @foreground;
+    alternate-active-background: @active;
+    alternate-active-foreground: @foreground;
 }

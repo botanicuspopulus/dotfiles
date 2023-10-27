@@ -3,7 +3,8 @@ set -efuo pipefail
 
 screenshot=/tmp/screenshot.jpg
 background=/tmp/screenshot-thumb.jpg
-opts=""
+config=$HOME/dotfiles/swaylock/config
+opts="--config $config"
 
 trap cleanup EXIT
 
