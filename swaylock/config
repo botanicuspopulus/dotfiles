@@ -7,9 +7,11 @@ fade-in=0.2
 
 indicator
 color=24283b
-font="Lekton Nerd Font Propo 14"
 indicator-caps-lock
-indicator-radius=80
+indicator-radius=360
+line-uses-ring
+font="Lekton Nerd Font 14"
+font-size=32
 indicator-thickness=20
 key-hl-color=bb9af7
 

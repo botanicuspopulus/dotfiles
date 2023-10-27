@@ -2,7 +2,7 @@
 
 scrollbar {
     handle-width:                5px ;
-    handle-color:                @selected;
+    handle-color:                @handle-colour;
     border-radius:               10px;
     background-color:            @background-alt;
 }

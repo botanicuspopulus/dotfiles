@@ -1,23 +1,56 @@
-anchor=top-right
-font=Lekton Nerd Font Propo 14
+# GLOBAL OPTIONS
+max-history=20
+sort=-time
+
+# BINDING OPTIONS
+on-button-left=invoke-default-action
+on-button-middle=exec makoctl menu -n "$id" rofi --dmenu -p 'Select Action: '
+on-button-right=dismiss-all
+on-touch=dismiss
+on-notify=none
+
+font=Lekton Nerd Font 14
 format=<b>%a </b> %s\n%b
 sort=-tiem
 width=350
-padding=0,5,10
+height=175
+outer-margin=0
 margin=5
+padding=0,5,10
 border-size=2
 border-radius=7
+max-icon-size=96
+icon-location=left
+markup=1
+actons=1
+history=1
 icons=0
-max-icon-size=64
+text-alignment=left
+default-timeout=7000
+ignore-timeout=0
+group-by=none
+max-visible=5
+layer=overlay
+anchor=top-right
+
 
 background-color=#24283b
 text-color=#c0caf5
 
-default-timeout=7000
-on-button-middle=exec makoctl menu -n "$id" rofi --dmenu -p 'Select Action: '
-markup=1
-max-visible=5
-layer=overlay
+[urgency=critical]
+border-color=#f7768e
+default-timeout=0
+
+[app-name=control_volume]
+width=170
+text-alignment=center
+anchor=top-center
+group-by=app-name
+default-timeout=2000
+format=<b>%s</b>
+
+[app-name=control_volume group-index=0]
+invisible=false
 
 [urgency=normal]
 border-color=#7aa2f7

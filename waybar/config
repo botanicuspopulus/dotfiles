@@ -73,8 +73,8 @@
       "8": "<span color='#9ece6a'>󰍡 </span>",
       "9": "󱉺 ",
       "urgent": "",
-      "focused": "󰝜 ",
-      "default": "󰓩 "
+      "focused": "󰷜 ",
+      "default": "󰍹 "
     }
   },
   "tray": {
@@ -108,10 +108,10 @@
     "format-source": "{volume}% 󰍬",
     "format-source-muted": "󰍭",
     "format-icons": {
-      "headphone": ["󰋋 婢", "󰋋 奄", "󰋋 奔", "󰋋 墳"],
-      "headset": ["󰋎 婢", "󰋎 奄", "󰋎 奔", "󰋎 墳"],
-      "phone": [" 婢", " 奄", " 奔", " 墳"],
-      "default": ["婢", "奄", "奔", "墳"]
+      "headphone": ["󰋋 婢", "󰋋 󰕿", "󰋋 󰖀", "󰋋 墳"],
+      "headset": ["󰋎 婢", "󰋎 󰕿", "󰋎 󰖀", "󰋎 墳"],
+      "phone": [" 婢", " 󰕿", " 󰖀", " 墳"],
+      "default": ["婢", "󰕿", "󰖀", "墳"]
     },
     "scroll-step": 2,
     "on-click": "pavucontrol",
@@ -174,7 +174,7 @@
       "critical": 10
     },
     "format": "{icon} {capacity}% {time}",
-    "format-icons" : ["", "", "", "", "", "", "", "", "", ""],
+    "format-icons" : ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "format-time": "({H}:{m})",
     "format-charging": "󰂄 {capacity}% {time}",
     "format-full": " {icon}",
@@ -205,9 +205,9 @@
   },
   "custom/powermenu": {
     "return-type": "json",
-    "format": "<span font=\"Lekton Nerd Font Propo 14\">󰐥</span>",
+    "format": "<span font=\"Lekton Nerd Font 14\">󰐥</span>",
     "interval": 3600,
     "escape": true,
-    "on-click": "~/.config/rofi/powermenu.sh"
+    "on-click": "~/dotfiles/rofi/powermenu/powermenu.sh"
   }
 }

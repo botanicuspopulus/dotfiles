@@ -61,7 +61,7 @@
   alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 
 [include]
-  path=$HOME/.config/dotfiles/themes/delta/tokyonight_night.gitconfig
+  path=$HOME/dotfiles/delta/tokyonight_night.gitconfig
 
 [delta]
   side-by-side = false
