@@ -15,4 +15,5 @@ decoration::backdrop {
 vte-terminal {
   padding: 10px 10px 10px 10px;
 }
+
 @import 'colors.css';
