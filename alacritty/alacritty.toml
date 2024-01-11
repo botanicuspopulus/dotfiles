@@ -1,0 +1,71 @@
+import = ["/home/williamsmith/dotfiles/alacritty/themes/tokyonight_night.toml"]
+startup_mode = "Fullscreen"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[cursor]
+thickness = 0.18
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12
+
+[font.bold]
+family = "Lekton Nerd Font"
+style = "Bold"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "Lekton Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "Lekton Nerd Font"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Paste"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Copy"
+
+[[keyboard.bindings]]
+action = "ClearLogNotice"
+key = "L"
+mods = "Control"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+
+[shell]
+args = ["-l", "-c", "tmux new -A -salacritty"]
+program = "/usr/bin/zsh"
+
+[window]
+decorations = "full"
+dynamic_padding = true
+dynamic_title = true
+opacity = 0.9
+
+[window.padding]
+x = 15
+y = 5
