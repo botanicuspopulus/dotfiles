@@ -13,7 +13,7 @@ TERM = "xterm-256color"
 size = 12
 
 [font.bold]
-family = "Lekton Nerd Font"
+family = "Lekton Nerd Font Mono"
 style = "Bold"
 
 [font.glyph_offset]
@@ -21,11 +21,11 @@ x = 0
 y = 0
 
 [font.italic]
-family = "Lekton Nerd Font"
+family = "Lekton Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
-family = "Lekton Nerd Font"
+family = "Lekton Nerd Font Mono"
 style = "Regular"
 
 [font.offset]
