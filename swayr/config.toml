@@ -7,7 +7,7 @@ args = [
   '-no-case-sensitive',
   '-no-drun-use-desktop-cache',
   '-p', '{prompt}',
-  '-font', 'Lekton Nerd Font 14',
+  '-font', 'Lekton Nerd Font Mono 14',
 ]
 
 [format]

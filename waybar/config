@@ -211,7 +211,7 @@
   },
   "custom/powermenu": {
     "return-type": "json",
-    "format": "<span font=\"Lekton Nerd Font 14\">󰐥</span>",
+    "format": "<span font=\"Lekton Nerd Font Mono 14\">󰐥</span>",
     "interval": 3600,
     "escape": true,
     "on-click": "~/dotfiles/rofi/powermenu/powermenu.sh"

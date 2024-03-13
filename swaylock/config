@@ -10,7 +10,7 @@ color=24283b
 indicator-caps-lock
 indicator-radius=360
 line-uses-ring
-font="Lekton Nerd Font 14"
+font="Lekton Nerd Font Mono 14"
 font-size=32
 indicator-thickness=20
 key-hl-color=bb9af7
