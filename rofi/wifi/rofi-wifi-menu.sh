@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-wireless_interfaces=($(nmcli device | awk '$2=="wifi" {print $1}'))
+wireless_interfaces=$(nmcli device | awk '$2=="wifi" {print $1}')
 wireless_interfaces_product=()
-wired_interfaces=($(nmcli device | awk '$2=="ethernet" {print $1}'))
+wired_interfaces=$(nmcli device | awk '$2=="ethernet" {print $1}')
 wired_interfaces_product=()
 wireless_int=0
 
@@ -33,12 +33,14 @@ function wireless_interface_state() {
 		then
 			wifi_list=$(nmcli --fields SSID,SECURITY,BARS device wifi list ifname "${wireless_interfaces[wireless_int]}")
 			list_wifi
+
 			if [[ $active_ssid == "--" ]]
 			then
 				wifi_switch="~Scan\n~Manual/Hidden\n~Wi-Fi Off"
 			else
 				wifi_switch="~Scan\n~Disconnect\nManual/Hidden\n~Wi-Fi Off"
 			fi
+
 			options="${wifi_list}\n${wifi_switch}"
 		fi
 	fi
