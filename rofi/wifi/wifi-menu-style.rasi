@@ -20,7 +20,7 @@ inputbar {
 }
 
 textbox-prompt-colon {
-    str:              "";
+    str:              "󰖩 ";
     background-color: inherit;
     text-color:       inherit;
 }
