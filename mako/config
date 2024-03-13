@@ -4,14 +4,13 @@ sort=-time
 
 # BINDING OPTIONS
 on-button-left=invoke-default-action
-on-button-middle=exec makoctl menu -n "$id" rofi --dmenu -p 'Select Action: '
+on-button-middle=exec makoctl menu -n "$id" rofi -dmenu -p 'Select Action: '
 on-button-right=dismiss-all
 on-touch=dismiss
 on-notify=none
 
 font=Lekton Nerd Font 14
-format=<b>%a </b> %s\n%b
-sort=-tiem
+format=<b>%a ▸ </b> %s\n%b
 width=350
 height=175
 outer-margin=0
@@ -22,7 +21,7 @@ border-radius=7
 max-icon-size=96
 icon-location=left
 markup=1
-actons=1
+actions=1
 history=1
 icons=0
 text-alignment=left
@@ -32,7 +31,6 @@ group-by=none
 max-visible=5
 layer=overlay
 anchor=top-right
-
 
 background-color=#24283b
 text-color=#c0caf5
