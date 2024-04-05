@@ -8,11 +8,11 @@ fade-in=0.2
 indicator
 color=24283b
 indicator-caps-lock
-indicator-radius=360
+indicator-radius=100em
 line-uses-ring
-font="Lekton Nerd Font Mono 14"
+font="Lekton Nerd Font 20em"
 font-size=32
-indicator-thickness=20
+indicator-thickness=10em
 key-hl-color=bb9af7
 
 inside-color=1d202f
