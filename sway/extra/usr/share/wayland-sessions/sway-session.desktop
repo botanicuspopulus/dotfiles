@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Sway Service
+Comment=William's Sway Service
+Exec=/usr/local/bin/launch_sway
+Type=Application
