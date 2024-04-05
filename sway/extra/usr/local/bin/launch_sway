@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+systemctl --user import-environment
+exec systemctl --wait --user start sway.service
