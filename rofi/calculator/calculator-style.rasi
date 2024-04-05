@@ -2,7 +2,7 @@
 configuration {
 	modi:                       "calc";
     show-icons:                 true;
-    display-calc:               "󰃬 ";
+    display-calc:               "󰃬";
 }
 
 /*****----- Global Properties -----*****/
@@ -14,55 +14,32 @@ configuration {
 @import "../shared/mainbox.rasi"
 @import "../shared/prompt.rasi"
 @import "../shared/scrollbar.rasi"
-@import "../shared/textbox_prompt_colon.rasi"
+@import "../shared/textbox-prompt-colon.rasi"
 @import "../shared/window.rasi"
 @import "../shared/message.rasi"
 
 /*****----- Inputbar -----*****/
 inputbar {
-    children: [ "textbox-prompt-colon", "entry"];
+    children: [ textbox-prompt-colon, entry];
 }
 
 textbox-prompt-colon {
-    str:              "󰃬 ";
+    str:              "󰃬";
     background-color: inherit;
     text-color:       inherit;
 }
+
 entry {
-    enabled:           true;
-    padding:           5px 0px;
+    padding:           0.25em 0em;
     background-color:  inherit;
     text-color:        inherit;
     cursor:            text;
     placeholder:       "";
     placeholder-color: inherit;
 }
-num-filtered-rows {
-    enabled:           true;
-    expand:            false;
-    background-color:  inherit;
-    text-color:        inherit;
-}
-textbox-num-sep {
-    enabled:          true;
-    expand:           false;
-    str:              "/";
-    background-color: inherit;
-    text-color:       inherit;
-}
-num-rows {
-    enabled:          true;
-    expand:           false;
-    background-color: inherit;
-    text-color:       inherit;
-}
-case-indicator {
-    enabled:          true;
-    background-color: inherit;
-    text-color:       inherit;
-}
 
 listview {
-    lines:                       5;
+    lines: 5;
+    dynamic: true;
 }
 

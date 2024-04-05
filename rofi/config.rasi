@@ -72,7 +72,7 @@ configuration {
 
 	/*---------- Misc setting ----------*/
 	terminal:       "rofi-sensible-terminal";
-	font:           "Lekton Nerd Font Mono 14";
+	font:           "Lekton Nerd Font 14";
 	sort:           false;
 	threads:        0;
 	click-to-exit:  true;
