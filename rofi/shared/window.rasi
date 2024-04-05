@@ -7,16 +7,15 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       500px;
-    x-offset:                    0px;
-    y-offset:                    0px;
+    width:                       30em;
+    x-offset:                    0em;
+    y-offset:                    0em;
 
     /* properties for all widgets */
-    enabled:                     true;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      2px solid;
-    border-radius:               10px;
+    margin:                      0em;
+    padding:                     0em;
+    border:                      0.15em solid;
+    border-radius:               0.6em;
     border-color:                @border-colour;
     cursor:                      "default";
     background-color:            @background-colour;

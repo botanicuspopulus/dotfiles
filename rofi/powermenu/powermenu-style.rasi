@@ -13,24 +13,24 @@ configuration {
 @import "../shared/message.rasi"
 @import "../shared/prompt.rasi"
 @import "../shared/scrollbar.rasi"
-@import "../shared/textbox_prompt_colon.rasi"
+@import "../shared/textbox-prompt-colon.rasi"
 @import "../shared/window.rasi"
 
 inputbar {
-  children: [ "textbox-prompt-colon", "prompt"];
+    children: [ textbox-prompt-colon, prompt];
 }
 
 listview {
-  lines:      5;
-  scrollbar:  false;
+    lines:      5;
+    scrollbar:  false;
 }
 
 textbox-prompt-colon {
-  padding: 10px 16px;
-  str:    "󰐥";
+    padding: 0.5em 0.85em;
+    str:    "󰐥";
 }
 
 element {
-    spacing: 0px;
-    padding: 10px;
+    spacing: 0em;
+    padding: 0.5em;
 }

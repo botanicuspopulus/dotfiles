@@ -18,7 +18,7 @@
     active-foreground:           @foreground;
 
     selected-normal-background:  @selected;
-    selected-normal-foreground:  @foreground;
+    selected-normal-foreground:  @selected-alt;
 
     selected-urgent-background:  @active;
     selected-urgent-foreground:  @foreground;

@@ -1,15 +1,15 @@
 /*****----- Configuration -----*****/
 configuration {
-	modi:                         "drun,run,filebrowser,window,ssh,calc";
-    show-icons:                 true;
-    display-drun:               "";
-    display-run:                "";
-    display-filebrowser:        "";
-    display-window:             "";
-    display-ssh:                "󰣀";
-    display-calc:               "󰃬";
-	drun-display-format:          "{name}";
-	window-format:                "{w} · {c} · {t}";
+    modi:                "drun,run,filebrowser,window,ssh,calc";
+    show-icons:          true;
+    display-drun:        "";
+    display-run:         "";
+    display-filebrowser: "";
+    display-window:      "";
+    display-ssh:         "󰣀";
+    display-calc:        "󰃬";
+    drun-display-format: "{name}";
+    window-format:       "{w} · {c} · {t}";
 }
 
 /*****----- Global Properties -----*****/
@@ -23,15 +23,15 @@ configuration {
 @import "../shared/mode_switcher.rasi"
 @import "../shared/prompt.rasi"
 @import "../shared/scrollbar.rasi"
-@import "../shared/textbox_prompt_colon.rasi"
+@import "../shared/textbox-prompt-colon.rasi"
 @import "../shared/window.rasi"
 
 window {
-  width: 600;
+    width: 30em;
 }
 
 inputbar {
-    children: [ "textbox-prompt-colon", "entry", "mode-switcher" ];
+    children: [ textbox-prompt-colon, entry, mode-switcher ];
 }
 
 textbox-prompt-colon {
