@@ -3,20 +3,20 @@ set -efuo pipefail
 
 screenshot=/tmp/screenshot.jpg
 background=/tmp/screenshot-thumb.jpg
-config=$HOME/dotfiles/swaylock/config
+config=$DOTFILES/swaylock/config
 opts="--config $config"
 
 trap cleanup EXIT
 
 cleanup() {
-  rm -rf "${background}" "${screenshot}"
+    rm -rf "${background}" "${screenshot}"
 }
 
 if command -v grim >/dev/null 2>&1 && command -v convert >/dev/null 2>&1; then
-  grim -t jpeg "${screenshot}"
-  convert "${screenshot}" -blur 0x8 "${background}"
-  rm -rf "${screenshot}"
-  opts="${opts} -i ${background}"
+    grim -t jpeg "${screenshot}"
+    convert "${screenshot}" -blur 0x8 "${background}"
+    rm -rf "${screenshot}"
+    opts="${opts} -i ${background}"
 fi
 
 swaylock ${opts}
