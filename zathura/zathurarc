@@ -6,6 +6,6 @@ set scroll-page-aware "true"
 set scroll-full-overlap 0.01
 set scroll-steo 100
 
-set font "Lekton Nerd Font Mono 12"
+set font "Lekton Nerd Font 12"
 include tokyonight_night
 set selection-clipboard wl-copy
