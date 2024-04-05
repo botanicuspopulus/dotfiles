@@ -14,100 +14,101 @@
 
 * {
     border: none;
-    border-radius: 0;
-    font-family: Lekton Nerd Font Mono;
-    font-size: 18px;
-    min-height: 0;
+    font-family: Lekton Nerd Font;
+    border-radius: 0em;
+    font-size: 1.02em;
+    min-height: 2em;
+    padding-top: 0.05em;
+    padding-bottom: 0.05em;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
 }
 
 window#waybar {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  text-shadow: none;
-  transition-duration: 0s;
-  background: transparent;
-  color: @color6;
+    border: none;
+    box-shadow: none;
+    text-shadow: none;
+    transition-duration: 0s;
+    background: transparent;
+    color: @color6;
 }
 
 window#waybar.hidden {
-  opacity: 0.2;
+    opacity: 0.2;
 }
 
 window#waybar.empty {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 window#waybar.solo {
-  background-color: @color7;
+    background-color: @color7;
 }
 
 tooltip {
-  background-color: @color7;
-  margin: 5px;
-  margin-left: 6px;
-  border-radius: 15px;
-  border: 2px solid @color2;
+    background-color: @color7;
+    margin-left: 0.2em;
+    margin-right: 0.5em;
+    border: 0.1em solid @color2;
+    border-radius: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 
 #custom-leftend,
 #custom-rightend {
-  padding-left: 4px;
+    padding-left: 0.5em;
 }
 
 #custom-leftend {
-  border-top-left-radius: 7px;
-  border-bottom-left-radius: 7px;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
 }
 
 #custom-rightend {
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
 }
 
 #window,
 #workspaces {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background-color: @color5;
+    background-color: @color5;
 }
 
 #workspaces:first-child {
-  margin-left: 10px;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
+    margin-left: 0.5em;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
 }
 
 #workspaces:last-child {
-  margin-right: 5px;
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
+    margin-right: 0.5em;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
 }
 
 #workspaces button {
-  color: @color6;
-  background: transparent;
-  padding: 5px 10px;
-  border: 3px solid @color12;
-  min-width: 33px;
+    color: @color6;
+    background: transparent;
+    border: 0.2em solid @color12;
+    border-radius: 0.5em;
+    min-width: 3em;
 }
 
 #workspaces button.focused {
-  color: @color7;
-  background-color: @color4;
-  border-radius: 7px;
+    color: @color7;
+    background-color: @color4;
 }
 
 #workspaces button.urgent {
-  background-color: @color1;
-  color: @color6;
+    background-color: @color1;
+    color: @color6;
 }
 
 #workspaces button:hover {
-  box-shadow: inherit;
-  color: @color7;
-  background-color: @color8;
-  border-radius: 7px;
+    box-shadow: inherit;
+    color: @color7;
+    background-color: @color8;
 }
 
 #clock, 
@@ -123,48 +124,46 @@ tooltip {
 #custom-rightend,
 #custom-media,
 #temperature {
-  background-color: @color5;
-  padding: 5px 5px;
-  margin: 5px 0px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    background-color: @color5;
 }
 
 #temperature.critical {
-  color: @color10;
+    color: @color10;
 }
 
 #cpu-format-icon {
-  color: @color11;
+    color: @color11;
 }
 
 #bluetooth {
-  color: @color2;
+    color: @color2;
 }
 
 #bluetooth.disabled {
-  color: @color9;
+    color: @color9;
 }
 
 #custom-media {
-  color: @color3;
-  border-radius: 7px;
+    color: @color3;
+    border-radius: 0.5em;
 }
 
 #custom-spacer {
-  padding-left: 10px;
+    padding-left: 0.5em;
 }
 
 #tray {
-  border-radius: 7px;
-  margin-top: 5px;
-	margin-right: 0px;
-  margin-bottom: 5px;
-  margin-left: 0px;
-  padding: 5px 10px;
+    border-radius: 0.5em;
+	margin-right: 0.2em;
+    margin-left: 0em;
+    min-width: 3em;
 }
 
 #battery {
-  color: @color3;
-  background-color: @color5
+    color: @color3;
+    background-color: @color5
 }
 
 #battery.charging {
@@ -172,16 +171,16 @@ tooltip {
 }
 
 #battery.warning {
-  color: @color1;
+    color: @color1;
 }
 
 #battery.critical {
-  color: @color10;
+    color: @color10;
 }
 
 #battery.warning:not(.charging) {
-  background-color: @color10;
-  color: @color5;
+    background-color: @color10;
+    color: @color5;
 }
 
 #network.linked {
@@ -189,7 +188,7 @@ tooltip {
 }
 
 #network.disconnected {
-  color: @color1;
+    color: @color1;
 }
 
 #network.disabled {
@@ -203,13 +202,9 @@ tooltip {
 #custom-powermenu {
 	color: @color5;
 	background-color: @color9;
-	border-radius: 7px;
-	margin-right: 0px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 0px;
-	padding: 5px 10px;
-	padding-right: 12px;
-	font-size: 20px;
+	border-radius: 0.5em;
+	margin-right: 0em;
+	margin-left: 0em;
+	padding-right: 1em;
+	padding-left: 0.8em;
 }
-

@@ -43,18 +43,18 @@
     "smooth-scrolling-threshold": 1.5,
     "enable-bar-scroll": false,
     "format-icons": {
-      "1": " ",
-      "6": "<span color='#e0af68'>󰈹 </span>",
-      "7": "<span color='#9ece6a'>󰖺 </span>",
-      "8": "<span color='#9ece6a'>󰍡 </span>",
-      "9": "󱉺 ",
-      "urgent": "",
-      "focused": "󰷜 ",
-      "default": "󰍹 "
+      "1": "",
+      "6": "<span color='#e0af68'>󰈹</span>",
+      "7": "<span color='#9ece6a'>󰖺</span>",
+      "8": "<span color='#9ece6a'>󰍡</span>",
+      "9": "󱉺",
+      "urgent": "󰈅",
+      "focused": "󰷜",
+      "default": "󰍹"
     }
   },
   "tray": {
-    "icon-size": 20,
+    "icon-size": 25,
     "spacing": 8
   },
   "network": {
@@ -211,7 +211,7 @@
   },
   "custom/powermenu": {
     "return-type": "json",
-    "format": "<span font=\"Lekton Nerd Font Mono 14\">󰐥</span>",
+    "format": "<span font=\"Lekton Nerd Font 14\">󰐥</span>",
     "interval": 3600,
     "escape": true,
     "on-click": "~/dotfiles/rofi/powermenu/powermenu.sh"
