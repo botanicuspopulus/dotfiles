@@ -15,10 +15,4 @@ bar {
   swaybar_command waybar
 }
 
-exec wl-paste -t text --watch clipman store --no-persist
 
-exec swayidle -w \
-  timeout 600 $lock \
-  timeout 570 'swaymsg "output * dpms off"' \
-  resume 'swaymsg "output * dpms on"' \
-  before-sleep $lock
