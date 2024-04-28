@@ -19,7 +19,6 @@
     "pulseaudio", 
     "cpu", 
     "memory", 
-    "backlight",
     "temperature", 
     "battery", 
     "clock",
