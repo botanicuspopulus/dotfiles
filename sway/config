@@ -1,5 +1,4 @@
 include ./config.d/*.config
-include ./config.d/applications/*.config
 include ./config.d/modes/*.config
 include /etc/sway/config.d/*
 
@@ -14,5 +13,3 @@ seat * hide_cursor 8000
 bar {
   swaybar_command waybar
 }
-
-
