@@ -35,7 +35,7 @@ FILE_EXTENSION_LOWER=$(echo ${FILE_EXTENSION} | tr '[:upper:]' '[:lower:]')
 
 # Settings
 HIGHLIGHT_SIZE_MAX=262143  # 256KiB
-HIGHLIGHT_TABWIDTH=8
+HIGHLIGHT_TABWIDTH=${HIGHLIGHT_TABWIDTH:-8}
 HIGHLIGHT_STYLE="${HIGHLIGHT_TABWIDTH:-pablo}"
 HIGHLIGHT_OPTIONS="--replace-tabs=${HIGHLIGHT_TABWIDTH} --style=${HIGHLIGHT_STYLE} ${HIGHLIGHT_TABWIDTH:-}"
 PYGMENTIZE_STYLE="${PYGMENTIZE_STYLE:-autumn}"
@@ -85,11 +85,19 @@ handle_extension() {
             w3m -dump "${FILE_PATH}" && exit 5
             lynx -dump -- "${FILE_PATH}" && exit 5
             elinks -dump "${FILE_PATH}" && exit 5
+            pandoc -s -t markdown -- "${FILE_PATH}" && exit 5
             ;; # Continue with next handler on failure
+
+        json|ipynb)
+            jq --color-output . "${FILE_PATH}" && exit 5
+            python -m json.tool -- "${FILE_PATH}" && exit 5
+            exit 1;;
     esac
 }
 
 handle_image() {
+    local DEFAULT_SIZE="1920x1080"
+
     local mimetype="${1}"
     case "${mimetype}" in
         # SVG
@@ -175,6 +183,7 @@ handle_mime() {
             if [[ "$( stat --printf='%s' -- "${FILE_PATH}" )" -gt "${HIGHLIGHT_SIZE_MAX}" ]]; then
                 exit 2
             fi
+
             if [[ "$( tput colors )" -ge 256 ]]; then
                 local pygmentize_format='terminal256'
                 local highlight_format='xterm256'
@@ -182,9 +191,16 @@ handle_mime() {
                 local pygmentize_format='terminal'
                 local highlight_format='ansi'
             fi
-            highlight --replace-tabs="${HIGHLIGHT_TABWIDTH}" --out-format="${highlight_format}" \
-                --style="${HIGHLIGHT_STYLE}" --force -- "${FILE_PATH}" && exit 5
-            # pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}" -- "${FILE_PATH}" && exit 5
+
+            env HIGHLIGHT_OPTIONS="${HIGHLIGHT_OPTIONS}" highlight \
+              --out-format="${highlight_format}" \
+              --force -- "${FILE_PATH}" && exit 5
+            env COLORTERM=8bit bat --style="${BAT_STYLE:-plain}" \
+              --color=always -- "${FILE_PATH}" && exit 5
+
+            pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}" \
+              -- "${FILE_PATH}" && exit 5
+
             exit 2;;
 
         # Image
@@ -212,6 +228,7 @@ MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
 if [[ "${PV_IMAGE_ENABLED}" == 'True' ]]; then
     handle_image "${MIMETYPE}"
 fi
+
 handle_extension
 handle_mime "${MIMETYPE}"
 handle_fallback
