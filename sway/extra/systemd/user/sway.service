@@ -4,12 +4,15 @@ Documentation=man:sway(5)
 BindsTo=graphical-session.target
 Wants=graphical-session-pre.target
 After=graphical-session-pre.target
+Before=sway-session.target
 
 [Service]
-Type=simple
+Type=notify
 EnvironmentFile=-%h/.config/sway/env
-ExexStartPre=systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY
-ExecStart=/usr/local/bin/sway
+
+ExecStart=/usr/local/bin/launch_sway
 Restart=on-failure
 RestartSec=1
-TimeoutStartSec=10
+TimeoutStartSec=60
+NotifyAccess=all
+ExecStopPost=/usr/bin/systemctl --user unset-environment SWAYSOCK WAYLAND_DISPLAY DISPLAY I3SOCK

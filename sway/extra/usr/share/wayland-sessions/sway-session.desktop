@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Sway Service
+Name=William's Sway Service
 Comment=William's Sway Service
-Exec=/usr/local/bin/launch_sway
+Exec=/usr/local/bin/sway
 Type=Application
