@@ -80,7 +80,7 @@ unset markers
 set compose_format = "[ %l] [ %a]%>─"
 
 # Attatchment view options
-set attach_format = "%u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
+set attach_format = "%u%D %<Q?& > %T%-75.75d %<T?&   > %5s · %m/%M"
 
 # Sidebar options
 set sidebar_folder_indent = no
