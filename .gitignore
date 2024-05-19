@@ -4,3 +4,4 @@ neomutt/accounts/
 **/__init__.py
 **/.generated_settings/
 sway/dot-config/sway/generated_background.svg
+lazygit/dot-config/lazygit/state.yml
