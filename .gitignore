@@ -3,3 +3,4 @@ neomutt/accounts/
 **/__pycache__/
 **/__init__.py
 **/.generated_settings/
+sway/dot-config/sway/generated_background.svg
