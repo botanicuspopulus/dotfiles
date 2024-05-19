@@ -32,9 +32,9 @@ max-visible=5
 layer=overlay
 anchor=top-right
 
-background-color=#1a1b26
+background-color=#24283b
 text-color=#c0caf5
-progress-color=#bbc2cf
+progress-color=#7dcfff
 
 [urgency=critical]
 border-color=#f7768e
@@ -55,7 +55,7 @@ invisible=false
 border-color=#7aa2f7
 
 [urgency=high]
-border-color=#f7768e
+border-color=#e0af68
 ignore-timeout=1
 
 [summary~="log-.*"]
