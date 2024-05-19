@@ -1,0 +1,34 @@
+# vim: filetype=muttrc
+
+# in/out mail servers
+set realname = "William Smith"
+set imap_user = "william@williamgsmith.co.za"
+set smtp_url = "smtps://mail.williamgsmith.co.za:465"
+set ssl_starttls = yes
+
+set folder = "imaps://mail.williamgsmith.co.za:993/"
+set spoolfile = "+INBOX"
+set record = "+INBOX.Sent"
+set trash = "+INBOX.Trash"
+set postponed = "+INBOX.Drafts"
+
+set header_cache = "~/.cache/neomutt/headers"
+set message_cachedir = "~/.cache/neomutt/bodies"
+set certificate_file = "~/.config/neomutt/certificates"
+
+
+unmailboxes *
+mailboxes = $spoolfile $postponed $record $trash
+
+source "gpg -dq $XDG_CONFIG_HOME/neomutt/accounts/williamgsmith/passwords.gpg |"
+
+set from = "william@williamgsmith.co.za"
+set envelope_from
+set use_from = "yes"
+set mail_check = 6
+
+# Allow Mutt to open a new IMAP connection automatically
+unset imap_passive
+
+# Keep the IMAP connection alive by polling intermittently (time in seconds)
+set imap_keepalive = 300
