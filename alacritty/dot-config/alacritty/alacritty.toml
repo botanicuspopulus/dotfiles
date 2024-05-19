@@ -1,4 +1,4 @@
-import = ["/home/williamsmith/dotfiles/alacritty/themes/tokyonight_night.toml"]
+import = ["/home/williamsmith/.config/alacritty/themes/tokyonight_storm.toml"]
 live_config_reload = true
 
 [colors]
