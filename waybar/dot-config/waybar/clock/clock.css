@@ -1,0 +1,3 @@
+#clock > tooltip {
+    background-color: alpha(@background-color, 0.6);
+}

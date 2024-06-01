@@ -1,0 +1,20 @@
+{
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon}󰂯 {format_source}",
+        "format-bluetooth-muted": "󰝟 {icon}󰂯 {format_source}",
+        "format-muted": "󰝟 {format_source}",
+        "format-source": "{volume}% 󰍬",
+        "format-source-muted": "󰍭",
+        "format-icons": {
+            "headphone": ["󰋋 󰝟", "󰋋 󰕿", "󰋋 󰖀", "󰋋 󰕾"],
+            "headset": ["󰋋 󰝟", "󰋋 󰕿", "󰋋 󰖀", "󰋋 󰕾"],
+            "phone": [" 󰝟", " 󰕿", " 󰖀", " 󰕾"],
+            "default": ["󰝟", "󰕿", "󰖀", "󰕾"]
+        },
+        "scroll-step": 2,
+        "on-click": "pavucontrol",
+        "on-click-right": "alacritty --class=wm-floating-big pulsemixer",
+        "tooltip": false
+    }
+}

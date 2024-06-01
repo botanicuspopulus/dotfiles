@@ -1,0 +1,23 @@
+{
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "disable-markup": false,
+        "all-outputs": false,
+        "format": "{name}: {icon}",
+        "smooth-scrolling-threshold": 1.5,
+        "enable-bar-scroll": false,
+        "format-icons": {
+            "1": "",
+            "6": "<span color='#e0af68'>󰈹</span>",
+            "7": "<span color='#9ece6a'>󰖺</span>",
+            "8": "<span color='#9ece6a'>󰍡</span>",
+            "9": "<span color='#f7768e'>󱉺</span>",
+            "urgent": "󰈅",
+            "focused": "󰷜",
+            "default": "󰍹"
+        }
+    }
+}

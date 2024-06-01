@@ -1,0 +1,31 @@
+{
+    "custom/spacer": {
+        "format": " "
+    },
+    "custom/leftend": {
+        "format": " "
+    },
+    "custom/rightend": {
+        "format": " "
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "format-icons": {
+            "spotify": "󰓇",
+            "default": "󰎄"
+        },
+        "max-length": 30,
+        "exec": "/usr/bin/python $HOME/bin/media-player.py 2> /dev/null",
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous"
+    },
+    "custom/powermenu": {
+        "return-type": "json",
+        "format": "<span font=\"Lekton Nerd Font 14\">󰐥</span>",
+        "interval": 3600,
+        "escape": true,
+        "on-click": "~/dotfiles/rofi/powermenu/powermenu.sh"
+    }
+}

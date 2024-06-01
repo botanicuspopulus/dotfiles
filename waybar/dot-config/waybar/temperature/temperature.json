@@ -1,0 +1,17 @@
+{
+    "temperature": {
+        "interval": 1,
+        "thermal-zone": 5,
+        "critical-threshold": 95,
+        "format": "{icon} {temperatureC}°C",
+        "format-critical": "⚠ {temperatureC}°C",
+        "format-icons": [
+            "",
+            "",
+            "", 
+            "<span color='#e0af68'></span>",
+            "<span color='#f7768e'></span>"
+        ],
+        "min-length": 7
+    }
+}

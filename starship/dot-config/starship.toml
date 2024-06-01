@@ -49,19 +49,10 @@ style = 'bold yellow'
 threshold = 99
 style = 'bold green'
 
-[c]
-symbol = ' '
-format = '[$symbol\($version\) ]($style)'
-
 [character]
-success_symbol = '[](bold bright-blue)[](bold blue)'
-error_symbol = '[](bold bright-red)[](bold blue)'
-vimcmd_symbol = '[](bold bright-cyan)[](bold blue)'
-
-[conda]
-symbol = ' '
-format = '[$symbol $environment ]($style)'
-ignore_base = false
+success_symbol = '[󰅂](bold bright-blue)[󰅂](bold blue)'
+error_symbol = '[󰅂](bold bright-red)[󰅂](bold blue)'
+vimcmd_symbol = '[󰅁](bold bright-cyan)[󰅁](bold blue)'
 
 [directory]
 truncation_length = 2
@@ -70,31 +61,28 @@ truncate_to_repo = true
 style = 'bold blue'
 format = '[󰉋 ](style)[$path]($style)[$read_only ]($read_only_style)'
 read_only = '󰌾 '
-home_symbol = '󰋜 '
+home_symbol = ' '
 
-[docker_context]
-symbol = ' '
-format = '[$symbol $context ]($style) $path'
 
 [git_branch]
-format = '[$symbol$branch]($style)'
-symbol = ' '
+format = '[$symbol$branch ]($style)'
+symbol = '󰘬 '
 
 [git_state]
 format = '\(:[$state( $progress_current/$progress_total)]($style)\)'
 
 [git_status]
 format = '([$all_status$ahead_behind]($style))'
-conflicted = '\[[⚔️$count](bright-white bold)\]]'
+conflicted = '\[󰞇[$count](bright-white bold)\]]'
 ahead = '\[[󱦲](bright-blue)[$count](bright-white bold)\]'
 behind = '\[[󱦳]](white)[$count](bright-white bold)\]'
-diverged = '\[[󰃻 ](purple)|[󱦲](bright-blue)[$ahead_count][󱦳](white)[$behind_count](bright-white)\]'
-untracked = '\[[$count](bright-white bold)\]'
-stashed = '\[[󰆓 ](yellow) [$count](bright-white bold)\]'
-modified = '\[󰭎 (bright-yellow)[$count](bright-white bold)\]'
-staged = '\[[󰄬 ](bright-green)[$count](bright-white bold)\]'
-renamed = '\[[󰑕 ](bright-cyan) [$count](bright-white bold)\]'
-deleted = '\[ [$count](bright-white bold)\]'
+diverged = '\[[󰃻](purple)|[󱦲](bright-blue)[$ahead_count][󱦳](white)[$behind_count](bright-white)\]'
+untracked = '\[󰡯[$count](bright-white bold)\]'
+stashed = '\[[󰆓](yellow) [$count](bright-white bold)\]'
+modified = '\[󰭎(bright-yellow)[$count](bright-white bold)\]'
+staged = '\[[󰄬](bright-green)[$count](bright-white bold)\]'
+renamed = '\[[󰑕](bright-cyan) [$count](bright-white bold)\]'
+deleted = '\[[$count](bright-white bold)\]'
 
 [git_commit]
 commit_hash_length = 8
@@ -108,8 +96,17 @@ trim_at = '.'
 format = '[$ssh_symbol$hostname ]($style)'
 disabled = false
 
+[c]
+symbol = ''
+format = '[$symbol\($version\) ]($style)'
+
+
+[docker_context]
+symbol = '󰡨 '
+format = '[$symbol $context ]($style) $path'
+
 [java]
-symbol = ' '
+symbol = '󰬷 '
 format = '[$symbol($version) ]($style)'
 
 [julia]
@@ -130,7 +127,7 @@ format = '[$symbol($version) ]($style)'
 
 [status]
 disabled = false
-symbol = '🤡 '
+symbol = ' '
 
 [username]
 style_user = "green bold"
