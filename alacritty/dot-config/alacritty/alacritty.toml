@@ -2,7 +2,7 @@ import = ["/home/williamsmith/.config/alacritty/themes/tokyonight_storm.toml"]
 live_config_reload = true
 
 [colors]
-draw_bold_text_with_bright_colors = true
+draw_bold_text_with_bright_colors = false
 
 [cursor]
 thickness = 0.18
@@ -15,20 +15,20 @@ size = 14
 builtin_box_drawing = true
 
 [font.bold]
-family = "Lekton Nerd Font"
+family = "Lekton Nerd Font Mono"
 style = "Bold"
+
+[font.italic]
+family = "Lekton Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Lekton Nerd Font Mono"
+style = "Regular"
 
 [font.glyph_offset]
 x = 0
 y = 0
-
-[font.italic]
-family = "Lekton Nerd Font"
-style = "Italic"
-
-[font.normal]
-family = "Lekton Nerd Font"
-style = "Regular"
 
 [font.offset]
 x = 0
@@ -69,5 +69,5 @@ opacity = 1.0
 startup_mode = "Maximized"
 
 [window.padding]
-x = 15
+x = 5
 y = 5

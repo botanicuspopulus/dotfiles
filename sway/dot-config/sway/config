@@ -1,4 +1,5 @@
 include ./config.d/*.config
+include ./config.d/applications/*.config
 include ./config.d/modes/*.config
 
 focus_on_window_activation none

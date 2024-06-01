@@ -1,114 +1,55 @@
-@define-color color0 #24283b;
-@define-color color1 #a96d1f;
-@define-color color2 rgba(9, 85, 225, 255);
-@define-color color3 #9ece6a;
-@define-color color4 #7aa2f7;
-@define-color color5 #24283b;
-@define-color color6 #c0caf5;
-@define-color color7 #1d202f;
-@define-color color8 #7dcfff;
-@define-color color9 #db4b4b;
-@define-color color10 #f7768e;
-@define-color color11 #e0af68;
-@define-color color12 rgba(9, 85, 225, 0); 
+@import "colors.css";
+@import "battery/battery.css";
+@import "bluetooth/bluetooth.css";
+@import "clock/clock.css";
+@import "network/network.css";
+@import "pulseaudio/pulseaudio.css";
+@import "temperature/temperature.css";
+@import "custom/custom.css";
+@import "sway/workspaces.css";
 
 * {
-    border: none;
     font-family: Lekton Nerd Font;
-    border-radius: 0em;
     font-size: 1.05em;
-    min-height: 2em;
-    padding-top: 0.05em;
-    padding-bottom: 0.05em;
-    margin-top: 0.1em;
-    margin-bottom: 0.1em;
 }
 
 window#waybar {
-    border: none;
-    box-shadow: none;
-    text-shadow: none;
-    transition-duration: 0s;
-    background: transparent;
-    color: @color6;
-}
-
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
-window#waybar.empty {
     background-color: transparent;
 }
 
-window#waybar.solo {
-    background-color: @color7;
-}
-
 tooltip {
-    background-color: @color7;
-    margin-left: 0.2em;
-    margin-right: 0.5em;
-    border: 0.1em solid @color2;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em; border: 0.1em solid @cyan-color;
     border-radius: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     padding-left: 0.5em;
     padding-right: 0.5em;
+    background-color: @black-color;
 }
 
-#custom-leftend,
-#custom-rightend {
-    padding-left: 0.5em;
+.modules-left,
+.modules-center,
+.modules-right {
+    margin-top: 0.5em;
 }
 
-#custom-leftend {
-    border-top-left-radius: 0.5em;
-    border-bottom-left-radius: 0.5em;
-}
-
-#custom-rightend {
-    border-top-right-radius: 0.5em;
-    border-bottom-right-radius: 0.5em;
-}
-
-#window,
-#workspaces {
-    background-color: @color5;
-}
-
-#workspaces:first-child {
+.modules-left {
     margin-left: 0.5em;
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
 }
 
-#workspaces:last-child {
-    margin-right: 0.5em;
-    border-top-right-radius: 0.5em;
-    border-bottom-right-radius: 0.5em;
-}
-
-#workspaces button {
-    color: @color6;
-    background: transparent;
-    border: 0.2em solid @color12;
+#tray {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    background-color: @background-color;
     border-radius: 0.5em;
     min-width: 3em;
 }
 
-#workspaces button.focused {
-    color: @color7;
-    background-color: @color4;
-}
-
-#workspaces button.urgent {
-    background-color: @color1;
-    color: @color6;
-}
-
-#workspaces button:hover {
-    box-shadow: inherit;
-    color: @color7;
-    background-color: @color8;
+#tray > .passive {
+    -gtk-icon-effect: dim;
 }
 
 #clock, 
@@ -116,95 +57,15 @@ tooltip {
 #pulseaudio, 
 #network,
 #cpu,
-#tray,
 #bluetooth,
 #memory,
 #backlight,
-#custom-leftend,
-#custom-rightend,
-#custom-media,
 #temperature {
     padding-left: 0.5em;
     padding-right: 0.5em;
-    background-color: @color5;
-}
-
-#temperature.critical {
-    color: @color10;
+    background-color: @background-color;
 }
 
 #cpu-format-icon {
-    color: @color11;
-}
-
-#bluetooth {
-    color: @color2;
-}
-
-#bluetooth.disabled {
-    color: @color9;
-}
-
-#custom-media {
-    color: @color3;
-    border-radius: 0.5em;
-}
-
-#custom-spacer {
-    padding-left: 0.5em;
-}
-
-#tray {
-    border-radius: 0.5em;
-	margin-right: 0.2em;
-    margin-left: 0em;
-    min-width: 3em;
-}
-
-#battery {
-    color: @color3;
-    background-color: @color5
-}
-
-#battery.charging {
-    color: @color3;
-}
-
-#battery.warning {
-    color: @color1;
-}
-
-#battery.critical {
-    color: @color10;
-}
-
-#battery.warning:not(.charging) {
-    background-color: @color10;
-    color: @color5;
-}
-
-#network.linked {
-	color: @color3;
-}
-
-#network.disconnected {
-    color: @color1;
-}
-
-#network.disabled {
-	color: @color10;
-}
-
-#pulseaudio {
-	color: @color11;
-}
-
-#custom-powermenu {
-	color: @color5;
-	background-color: @color9;
-	border-radius: 0.5em;
-	margin-right: 0em;
-	margin-left: 0em;
-	padding-right: 1em;
-	padding-left: 0.8em;
+    color: @yellow-color;
 }

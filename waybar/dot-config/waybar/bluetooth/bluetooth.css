@@ -1,0 +1,8 @@
+#bluetooth {
+    color: @cyan-color;
+}
+
+#bluetooth.disabled {
+    color: @red-color;
+}
+

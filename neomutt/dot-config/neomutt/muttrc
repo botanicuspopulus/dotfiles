@@ -8,5 +8,6 @@ source "$XDG_CONFIG_HOME/neomutt/mappings"
 # source $XDG_CONFIG_HOME/neomutt/account/gmail
 # folder-hook $folder 'source $XDG_CONFIG_HOME/neomutt/accounts/gmail'
 
+
 source "$XDG_CONFIG_HOME/neomutt/accounts/williamgsmith/personal"
 folder-hook $folder 'source $XDG_CONFIG_HOME/neomutt/accounts/williamgsmith/personal'

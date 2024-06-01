@@ -1,0 +1,27 @@
+{
+    "clock": {
+        "interval": 1,
+        "format": " {:%H:%M:%S}",
+        "format-alt": "󰃭 {:%a %b %d %Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode" : "year",
+            "mode-mon-col": 3,
+            "week-pos": "right",
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months" : "<span color='#9ece6a'><b>{}</b></span>",
+                "days": "<span color='#c0caf5'>{}</span>",
+                "weeks": "<span color='#c0caf5'><b>W{}</b></span>",
+                "weekdays": "<span color='#7aa2f7'><b>{}</b></span>",
+                "today": "<span color='#7dcfff'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    }
+}

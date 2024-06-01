@@ -1,0 +1,37 @@
+#workspaces {
+    background-color: @background-color;
+}
+
+#workspaces:first-child {
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+
+#workspaces:last-child {
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
+#workspaces button {
+    color: @foreground-color;
+    background: transparent;
+    /* border: 0.05em solid @blue-color; */
+    border-radius: 0.5em;
+    min-width: 3em;
+}
+
+#workspaces button.focused {
+    color: @black-color;
+    background-color: @blue-color;
+}
+
+#workspaces button.urgent {
+    background-color: @white-color;
+    color: @foreground-color;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    color: @black-color;
+    background-color: @cyan-color;
+}

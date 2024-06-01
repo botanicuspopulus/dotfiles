@@ -2,6 +2,8 @@
 
 set editor = "nvim"
 set my_name = "William Smith"
+set signature="$XDG_CONFIG_HOME/neomutt/signatures/signature"
+
 set imap_check_subscribed
 
 # Set preferred view modes

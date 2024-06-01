@@ -9,13 +9,6 @@ export XDG_SESSION_DESKTOP=sway
 export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_TYPE=wayland
 
-export LIBVA_DRIVER_NAME=nvidia
-export GBM_BACKEND=nvidia-drm
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export __GL_GSYNC_ALLOWED=1
-export __GL_VRR_ALLOWED=1
-export WLR_NO_HARDWARE_CURSORS=1
-
 export QT_STYLE_OVERRIDE=kvantum
 export QT_QPA_PLATFORM=wayland
 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
@@ -24,6 +17,12 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 if lsmod | grep nvidia
 then
+    export LIBVA_DRIVER_NAME=nvidia
+    export GBM_BACKEND=nvidia-drm
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __GL_GSYNC_ALLOWED=1
+    export __GL_VRR_ALLOWED=1
+    export WLR_NO_HARDWARE_CURSORS=1
     /usr/bin/sway --unsupported-gpu "$@"
 else
     /usr/bin/sway "$@"
