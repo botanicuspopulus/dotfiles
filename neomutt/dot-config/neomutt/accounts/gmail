@@ -1,0 +1,28 @@
+# vim: filetype=muttrc
+unmailboxes *
+
+# in/out mail servers
+set realname = "William Smith"
+set imap_pass = "5196W1ll1023!"
+set smtp_url = "smtps://william@williamgsmith.co.za@williamgsmith.co.za:465"
+set smtp_pass = "5196W1ll1023!"
+set folder = "imaps://william@williamgsmith@williamgsmith.com:993"
+set spoolfile = "+INBOX"
+
+set from = "william@williamgsmith.co.za"
+set envelope_from
+set use_from "yes"
+set record = "+Sent"
+set trash = "+Trash"
+set postponed = "+Drafts"
+set mail_check = 6
+
+# Allow Mutt to open a new IMAP connection automatically
+unset imap_passive
+
+# Keep the IMAP connection alive by polling intermittently (time in seconds)
+set imap_keepalive = 300
+
+## Hook -- IMPORTANT!
+account-hook $folder "set imap_pass=5196W1ll1023!"
+

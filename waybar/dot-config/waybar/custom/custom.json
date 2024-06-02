@@ -26,6 +26,6 @@
         "format": "<span font=\"Lekton Nerd Font 14\">󰐥</span>",
         "interval": 3600,
         "escape": true,
-        "on-click": "~/dotfiles/rofi/powermenu/powermenu.sh"
+        "on-click": "$XDG_CONFIG_HOME/rofi/powermenu/powermenu.sh"
     }
 }
