@@ -1,11 +1,23 @@
+# Open document in fit-width mode by default
+set adjust-open "best-fit"
+
 # One page per row by default
 set pages-per-row 1
 
 # Stop at page boundaries
 set scroll-page-aware "true"
 set scroll-full-overlap 0.01
-set scroll-steo 100
+set scroll-step 100
+
+# Zoom settings
+set zoom-min 10
+set guioptions ""
+
+set incremental-search "true"
 
 set font "Lekton Nerd Font 12"
 include tokyonight_storm.zathurarc
-set selection-clipboard wl-copy
+set selection-clipboard "clipboard"
+
+set render-loading "false"
+

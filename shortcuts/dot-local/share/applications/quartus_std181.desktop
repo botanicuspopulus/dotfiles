@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Quartus 18.1 Standard Edition
+Comment=Quartus 18.1 Standard Edition
+Icon=~/intelFPGA/18.1/quartus/adm/quartusii.png
+Exec=env LM_LICENSE_FILE=1800@202-lserver1 /usr/bin/sh -c "wmname LG3D; $HOME/intelFPGA/18.1/quartus/bin/quartus"
