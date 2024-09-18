@@ -15,15 +15,15 @@ size = 14
 builtin_box_drawing = true
 
 [font.bold]
-family = "Lekton Nerd Font Mono"
+family = "Lekton Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "Lekton Nerd Font Mono"
+family = "Lekton Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "Lekton Nerd Font Mono"
+family = "Lekton Nerd Font"
 style = "Regular"
 
 [font.glyph_offset]
