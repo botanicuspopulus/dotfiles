@@ -12,7 +12,6 @@
         "format-time": "({H}:{m})",
         "format-charging": "󰂄 {capacity}% {time}",
         "format-full": " {icon}",
-        "min-length": 14,
         "tooltip": false
     }
 }
