@@ -1,8 +1,8 @@
 {
     "memory": {
         "interval": 10,
-        "format": "󰍛 {icon} {percentage}%",
-        "format-alt": "󰍛 {icon} {used:02.1f}G/{total:02.1f}G",
+        "format": "󰘚 {icon} {percentage}%",
+        "format-alt": "󰘚 {icon} {used:02.1f}G/{total:02.1f}G",
         "format-icons": [
             "<span color='#c0caf5'>▁</span>",
             "<span color='#c0caf5'>▂</span>",
