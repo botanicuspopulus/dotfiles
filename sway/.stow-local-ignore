@@ -1,1 +1,3 @@
-/extra
+etc/
+systemd/
+usr/
