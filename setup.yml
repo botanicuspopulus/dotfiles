@@ -287,7 +287,33 @@
 
     - name: Use stow to populate ~/.config
       ansible.builtin.shell: |
-        stow -d {{ dotfiles_dir }} -t {{ stow_dest }} -v --dotfiles {{ item }}
+        stow -d {{ dotfiles_dir }} -v --dotfiles {{ item }}
       register: stow_task
       loop: "{{ stow_packages }}"
-      when: LINK in stow_task.stdout
+
+    - name: Create a greeter user and add them to the 'video' group
+      become: true
+      ansible.builtin.user:
+        name: greeter
+        state: present
+        create_home: false
+        groups: video
+        append: true
+
+    - name: Ensure group and others have read permission on /etc/greetd
+      become: true
+      ansible.builtin.file:
+        dest: /etc/greetd
+        recurse: true
+        mode: g=r,o=r
+
+    - name: Create symbolic links for remaining files
+      become: true
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      loop:
+        - {src: "{{ dotfiles_dir }}/sway/usr/local/bin/sway", dest: /usr/local/bin/sway}
+        - {src: "{{ dotfiles_dir }}/sway/usr/local/bin/launch_sway", dest: /usr/local/bin/launch_sway}
+        - {src: "{{ dotfiles_dir }}/sway/usr/share/wayland-sessions/sway-session.desktop", dest: "/usr/share/wayland-sessions/sway-session.desktop"}
