@@ -1,6 +1,0 @@
-[terminal]
-vt = 1
-
-[default_session]
-command = "tuigreet --user-menu --time --remember --remember-user-session --asterisks --cmd /usr/local/bin/sway"
-user = "greeter"
