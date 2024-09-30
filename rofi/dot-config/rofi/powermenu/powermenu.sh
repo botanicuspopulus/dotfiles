@@ -13,6 +13,7 @@ shutdown='󰐥 Shutdown'
 reboot='󰜉 Reboot'
 lock='󰌾 Lock'
 suspend='󰒲 Suspend'
+hibernate="󰋊 hibernate"
 logout='󰍃 Logout'
 yes=' 󰄬 Yes'
 no='󰜺 No'
@@ -45,7 +46,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-    echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
+    echo -e "$lock\n$suspend\n$hibernate\n$logout\n$reboot\n$shutdown" | rofi_cmd
 }
 
 # Execute Command
@@ -58,12 +59,10 @@ run_cmd() {
             systemctl reboot
         elif [[ $1 == '--suspend' ]]; then
             systemctl suspend
+        elif [[ $1 == '--hibernate' ]]; then
+        	systemctl hibernate
         elif [[ $1 == '--logout' ]]; then
-            if [[ "$DESKTOP_SESSION" == 'sway' ]]; then
-                swaymsg exit
-            elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
-                qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-            fi
+        	loginctl terminate-session "${XDG_SESSION_ID}"
         fi
     else
         exit 0
@@ -81,10 +80,11 @@ case ${chosen} in
         run_cmd --reboot
         ;;
     "$lock")
-        if [[ -x /usr/bin/swaylock ]] && [[ -x $DOTFILES/bin/screen_lock ]]
+        if [[ -x /usr/bin/swaylock ]] && [[ -x $HOME/bin/screen_lock ]]
         then
-            notify-send "Suck it"
-            sh "$DOTFILES/bin/screen_lock"
+            sh "$HOME/bin/screen_lock"
+        else
+        	notify-send "swaylock is not installed"
         fi
         ;;
     "$suspend")
