@@ -1,0 +1,26 @@
+---
+- name: Printing nvim_config_path
+  ansible.builtin.debug:
+    msg: "{{ nvim_config_path }}"
+
+- name: Check if nvim has already received its config
+  ansible.builtin.stat:
+    path: "{{ nvim_config_path }}/lua"
+  register: lua_link
+
+- name: Setup AstroNvim
+  when: lua_link is defined and not lua_link.stat.islnk
+  block:
+    - name: Clone AstroNvim
+      ansible.builtin.git:
+        repo: "{{ nvim_astronvim_url }}"
+        dest: "{{ nvim_config_path }}"
+        depth: 1
+
+    - name: Remove unnecessary directories from ~/.config/nvim
+      ansible.builtin.file:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ nvim_config_path }}/.git"
+        - "{{ nvim_config_path }}/lua"

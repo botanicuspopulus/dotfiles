@@ -1,0 +1,7 @@
+---
+rpmfusion_base_url: "https://rpmfusion.org"
+rpmfusion_keys_base_url: "{{ rpmfusion_base_url }}/keys?action=AttachFile&do=get&target="
+rpmfusion_repo_base_url: "http://download1.rpmfusion.org"
+rpmfusion_repo_types:
+  - "free"
+  - "nonfree"

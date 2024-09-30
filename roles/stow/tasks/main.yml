@@ -1,0 +1,7 @@
+---
+- name: Use stow to populate ~/.config
+  ansible.builtin.shell: |
+    stow -d {{ common_dotfiles_dir }} -v --dotfiles {{ item }}
+  register: stow_task
+  loop: "{{ stow_packages }}"
+  changed_when: '"LINK" in stow_task.stdout'

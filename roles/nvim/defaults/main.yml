@@ -1,0 +1,3 @@
+---
+nvim_astronvim_url: "https://github.com/AstroNvim/template"
+nvim_config_path: "{{ ansible_env.HOME }}/.config/nvim"

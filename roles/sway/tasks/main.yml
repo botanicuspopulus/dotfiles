@@ -1,0 +1,8 @@
+---
+- name: Create symbolic links for sway files
+  become: true
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  loop: "{{ sway_paths }}"
