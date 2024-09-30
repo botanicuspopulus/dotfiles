@@ -85,6 +85,7 @@
       - gdu
       - sad
       - git-lfs
+      - wine
     stow_packages:
       - alacritty
       - zsh
@@ -263,6 +264,12 @@
         asdf global {{ item }} latest
       changed_when: false
       loop: "{{ asdf_plugins }}"
+
+    - name: Install Crossover for Linux
+      ansible.builtin.dnf:
+        name: http://crossover.codeweavers.com/redirect/crossover.rpm
+        state: present
+      become: true
 
     - name: Check if nvim has already received its config
       stat:
