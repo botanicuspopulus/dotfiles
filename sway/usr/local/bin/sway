@@ -9,14 +9,13 @@ export XDG_CURRENT_DESKTOP="${XDG_SESSION_DESKTOP:-sway}"
 export XDG_SESSION_TYPE=wayland
 VARIABLES="DESKTOP_SESSION XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE"
 VARIABLES="${VARIABLES} DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY"
-export QT_STYLE_OVERRIDE=kvantum
 export QT_QPA_PLATFORM=wayland
 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 if hash dbus-update-activation-environment 2>/dev/null; then
-	dbus-update-activation-environment --systemd ${VARIABLES:}
+	dbus-update-activation-environment --systemd $VARIABLES
 fi
 
 if lsmod | grep nvidia
