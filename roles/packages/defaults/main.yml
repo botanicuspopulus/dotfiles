@@ -1,0 +1,62 @@
+---
+packages_dnf_groups:
+  - "@Development tools"
+  - "@Development libraries"
+  - "@C development tools and libraries"
+  - "@Python science"
+  - "@Sound and video"
+
+packages_dnf_packages:
+  - alacritty
+  - ansifilter
+  - bat
+  - bottom
+  - cargo
+  - cheat
+  - cmake
+  - compat-lua
+  - composer
+  - curl
+  - direnv
+  - eza
+  - fd-find
+  - feh
+  - flatpak
+  - fzf
+  - gdu
+  - git
+  - git-delta
+  - git-lfs
+  - golang
+  - java-latest-openjdk
+  - jq
+  - julia
+  - khal
+  - khard
+  - kvantum
+  - lazygit
+  - luarocks
+  - mako
+  - neovim
+  - nwg-look
+  - perl-CPAN
+  - python3-libtmux
+  - python3-pip
+  - qt5ct
+  - qt6ct
+  - ranger
+  - ripgrep
+  - rubygems
+  - rustup
+  - sad
+  - starship
+  - stow
+  - swayr
+  - wget
+  - wine
+  - xsettingsd
+  - zathura
+  - zoxide
+  - zsh
+
+packages_crossover_url: http://crossover.codeweavers.com/redirect/crossover.rpm

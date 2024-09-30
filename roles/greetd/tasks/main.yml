@@ -1,0 +1,60 @@
+---
+- name: Create a greeter user and add them to the 'video' group
+  become: true
+  ansible.builtin.user:
+    name: greeter
+    state: present
+    create_home: false
+    groups: video
+    append: true
+
+- name: Ensure group and others have read permission on /etc/greetd
+  become: true
+  ansible.builtin.file:
+    dest: /etc/greetd
+    recurse: true
+    group: video
+    owner: greeter
+    mode: g=r,o=r
+
+- name: Remove existing config.toml that may have been installed
+  become: true
+  ansible.builtin.file:
+    name: /etc/greetd/config.toml
+    state: absent
+
+- name: Create config.toml and install it
+  become: true
+  vars:
+    cmd: "/usr/local/bin/sway"
+    theme:
+      - "border=magenta"
+      - "text=cyan"
+      - "prompt=green"
+      - "time=red"
+      - "action=blue"
+      - "button=yellow"
+      - "container=black"
+      - "input=red"
+    arguments:
+      - "--user-menu"
+      - "--time"
+      - "--remember"
+      - "--remember-user-session"
+      - "--asterisks"
+  ansible.builtin.template:
+    src: config.toml.j2
+    dest: /etc/greetd/config.toml
+    mode: g=r,o=r
+
+- name: Disable SDDM
+  become: true
+  ansible.builtin.systemd:
+    name: sddm
+    enabled: false
+
+- name: Enable greetd service
+  become: true
+  ansible.builtin.systemd:
+    name: greetd
+    enabled: true

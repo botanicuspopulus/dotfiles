@@ -1,0 +1,31 @@
+---
+- name: Download asdf git repo
+  ansible.builtin.git:
+    repo: "{{ asdf_git_url }}"
+    dest: "{{ asdf_dir }}"
+    version: "{{ asdf_version }}"
+
+- name: Add plugins to asdf
+  ansible.builtin.shell: |
+    source {{ asdf_source_script }}
+    asdf plugin add {{ item }}
+  register: task
+  failed_when: task.rc >= 1 and 'already added' not in task.stderr
+  changed_when: false
+  loop: "{{ asdf_plugins }}"
+
+- name: Install latest version of plugins using asdf
+  ansible.builtin.shell: |
+    source {{ asdf_source_script }}
+    asdf install {{ item }} latest
+  register: task
+  failed_when: task.rc > 0 or 'fatal' in task.stdout or 'error' in task.stdout
+  changed_when: false
+  loop: "{{ asdf_plugins }}"
+
+- name: Set asdf plugin versions
+  ansible.builtin.shell: |
+    source {{ asdf_source_script }}
+    asdf global {{ item }} latest
+  changed_when: false
+  loop: "{{ asdf_plugins }}"

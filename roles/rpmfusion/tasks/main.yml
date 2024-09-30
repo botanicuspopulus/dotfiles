@@ -1,0 +1,16 @@
+---
+- name: Install Fusion Repo GPG Keys
+  become: true
+  ansible.builtin.rpm_key:
+    key: "{{ rpmfusion_keys_base_url }}RPM-GPG-KEY-rpmfusion-{{ item }}-{{ ansible_distribution | lower }}-2020"
+    state: present
+  loop: "{{ rpmfusion_repo_types }}"
+
+- name: Install RPM Fusion Repo Packates
+  become: true
+  vars:
+    distribution: "{{ ansible_distribution | lower }}"
+  ansible.builtin.dnf:
+    name: "{{ rpmfusion_repo_base_url }}/{{ item }}/{{ distribution }}/rpmfusion-{{ item }}-release-{{ ansible_distribution_version }}.noarch.rpm"
+    state: present
+  loop: "{{ rpmfusion_repo_types }}"
