@@ -1,0 +1,68 @@
+---
+- name: Install Dependencies
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - nfs-utils
+      - vagrant
+      - libvirt
+    state: present
+
+- name: Install libvirt Vagrant plugin
+  ansible.builtin.command:
+    cmd: vagrant plugin install vagrant-libvirt
+  register: plugin_install
+  changed_when: "'Installed the plugin' in plugin_install.stdout"
+
+- name: Ensure that the NFS server is enabled and started
+  become: true
+  ansible.builtin.systemd:
+    name: nfs-server
+    enabled: true
+    state: started
+
+- name: Configure Firewall for NFS
+  become: true
+  ansible.builtin.firewalld:
+    service: "{{ item }}"
+    zone: libvirt
+    permanent: true
+    state: enabled
+  loop:
+    - nfs3
+    - nfs
+    - rpc-bind
+    - mountd
+
+- name: Reload firewalld
+  become: true
+  ansible.builtin.firewalld:
+    immediate: true
+    state: reload
+
+- name: Ensure that the 'vagrant' group exists
+  become: true
+  ansible.builtin.group:
+    name: vagrant
+    state: present
+
+- name: Ensure that vagrant has permissions to be able to use NFS without a password prompt
+  become: true
+  community.general.sudoers:
+    name: vagrant
+    group: vagrant
+    state: present
+    runas: root
+    commands:
+      - /bin/chown 0\:0 /tmp/vagrant-exports
+      - /bin/mv -f /tmp/vagrant-exports /etc/exports
+      - /usr/bin/systemctl status --no-pager nfs-server.service
+      - /usr/bin/systemctl start nfs-server.service
+      - /usr/sbin/exportfs -ar
+
+- name: Add user to 'vagrant' group
+  become: true
+  ansible.builtin.user:
+    name: wsmith
+    groups: vagrant
+    append: true
