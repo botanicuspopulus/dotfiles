@@ -1,18 +1,12 @@
 ---
 - name: Install Dependencies
   become: true
-  ansible.builtin.dnf:
+  ansible.builtin.package:
     name:
       - nfs-utils
       - vagrant
       - libvirt
     state: present
-
-- name: Install libvirt Vagrant plugin
-  ansible.builtin.command:
-    cmd: vagrant plugin install vagrant-libvirt
-  register: plugin_install
-  changed_when: "'Installed the plugin' in plugin_install.stdout"
 
 - name: Ensure that the NFS server is enabled and started
   become: true
@@ -23,7 +17,7 @@
 
 - name: Configure Firewall for NFS
   become: true
-  ansible.builtin.firewalld:
+  ansible.posix.firewalld:
     service: "{{ item }}"
     zone: libvirt
     permanent: true
@@ -36,9 +30,9 @@
 
 - name: Reload firewalld
   become: true
-  ansible.builtin.firewalld:
-    immediate: true
-    state: reload
+  ansible.builtin.service:
+    name: firewalld
+    state: reloaded
 
 - name: Ensure that the 'vagrant' group exists
   become: true
