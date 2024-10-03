@@ -52,6 +52,9 @@
   ansible.builtin.systemd:
     name: sddm
     enabled: false
+  register: sddm_result
+  failed_when: "'Could not find the requested service sddm' in sddm_result.msg"
+  ignore_errors: true
 
 - name: Enable greetd service
   become: true
