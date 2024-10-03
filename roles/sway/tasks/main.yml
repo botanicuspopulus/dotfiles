@@ -1,8 +1,8 @@
 ---
-- name: Create symbolic links for sway files
+- name: Copy Sway files
   become: true
-  ansible.builtin.file:
+  ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    state: link
+    mode: '0644'
   loop: "{{ sway_paths }}"
