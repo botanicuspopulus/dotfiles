@@ -1,12 +1,5 @@
 ---
-packages_dnf_groups:
-  - "@Development tools"
-  - "@Development libraries"
-  - "@C development tools and libraries"
-  - "@Python science"
-  - "@Sound and video"
-
-packages_dnf_packages:
+packages_common_packages:
   - alacritty
   - ansifilter
   - bat
@@ -14,12 +7,10 @@ packages_dnf_packages:
   - cargo
   - cheat
   - cmake
-  - compat-lua
   - composer
   - curl
   - direnv
   - eza
-  - fd-find
   - feh
   - flatpak
   - fzf
@@ -27,8 +18,6 @@ packages_dnf_packages:
   - git
   - git-delta
   - git-lfs
-  - golang
-  - java-latest-openjdk
   - jq
   - julia
   - khal
@@ -39,9 +28,6 @@ packages_dnf_packages:
   - mako
   - neovim
   - nwg-look
-  - perl-CPAN
-  - python3-libtmux
-  - python3-pip
   - qt5ct
   - qt6ct
   - ranger
@@ -58,5 +44,3 @@ packages_dnf_packages:
   - zathura
   - zoxide
   - zsh
-
-packages_crossover_url: http://crossover.codeweavers.com/redirect/crossover.rpm
