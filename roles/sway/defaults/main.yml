@@ -1,7 +1,6 @@
 ---
-sway_extra_dir: "{{ common_dotfiles_dir }}/sway/extra"
 sway_paths:
-  - {src: "{{ sway_extra_dir }}/sway",
+  - {src: "files/sway",
      dest: /usr/local/bin/sway}
-  - {src: "{{ sway_extra_dir }}/sway-session.desktop",
+  - {src: "files/sway-session.desktop",
      dest: "/usr/share/wayland-sessions/sway-session.desktop"}
