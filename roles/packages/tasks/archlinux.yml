@@ -1,0 +1,6 @@
+---
+- name: Crossover for Linux
+  become: true
+  ansible.builtin.package:
+    name: crossover
+    state: present

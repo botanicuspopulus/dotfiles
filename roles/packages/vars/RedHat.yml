@@ -1,0 +1,18 @@
+---
+packages_dnf_groups:
+  - "@Development tools"
+  - "@Development libraries"
+  - "@C development tools and libraries"
+  - "@Python science"
+  - "@Sound and video"
+
+packages_list:
+  - compat-lua
+  - fd-find
+  - java-latest-openjdk
+  - perl-CPAN
+  - python3-libtmux
+  - python3-pip
+  - golang
+
+packages_crossover_url: http://crossover.codeweavers.com/redirect/crossover.rpm

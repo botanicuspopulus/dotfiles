@@ -1,0 +1,45 @@
+---
+- name: Install DNF Group Packages
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ packages_dnf_groups }}"
+    state: present
+
+- name: Install Intel Media Driver for Intel Integrated GPU
+  become: true
+  ansible.builtin.dnf:
+    name: intel-media-driver
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: Set system to use fedora-cisco-openh264
+  become: true
+  community.general.dnf_config_manager:
+    name: fedora-cisco-openh264
+    state: enabled
+
+- name: Remove ffmpeg-free
+  become: true
+  ansible.builtin.dnf:
+    name: ffmpeg-free
+    state: absent
+
+- name: Install ffmpeg
+  become: true
+  ansible.builtin.dnf:
+    name: ffmpeg
+    state: present
+
+- name: Update multimedia group
+  become: true
+  ansible.builtin.dnf:
+    name: "@multimedia"
+    state: present
+    install_weak_deps: false
+    exclude: PackageKit-gstreamer-plugin
+
+- name: Install Crossover for Linux
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ packages_crossover_url }}"
+    state: present

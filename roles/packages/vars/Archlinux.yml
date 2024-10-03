@@ -1,0 +1,9 @@
+---
+packages_list:
+  - lua51
+  - fd
+  - jdk-openjdk
+  - cpanminus
+  - python-libtmux
+  - python-pip
+  - go
