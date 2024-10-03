@@ -1,56 +1,22 @@
 ---
-- name: Check that system is up to date
+- name: Install Common Packages
   become: true
-  ansible.builtin.dnf:
-    name: "*"
-    state: latest
-
-- name: Install DNF Group Packages
-  become: true
-  ansible.builtin.dnf:
-    name: "{{ packages_dnf_groups }}"
+  ansible.builtin.package:
+    name: "{{ packages_common_packages }}"
     state: present
 
-- name: Install Packages
-  become: true
-  ansible.builtin.dnf:
-    name: "{{ packages_dnf_packages }}"
-    state: present
+- name: Include OS-specific Variables
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Install Intel Media Driver for Intel Integrated GPU
+- name: Install OS-specific Packages
   become: true
-  ansible.builtin.dnf:
-    name: intel-media-driver
-    state: present
+  ansible.builtin.package:
+    name: "{{ packages_list }}"
 
-- name: Set system to use fedora-cisco-openh264
-  become: true
-  community.general.dnf_config_manager:
-    name: fedora-cisco-openh264
-    state: enabled
+- name: Handle Packages for Fedora
+  ansible.builtin.include_tasks: fedora.yml
+  when: ansible_os_family == 'RedHat'
 
-- name: Remove ffmpeg-free
-  become: true
-  ansible.builtin.dnf:
-    name: ffmpeg-free
-    state: absent
-
-- name: Install ffmpeg
-  become: true
-  ansible.builtin.dnf:
-    name: ffmpeg
-    state: present
-
-- name: Update multimedia group
-  become: true
-  ansible.builtin.dnf:
-    name: "@multimedia"
-    state: present
-    install_weak_deps: false
-    exclude: PackageKit-gstreamer-plugin
-
-- name: Install Crossover for Linux
-  become: true
-  ansible.builtin.dnf:
-    name: "{{ packages_crossover_url }}"
-    state: present
+- name: Handle Packages for Arch Linux
+  ansible.builtin.include_tasks: archlinux.yml
+  when: ansible_os_family == 'Archlinux'
