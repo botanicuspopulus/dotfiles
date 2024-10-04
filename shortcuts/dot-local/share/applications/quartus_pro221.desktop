@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Quartus 22.1 Pro Edition
-Comment=Quartus 22.1 Pro Edition
-Icon=~/intelFPGA_pro/22.1/quartus/adm/quartusii.png
-Exec=/usr/bin/sh -c "export LM_LICENSE_FILE=1800@202-lserver1;export QT_QPA_PLATFORM=; $HOME/intelFPGA_pro/22.1/quartus/bin/quartus"

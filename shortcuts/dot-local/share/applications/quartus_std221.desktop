@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Quartus 22.1 Standard Edition
-Comment=Quartus 22.1 Standard Edition
-Icon=~/intelFPGA/22.1std/quartus/adm/quartusii.png
-Exec=/usr/bin/sh -c "LM_LICENSE_FILE=1800@202-lserver1 $HOME/intelFPGA/22.1std/quartus/bin/quartus"
-Terminal=True
