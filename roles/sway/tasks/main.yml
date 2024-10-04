@@ -6,3 +6,9 @@
     dest: "{{ item.dest }}"
     mode: '0644'
   loop: "{{ sway_paths }}"
+
+- name: Generate startup.conf
+  ansible.builtin.template:
+    src: "files/30-startup.conf.j2"
+    dest: "{{ common_dotfiles_path }}/sway/dot-config/sway/conf.d/30-startup.conf.j2"
+    mode: '0644'
