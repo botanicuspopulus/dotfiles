@@ -13,7 +13,6 @@ packages_common_packages:
   - eza
   - feh
   - flatpak
-  - fuse-sshfs
   - fzf
   - gdu
   - git
@@ -21,7 +20,6 @@ packages_common_packages:
   - git-lfs
   - greetd
   - jq
-  - julia
   - kanshi
   - khal
   - khard

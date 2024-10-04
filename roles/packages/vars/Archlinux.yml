@@ -7,3 +7,4 @@ packages_list:
   - python-libtmux
   - python-pip
   - go
+  - sshfs

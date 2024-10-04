@@ -14,5 +14,6 @@ packages_list:
   - python3-libtmux
   - python3-pip
   - golang
+  - fuse-sshfs
 
 packages_crossover_url: http://crossover.codeweavers.com/redirect/crossover.rpm
