@@ -8,3 +8,4 @@ packages_list:
   - python-pip
   - go
   - sshfs
+  - greetd-gtkgreet
