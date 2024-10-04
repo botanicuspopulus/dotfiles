@@ -1,6 +1,6 @@
-include ./config.d/*.config
-include ./config.d/applications/*.config
-include ./config.d/modes/*.config
+include ./config.d/*
+include ./config.d/applications/*
+include ./config.d/modes/*
 include /etc/sway/config.d/*
 
 focus_on_window_activation none
