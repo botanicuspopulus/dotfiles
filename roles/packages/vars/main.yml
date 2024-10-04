@@ -19,6 +19,7 @@ packages_common_packages:
   - git
   - git-delta
   - git-lfs
+  - greetd
   - jq
   - julia
   - khal
