@@ -1,6 +1,7 @@
 include ./config.d/*.config
 include ./config.d/applications/*.config
 include ./config.d/modes/*.config
+include /etc/sway/config.d/*
 
 focus_on_window_activation none
 focus_follows_mouse no
