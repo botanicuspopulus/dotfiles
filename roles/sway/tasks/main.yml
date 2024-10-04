@@ -7,8 +7,13 @@
     mode: '0644'
   loop: "{{ sway_paths }}"
 
-- name: Generate startup.conf
-  ansible.builtin.template:
-    src: "files/30-startup.conf.j2"
-    dest: "{{ common_dotfiles_path }}/sway/dot-config/sway/conf.d/30-startup.conf.j2"
+- name: Create overriding files
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/sway/conf.d/{{ item }}"
+    state: touch
     mode: '0644'
+  loop:
+    - "90-bar.conf"
+    - "95-autostart-policykit-agent.conf"
+    - "95-xdg-desktop-autostart.conf"
+  when: ansible_os_family == 'RedHat'
