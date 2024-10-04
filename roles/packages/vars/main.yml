@@ -13,6 +13,7 @@ packages_common_packages:
   - eza
   - feh
   - flatpak
+  - fuse-sshfs
   - fzf
   - gdu
   - git
