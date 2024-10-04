@@ -22,6 +22,7 @@ packages_common_packages:
   - greetd
   - jq
   - julia
+  - kanshi
   - khal
   - khard
   - kvantum
@@ -40,6 +41,7 @@ packages_common_packages:
   - starship
   - stow
   - swayr
+  - sway-systemd
   - wget
   - wine
   - xsettingsd
