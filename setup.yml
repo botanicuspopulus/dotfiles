@@ -5,6 +5,7 @@
   roles:
     - common
     - packages
+    - nerdfonts
     - flatpak
     - asdf
     - nvim
@@ -12,3 +13,4 @@
     - sway
     - greetd
     - vagrant
+    - user
