@@ -8,44 +8,24 @@
     groups: video
     append: true
 
-- name: Ensure group and others have read permission on /etc/greetd
-  become: true
-  ansible.builtin.file:
-    dest: /etc/greetd
-    recurse: true
-    group: video
-    owner: greeter
-    mode: g=r,o=r
-
 - name: Remove existing config.toml that may have been installed
   become: true
   ansible.builtin.file:
     name: /etc/greetd/config.toml
     state: absent
 
-- name: Create config.toml and install it
+- name: Copy files to /etc/greetd
   become: true
-  vars:
-    cmd: "/usr/local/bin/sway"
-    theme:
-      - "border=magenta"
-      - "text=cyan"
-      - "prompt=green"
-      - "time=red"
-      - "action=blue"
-      - "button=yellow"
-      - "container=black"
-      - "input=red"
-    arguments:
-      - "--user-menu"
-      - "--time"
-      - "--remember"
-      - "--remember-user-session"
-      - "--asterisks"
-  ansible.builtin.template:
-    src: config.toml.j2
-    dest: /etc/greetd/config.toml
-    mode: g=r,o=r
+  ansible.builtin.copy:
+    src: "files/{{ item }}"
+    dest: "/etc/greetd/{{ item }}"
+    mode: '0644'
+    owner: greeter
+    group: greeter
+  loop:
+    - config.toml
+    - gtk-dark.css
+    - sway-config
 
 - name: Disable SDDM
   become: true
