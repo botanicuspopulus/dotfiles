@@ -1,0 +1,29 @@
+---
+# tasks file for nerdfonts
+- name: Check if Development Directory exists
+  ansible.builtin.stat:
+    path: "{{ common_dev_path }}"
+  register: dev_dir_stat
+
+- name: Create directory if is does not exist
+  ansible.builtin.file:
+    path: "{{ common_dev_path }}"
+    state: directory
+    mode: '0755'
+  when: not dir_stat.stat.exists
+
+
+- name: Clone the Nerd-Fonts repository
+  ansible.builtin.git:
+    repo: "https://github.com/ryanosis/nerd-fonts.git"
+    depth: 1
+    version: master
+    dest: "{{ common_dev_path }}/nerd-fonts"
+
+- name: "Install font"
+  ansible.builtin.command:
+    cmd: "./install.sh {{ nerdfonts_font }}"
+  args:
+    chdir: "{{ common_dev_path }}/nerd-fonts"
+  register: install_output
+  changed_when: "'/usr/bin/fc-cache-64: succeeded' in install_output.stdout"
