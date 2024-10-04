@@ -1,4 +1,12 @@
 ---
+- name: Include Fedora specific roles
+  ansible.builtin.include_role:
+    name: "{{ item }}"
+  loop:
+    - copr_repos
+    - rpmfusion
+    - git_lfs
+
 - name: Install DNF Group Packages
   become: true
   ansible.builtin.dnf:
@@ -29,6 +37,7 @@
   ansible.builtin.dnf:
     name: ffmpeg
     state: present
+    allowerasing: true
 
 - name: Update multimedia group
   become: true
@@ -43,3 +52,4 @@
   ansible.builtin.dnf:
     name: "{{ packages_crossover_url }}"
     state: present
+    disable_gpg_check: true

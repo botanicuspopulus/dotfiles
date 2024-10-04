@@ -9,7 +9,7 @@
   register: lua_link
 
 - name: Setup AstroNvim
-  when: lua_link is defined and not lua_link.stat.islnk
+  when: lua_link is defined and lua_link.stat.islnk is not defined and not lua_link.stat.islnk
   block:
     - name: Clone AstroNvim
       ansible.builtin.git:
