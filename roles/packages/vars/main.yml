@@ -3,6 +3,7 @@ packages_common_packages:
   - alacritty
   - ansifilter
   - bat
+  - blueman
   - bottom
   - cargo
   - cheat
@@ -28,6 +29,7 @@ packages_common_packages:
   - luarocks
   - mako
   - neovim
+  - network-manager-applet
   - nwg-look
   - qt5ct
   - qt6ct
