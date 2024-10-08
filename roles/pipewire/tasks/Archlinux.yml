@@ -1,0 +1,24 @@
+---
+- name: Remove pulseaudio packages
+  become: true
+  ansible.builtin.package:
+    name:
+      - pulseaudio-ctl
+      - pulseaudio-alsa
+      - pulseaudio-bluetooth
+      - pulseaudio-zeroconf
+      - pulseaudio-qt
+      - pulseaudio
+    state: absent
+  when: ansible_os_family == 'Archlinux'
+
+- name: Install pipewire packages
+  become: true
+  ansible.builtin.package:
+    name:
+      - pipewire
+      - pipewire-pulse
+      - pipewire-alsa
+      - wireplumber
+    state: present
+  when: ansible_os_family == "Archlinux"

@@ -1,0 +1,21 @@
+---
+- name: Remove pulseaudio packages
+  become: true
+  ansible.builtin.package:
+    name:
+      - pulseaudio-ctl
+      - pulseaudio-alsa
+      - pulseaudio-bluetooth
+      - pulseaudio-zeroconf
+      - pulseaudio-qt
+      - pulseaudio
+  when: ansible_os_family == 'RedHat'
+
+- name: Install pipewire packages
+  become: true
+  ansible.builtin.package:
+    name:
+      - pipewire
+      - pipewire-pulsedio
+      - wireplumber
+  when: ansible_os_family == "RedHat"
