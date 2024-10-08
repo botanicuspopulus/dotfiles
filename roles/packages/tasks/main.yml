@@ -13,10 +13,5 @@
   ansible.builtin.package:
     name: "{{ packages_list }}"
 
-- name: Handle Packages for Fedora
-  ansible.builtin.include_tasks: fedora.yml
-  when: ansible_os_family == 'RedHat'
-
-- name: Handle Packages for Arch Linux
-  ansible.builtin.include_tasks: archlinux.yml
-  when: ansible_os_family == 'Archlinux'
+- name: Handle Packages
+  ansible.builtin.include_tasks: "{{ ansible_os_family }}.yml"
