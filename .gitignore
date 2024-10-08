@@ -5,3 +5,7 @@ neomutt/accounts/
 **/.generated_settings/
 sway/dot-config/sway/generated_background.svg
 lazygit/dot-config/lazygit/state.yml
+Kvantum/dot-config/Kvantum/Kvantum-Tokyo-Night
+sway/dot-config/sway/config.d/30-startup.conf
+sway/dot-config/sway/config.d/95-system-keyboard-config.conf
+sway/dot-config/sway/config.d/95-xdg-desktop-autostart.conf
