@@ -1,9 +1,9 @@
 exec {
-    {% if ansible_os_family == 'Archlinux' %}
-    /usr/lib/policykit-kde-authentication-agent-1
-    {% elif ansible_os_family == 'RedHat' %}
-    /usr/libexec/kf6/polkit-kde-authentication-agent-1
-    {% endif %}
+    {% if ansible_os_family == 'Archlinux' -%}
+    /usr/lib
+    {%- elif ansible_os_family == 'RedHat' -%}
+    /usr/libexec/kf6
+    {%- endif -%}/policykit-kde-authentication-agent-1
 
     mako
     kanshi
@@ -12,10 +12,6 @@ exec {
 
     nm-applet --indicator
     blueman-applet
-
-    wireplumber
-    pipewire
-    pipewire-pulse
 
     swayidle -w \
         timeout 600 $lock \
