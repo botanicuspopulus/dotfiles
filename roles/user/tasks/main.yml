@@ -4,3 +4,26 @@
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: /usr/bin/zsh
+
+- name: Clone Tokyonight GTK Theme repo
+  ansible.builtin.git:
+    repo: "https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme.git"
+    depth: 1
+    version: master
+    dest: "/tmp/tokyonight_theme"
+
+- name: Install Tokyonight GTK Theme
+  ansible.builtin.command: "/tmp/tokyonight_theme/themes/install.sh --color dark --tweaks storm outline macos --libadwaita"
+  args:
+    creates: "{{ ansible_env.HOME }}/.themes/Tokyonight-Dark-Storm"
+
+- name: Cleanup Repo
+  ansible.builtin.file:
+    path: /tmp/tokyonight_theme
+    state: absent
+
+- name: Extract Tokyonight Icon Theme Archive
+  ansible.builtin.unarchive:
+    src: "https://github.com/ljmill/tokyo-night-icons/releases/download/v0.2.0/TokyoNight-SE.tar.bz2"
+    dest: "{{ ansible_env.XDG_DATA_HOME }}/icons"
+    remote_src: true
