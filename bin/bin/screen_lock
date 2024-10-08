@@ -3,7 +3,7 @@ set -efuo pipefail
 
 screenshot=/tmp/screenshot.jpg
 background=/tmp/screenshot-thumb.jpg
-config=$DOTFILES/swaylock/config
+config=$XDG_CONFIG_HOME/swaylock/config
 opts="--config $config"
 
 trap cleanup EXIT
@@ -14,7 +14,7 @@ cleanup() {
 
 if command -v grim >/dev/null 2>&1 && command -v convert >/dev/null 2>&1; then
     grim -t jpeg "${screenshot}"
-    convert "${screenshot}" -blur 0x8 "${background}"
+    magick "${screenshot}" -blur 0x8 "${background}"
     rm -rf "${screenshot}"
     opts="${opts} -i ${background}"
 fi

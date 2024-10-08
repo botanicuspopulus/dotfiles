@@ -1,11 +1,5 @@
 ignore-empty-password
 
-clock
-timestr=%R
-
-fade-in=0.2
-
-indicator
 color=24283b
 indicator-caps-lock
 indicator-radius=100em
