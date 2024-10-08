@@ -1,4 +1,5 @@
 ignore-empty-password
+show-failed-attempts
 
 color=24283b
 indicator-caps-lock
