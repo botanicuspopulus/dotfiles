@@ -27,3 +27,9 @@
     - "95-system-keyboard-config.conf"
     - "95-xdg-desktop-autostart.conf"
   when: ansible_os_family == 'Archlinux'
+
+- name: Creating startup config for sway
+  ansible.builtin.template:
+    src: templates/30-startup.conf.j2
+    dest: "{{ ansible_env.XDG_CONFIG_HOME }}/sway/config.d/30-startup.conf"
+    mode: '0644'
