@@ -1,22 +1,27 @@
 #!/usr/bin/env bash
 set -efuo pipefail
 
-screenshot=/tmp/screenshot.jpg
-background=/tmp/screenshot-thumb.jpg
-config=$XDG_CONFIG_HOME/swaylock/config
-opts="--config $config"
+CONFIG="$XDG_CONFIG_HOME/swaylock/config"
+OPTS="--config $CONFIG"
+
+cleanup() {
+    rm -rf /tmp/screenshot-*.jpg
+    rm -rf /tmp/screenshot-thumb-*.jpg
+}
 
 trap cleanup EXIT
 
-cleanup() {
-    rm -rf "${background}" "${screenshot}"
-}
+if command -v grim >/dev/null 2>&1 && command -v magick >/dev/null 2>&1; then
+    for OUTPUT in $(swaymsg -t get_outputs | jq -r '.[].name'); do
+      SCREENSHOT="/tmp/screenshot-${OUTPUT}.jpg"
+      BACKGROUND="/tmp/screenshot-thumb-${OUTPUT}.jpg"
 
-if command -v grim >/dev/null 2>&1 && command -v convert >/dev/null 2>&1; then
-    grim -t jpeg "${screenshot}"
-    magick "${screenshot}" -blur 0x8 "${background}"
-    rm -rf "${screenshot}"
-    opts="${opts} -i ${background}"
+      grim -o "${OUTPUT}" -t jpeg "${SCREENSHOT}"
+      magick "${SCREENSHOT}" -blur 0x8 "${BACKGROUND}"
+      rm -rf "${SCREENSHOT}"
+
+      OPTS="${OPTS} --image ${OUTPUT}:${BACKGROUND}"
+    done
 fi
 
-swaylock ${opts}
+swaylock ${OPTS}
