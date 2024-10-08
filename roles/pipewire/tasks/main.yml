@@ -1,0 +1,18 @@
+---
+# tasks file for pipewire
+- name: Handle pulseaudio removal and installation of pipewire
+  ansible.builtin.include_tasks: "{{ ansible_os_family }}.yml"
+
+- name: Enable services
+  ansible.builtin.systemd:
+    name: "{{ service_name }}"
+    state: started
+    enabled: true
+    daemon_reload: true
+    scope: user
+  loop:
+    - pipewire
+    - pipewire-pulse
+    - wireplumber
+  loop_control:
+    loop_var: service_name
