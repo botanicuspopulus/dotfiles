@@ -20,6 +20,7 @@ packages_common_packages:
   - git-delta
   - git-lfs
   - greetd
+  - grim
   - jq
   - kanshi
   - khal
