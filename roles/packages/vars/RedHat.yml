@@ -16,5 +16,6 @@ packages_list:
   - golang
   - fuse-sshfs
   - gtkgreet
+  - gtk-murrine-engine
 
 packages_crossover_url: http://crossover.codeweavers.com/redirect/crossover.rpm
