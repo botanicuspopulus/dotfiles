@@ -9,3 +9,4 @@ packages_list:
   - go
   - sshfs
   - greetd-gtkgreet
+  - gtk-engine-murrine
