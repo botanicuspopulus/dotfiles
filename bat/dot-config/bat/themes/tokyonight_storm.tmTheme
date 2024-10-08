@@ -779,7 +779,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>CSS psuedo selectors</string>
+			<string>CSS pseudo selectors</string>
 			<key>scope</key>
 			<string>entity.other.attribute-name.pseudo-class, entity.other.attribute-name.pseudo-element, entity.other.attribute-name.placeholder, meta.property-list meta.property-value</string>
 			<key>settings</key>
@@ -1374,3 +1374,4 @@
 	<string>06f855e3-9fb7-4fb1-b790-aef06065f34e</string>
 </dict>
 </plist>
+
