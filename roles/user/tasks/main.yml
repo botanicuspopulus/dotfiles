@@ -39,11 +39,21 @@
         path: "{{ temp_dir }}"
         state: absent
 
-- name: Extract Tokyonight Icon Theme Archive
-  ansible.builtin.unarchive:
-    src: "https://github.com/ljmill/tokyo-night-icons/releases/download/v0.2.0/TokyoNight-SE.tar.bz2"
-    dest: "{{ ansible_env.XDG_DATA_HOME }}/icons/"
-    remote_src: true
+- name: Install Tokyonight Icon Theme
+  vars:
+    icons_path: "{{ ansible_env.XDG_DATA_HOME }}/icons/"
+  block:
+    - name: Ensure that the icons folder exists
+      ansible.builtin.file:
+        path: "{{ icons_path }}"
+        state: directory
+        mode: '0755'
+
+    - name: Download and Extract theme archive
+      ansible.builtin.unarchive:
+        src: "https://github.com/ljmill/tokyo-night-icons/releases/download/v0.2.0/TokyoNight-SE.tar.bz2"
+        dest: "{{ icons_path }}"
+        remote_src: true
 
 - name: Extract font archive
   ansible.builtin.unarchive:
