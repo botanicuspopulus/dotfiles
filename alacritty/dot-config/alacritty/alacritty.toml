@@ -1,4 +1,4 @@
-import = ["/home/williamsmith/.config/alacritty/themes/tokyonight_night.toml"]
+import = ["~/.config/alacritty/themes/tokyonight_night.toml"]
 live_config_reload = true
 
 [colors]
@@ -8,7 +8,7 @@ draw_bold_text_with_bright_colors = false
 thickness = 0.18
 
 [env]
-TERM = "xterm-256color"
+TERM = "alacritty"
 
 [font]
 size = 14
@@ -63,9 +63,10 @@ args = ["-l"]
 
 [window]
 decorations = "none"
-dynamic_padding = true
-dynamic_title = true
-opacity = 1.0
+dynamic_padding = false
+dynamic_title = false
+opacity = 0.90
+blur = true
 startup_mode = "Maximized"
 
 [window.padding]
