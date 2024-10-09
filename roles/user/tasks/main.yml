@@ -63,3 +63,9 @@
     exclude:
       - README.md
       - SIL Open Font License.txt
+
+- name: Extract Cursor Theme Archive
+  ansible.builtin.unarchive:
+    src: "https://github.com/catppuccin/cursors/releases/download/v0.3.1/catppuccin-mocha-dark-cursors.zip"
+    dest: "{{ ansible_env.XDG_DATA_HOME }}/icons/"
+    remote_src: true
