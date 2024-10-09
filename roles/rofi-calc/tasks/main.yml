@@ -1,0 +1,60 @@
+---
+# tasks file for rofi-calc
+- name: Build and install rofi-calc
+  when: ansible_os_family == 'RedHat'
+  block:
+    - name: Install Dependencies
+      become: true
+      ansible.builtin.package:
+        name:
+          - qalculate
+          - automake
+          - libtool
+          - cairo-devel
+          - rofi-devel
+
+    - name: Clone Repo
+      ansible.builtin.git:
+        repo: "https://github.com/svenstaro/rofi-calc.git"
+        dest: /tmp/rofi-calc
+        depth: 1
+        version: master
+
+    - name: Create m4 directory
+      ansible.builtin.file:
+        path: /tmp/rofi-calc/m4
+        state: directory
+        mode: '0755'
+
+    - name: Run autoreconf
+      ansible.builtin.command: autoreconf -i
+      args:
+        chdir: /tmp/rofi-calc
+        creates: /tmp/rofi-calc/configure
+
+    - name: Create build directory
+      ansible.builtin.file:
+        path: /tmp/rofi-calc/build
+        state: directory
+        mode: '0755'
+
+    - name: Run configure command
+      ansible.builtin.command: ../configure
+      args:
+        chdir: /tmp/rofi-calc/build/
+        creates: /tmp/rofi-calc/build/Makefile
+
+    - name: Run make
+      community.general.make:
+        chdir: /tmp/rofi-calc/build
+
+    - name: Install rofi-calc
+      become: true
+      community.general.make:
+        chdir: /tmp/rofi-calc/build
+        target: install
+
+    - name: Cleanup
+      ansible.builtin.file:
+        path: /tmp/rofi-calc
+        state: absent
