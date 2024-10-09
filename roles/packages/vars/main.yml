@@ -1,6 +1,5 @@
 ---
 packages_common_packages:
-  - alacritty
   - ansifilter
   - bat
   - blueman
@@ -14,6 +13,7 @@ packages_common_packages:
   - eza
   - feh
   - flatpak
+  - foot
   - fzf
   - gdu
   - git

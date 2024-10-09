@@ -1,7 +1,6 @@
 ---
 stow_dir: "{{ ansible_env.HOME }}"
 stow_packages:
-  - alacritty
   - zsh
   - gtk-2.0
   - gtk-3.0
@@ -21,6 +20,7 @@ stow_packages:
   - direnv
   - fd
   - khard
+  - foot
   - khal
   - lazygit
   - nvim
