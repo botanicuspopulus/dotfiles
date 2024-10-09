@@ -5,25 +5,51 @@
     name: "{{ ansible_env.USER }}"
     shell: /usr/bin/zsh
 
-- name: Clone Tokyonight GTK Theme repo
-  ansible.builtin.git:
-    repo: "https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme.git"
-    depth: 1
-    version: master
-    dest: "/tmp/tokyonight_theme"
+- name: Handle Fedora Dependencies
+  become: true
+  ansible.builtin.package:
+    name:
+      - sassc
+      - libsass
+    state: present
 
 - name: Install Tokyonight GTK Theme
-  ansible.builtin.command: "/tmp/tokyonight_theme/themes/install.sh --color dark --tweaks storm outline macos --libadwaita"
-  args:
-    creates: "{{ ansible_env.HOME }}/.themes/Tokyonight-Dark-Storm"
+  vars:
+    temp_dir: /tmp/tokyonight_theme
+    theme_color: dark
+    theme_tweaks:
+      - storm
+      - outline
+      - macos
+  block:
+    - name: Clone Repo
+      ansible.builtin.git:
+        repo: "{{ user_tokyonight_gtk_theme_url }}"
+        depth: 1
+        version: master
+        dest: "{{ temp_dir }}"
 
-- name: Cleanup Repo
-  ansible.builtin.file:
-    path: /tmp/tokyonight_theme
-    state: absent
+    - name: Install Tokyonight GTK Theme
+      ansible.builtin.command: "{{ temp_dir }}/themes/install.sh --color {{ theme_color }} --tweaks {{ theme_tweaks | join(' ') }} --libadwaita"
+      args:
+        creates: "{{ ansible_env.HOME }}/.themes/Tokyonight-Dark-Storm"
+
+    - name: Cleanup Repo
+      ansible.builtin.file:
+        path: "{{ temp_dir }}"
+        state: absent
 
 - name: Extract Tokyonight Icon Theme Archive
   ansible.builtin.unarchive:
     src: "https://github.com/ljmill/tokyo-night-icons/releases/download/v0.2.0/TokyoNight-SE.tar.bz2"
-    dest: "{{ ansible_env.XDG_DATA_HOME }}/icons"
+    dest: "{{ ansible_env.XDG_DATA_HOME }}/icons/"
     remote_src: true
+
+- name: Extract font archive
+  ansible.builtin.unarchive:
+    src: "{{ user_nerdfonts_url }}"
+    dest: "{{ ansible_env.XDG_DATA_HOME }}/fonts/"
+    remote_src: true
+    exclude:
+      - README.md
+      - SIL Open Font License.txt

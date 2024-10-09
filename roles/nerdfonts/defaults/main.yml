@@ -1,4 +1,0 @@
----
-# defaults file for nerdfonts
-nerdfonts_font: Lekton
-nerdfonts_url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ nerdfonts_font }}.tar.xz"

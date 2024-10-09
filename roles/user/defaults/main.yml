@@ -1,2 +1,5 @@
 ---
 # defaults file for user
+user_font: Lekton
+user_nerdfonts_url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ user_font }}.tar.xz"
+user_tokyonight_gtk_theme_url: "https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme.git"
