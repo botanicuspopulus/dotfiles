@@ -19,9 +19,6 @@
         "sway/mode", 
         "sway/scratchpad"
     ],
-    "modules-center": [
-        "custom/media"
-    ],
     "modules-right": [ 
         "tray", 
         "custom/spacer",
