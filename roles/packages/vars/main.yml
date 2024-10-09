@@ -6,6 +6,7 @@ packages_common_packages:
   - bottom
   - cargo
   - cheat
+  - cliphist
   - cmake
   - composer
   - curl
