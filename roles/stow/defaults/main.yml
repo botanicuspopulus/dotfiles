@@ -1,31 +1,31 @@
 ---
 stow_dir: "{{ ansible_env.HOME }}"
 stow_packages:
-  - zsh
-  - Kvantum
-  - mako
-  - nwg-look
-  - qt5ct
-  - qt6ct
-  - xresources
-  - xsettingsd
-  - git
-  - starship
   - bat
   - cheat
   - delta
   - direnv
   - fd
-  - khard
   - foot
+  - git
   - khal
+  - khard
+  - Kvantum
   - lazygit
+  - mako
   - nvim
+  - nwg-look
+  - qt5ct
+  - qt6ct
   - ranger
   - ripgrep
-  - zathura
   - rofi
+  - starship
   - sway
   - swaylock
   - swaynag
   - waybar
+  - xresources
+  - xsettingsd
+  - zathura
+  - zsh
