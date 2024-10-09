@@ -11,6 +11,7 @@
 * {
     font-family: Lekton Nerd Font;
     font-size: 1.05em;
+    color: @foreground-color;
 }
 
 window#waybar {
@@ -44,12 +45,18 @@ tooltip {
     padding-left: 0.5em;
     padding-right: 0.5em;
     background-color: @background-color;
+    color: @foreground-color;
     border-radius: 0.5em;
     min-width: 3em;
 }
 
 #tray > .passive {
     -gtk-icon-effect: dim;
+}
+
+#tray > .needs-aatention {
+  -gtk-icon-effect: highlight;
+  color: @orange-color;
 }
 
 #clock, 
