@@ -2,6 +2,7 @@
 stow_dir: "{{ ansible_env.HOME }}"
 stow_packages:
   - bat
+  - bin
   - cheat
   - delta
   - direnv
@@ -24,6 +25,8 @@ stow_packages:
   - sway
   - swaylock
   - swaynag
+  - swayr
+  - tmux
   - waybar
   - xresources
   - xsettingsd
