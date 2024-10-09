@@ -2,9 +2,6 @@
 stow_dir: "{{ ansible_env.HOME }}"
 stow_packages:
   - zsh
-  - gtk-2.0
-  - gtk-3.0
-  - gtk-4.0
   - Kvantum
   - mako
   - nwg-look
