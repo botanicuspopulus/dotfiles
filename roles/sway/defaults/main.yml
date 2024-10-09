@@ -2,5 +2,3 @@
 sway_paths:
   - {src: "files/sway",
      dest: /usr/local/bin/sway}
-  - {src: "files/sway-session.desktop",
-     dest: "/usr/share/wayland-sessions/sway-session.desktop"}
