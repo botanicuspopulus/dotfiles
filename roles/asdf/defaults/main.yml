@@ -5,3 +5,4 @@ asdf_dir: "{{ ansible_env.HOME }}/.asdf"
 asdf_source_script: "{{ asdf_dir }}/asdf.sh"
 asdf_plugins:
   - deno
+  - github-cli
