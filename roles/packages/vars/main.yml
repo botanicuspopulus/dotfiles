@@ -1,54 +1,52 @@
 ---
 packages_common_packages:
   - ansifilter
-  - bat
-  - blueman
-  - bottom
   - cargo
-  - cheat
   - cliphist
-  - cmake
   - composer
   - curl
-  - direnv
-  - eza
   - feh
   - flatpak
-  - foot
-  - fzf
   - gdu
   - git
-  - git-delta
   - git-lfs
-  - greetd
-  - grim
-  - jq
-  - kanshi
-  - khal
   - khard
-  - kvantum
-  - lazygit
   - luarocks
-  - mako
   - neovim
-  - network-manager-applet
-  - nwg-look
-  - pcmanfm
-  - qt5ct
-  - qt6ct
   - ranger
-  - ripgrep
   - rubygems
   - rustup
   - sad
-  - starship
   - stow
-  - swayr
-  - sway-systemd
   - wget
+  - zsh
+
+packages_desktop:
+  - blueman
+  - foot
+  - greetd
+  - grim
+  - kanshi
+  - khal
+  - kvantum
+  - mako
+  - network-manager-applet
+  - nwg-look
+  - spacemanfm
+  - qt5ct
+  - qt6ct
   - wine
-  - wmname
   - xsettingsd
   - zathura
-  - zoxide
-  - zsh
+
+packages_sway_desktop_wm:
+  - swayr
+  - sway-systemd
+
+packages_hyprland_desktop_wm:
+  - hyprland
+  - hypridle
+  - pyprland
+  - hyprland-autorename-workspaces
+  - hyprshot
+  - swaylock-effects

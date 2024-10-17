@@ -8,7 +8,6 @@ packages_dnf_groups:
 
 packages_list:
   - compat-lua
-  - fd-find
   - java-latest-openjdk
   - perl-CPAN
   - python3-libtmux
