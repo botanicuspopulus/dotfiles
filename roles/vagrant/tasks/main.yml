@@ -8,6 +8,15 @@
       - libvirt
     state: present
 
+- name: Install Arch Dependencies
+  become: true
+  ansible.builtin.package:
+    name:
+      - qemu-img
+      - qemu-system-x86
+    state: present
+  when: ansible_os_family == 'Archlinux'
+
 - name: Ensure that the NFS server is enabled and started
   become: true
   ansible.builtin.systemd:
@@ -28,17 +37,36 @@
     - rpc-bind
     - mountd
 
+- name: Enable libvirt systemd service
+  ansible.builtin.systemd:
+    name: libvirtd
+    enabled: true
+    state: started
+
 - name: Reload firewalld
   become: true
   ansible.builtin.service:
     name: firewalld
     state: reloaded
 
+- name: Ensure that the 'libvirt' group exists
+  become: true
+  ansible.builtin.group:
+    name: libvirt
+    state: present
+
 - name: Ensure that the 'vagrant' group exists
   become: true
   ansible.builtin.group:
     name: vagrant
     state: present
+
+- name: Add user to the libvirt group
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    groups: vagrant
+    append: true
 
 - name: Ensure that vagrant has permissions to be able to use NFS without a password prompt
   become: true
@@ -57,6 +85,6 @@
 - name: Add user to 'vagrant' group
   become: true
   ansible.builtin.user:
-    name: wsmith
+    name: "{{ ansible_env.USER }}"
     groups: vagrant
     append: true
