@@ -1,0 +1,6 @@
+[terminal]
+vt = 1
+
+[default_session]
+command = "{{ desktop wm }} --config /etc/greetd/{{ desktop_wm | lower }}.conf"
+user = "greeter"
