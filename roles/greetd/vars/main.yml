@@ -1,0 +1,4 @@
+greetd_file_mode: '0644'
+greetd_user: greeter
+greetd_group: video
+greetd_dir: /etc/greetd

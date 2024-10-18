@@ -2,30 +2,37 @@
 - name: Create a greeter user and add them to the 'video' group
   become: true
   ansible.builtin.user:
-    name: greeter
-    state: present
+    name: "{{ greetd_user }}"
+    groups: "{{ greetd_group }}"
     create_home: false
-    groups: video
     append: true
+    state: present
 
 - name: Remove existing config.toml that may have been installed
   become: true
   ansible.builtin.file:
-    name: /etc/greetd/config.toml
+    name: "{{ greetd_dir }}/config.toml"
     state: absent
 
 - name: Copy files to /etc/greetd
   become: true
   ansible.builtin.copy:
     src: "files/{{ item }}"
-    dest: "/etc/greetd/{{ item }}"
-    mode: '0644'
-    owner: greeter
-    group: greeter
+    dest: "{{ greetd_dir }}/{{ item }}"
+    owner: "{{ greetd_user }}"
+    group: "{{ greetd_group }}"
+    mode: "{{ greetd_mode }}"
   loop:
-    - config.toml
     - gtk-dark.css
-    - sway-config
+    - "{{ desktop_wm }}.conf"
+
+- name: Populate config.toml template
+  ansible.builtin.template:
+    src: templates/config.toml.j2
+    dest: "{{ greetd_dir }}/config.toml"
+    owner: "{{ greetd_user }}"
+    group: "{{ greetd_group }}"
+    mode: "{{ greetd_mode }}"
 
 - name: Disable SDDM
   become: true
