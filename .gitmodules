@@ -1,31 +1,31 @@
 [submodule "cheat/cheatsheets/community"]
-	path = cheat/dot-config/cheat/cheatsheets/community
+	path = config/cheat/dot-config/cheat/cheatsheets/community
 	url = https://github.com/cheat/cheatsheets.git
 
 [submodule "nvim"]
-	path = nvim
+	path = config/nvim
 	url = git@github.com:botanicuspopulus/NvimConfig.git
 
 [submodule "zsh"]
-	path = zsh
+	path = config/zsh
 	url = git@github.com:botanicuspopulus/zsh_dotfiles.git
 
 [submodule "ranger/plugins/ranger-archives"]
-	path = ranger/dot-config/ranger/plugins/ranger-archives
+	path = config/ranger/dot-config/ranger/plugins/ranger-archives
 	url = https://github.com/maximtrp/ranger-archives.git
 
 [submodule "ranger/plugins/ranger_udisk_menu"]
-	path = ranger/dot-config/ranger/plugins/ranger_udisk_menu
+	path = config/ranger/dot-config/ranger/plugins/ranger_udisk_menu
 	url = https://github.com/SL-RU/ranger_udisk_menu.git
 [submodule "ranger/plugins/devicons2"]
-	path = ranger/dot-config/ranger/plugins/devicons2
+	path = config/ranger/dot-config/ranger/plugins/devicons2
 	url = https://github.com/cdump/ranger-devicons2
 [submodule "ranger/plugins/fzf-marks"]
-	path = ranger/dot-config/ranger/plugins/fzf-marks
+	path = config/ranger/dot-config/ranger/plugins/fzf-marks
 	url = https://github.com/laggardkernel/ranger-fzf-marks.git
 [submodule "ranger/plugins/zoxide"]
-	path = ranger/dot-config/ranger/plugins/zoxide
+	path = config/ranger/dot-config/ranger/plugins/zoxide
 	url = git@github.com:jchook/ranger-zoxide.git
 [submodule "ranger/plugins/ranger_fzf_filter"]
-	path = ranger/dot-config/ranger/plugins/ranger_fzf_filter
+	path = config/ranger/dot-config/ranger/plugins/ranger_fzf_filter
 	url = git@github.com:MuXiu1997/ranger-fzf-filter.git

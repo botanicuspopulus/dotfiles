@@ -15,9 +15,7 @@
         "$XDG_CONFIG_HOME/waybar/memory/memory.json",
     ],
     "modules-left": [ 
-        "sway/workspaces", 
-        "sway/mode", 
-        "sway/scratchpad"
+        "hyprland/workspaces", 
     ],
     "modules-right": [ 
         "tray", 
