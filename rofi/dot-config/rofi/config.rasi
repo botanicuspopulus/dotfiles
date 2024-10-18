@@ -69,6 +69,7 @@ configuration {
 	display-keys:         "Keys";
 	display-calc:         "Calc";
 	display-filebrowser:  "Files";
+	display-clipboard:    "Clipboard";
 
 	/*---------- Misc setting ----------*/
 	terminal:       "rofi-sensible-terminal";
