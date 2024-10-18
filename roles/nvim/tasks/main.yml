@@ -16,6 +16,7 @@
         repo: "{{ nvim_astronvim_url }}"
         dest: "{{ nvim_config_path }}"
         depth: 1
+        version: master
 
     - name: Remove unnecessary directories from ~/.config/nvim
       ansible.builtin.file:
