@@ -24,29 +24,30 @@ packages_common_packages:
 packages_desktop:
   - blueman
   - foot
-  - greetd
-  - grim
-  - kanshi
   - khal
-  - kvantum
-  - mako
   - network-manager-applet
-  - nwg-look
-  - spacemanfm
-  - qt5ct
-  - qt6ct
   - wine
-  - xsettingsd
   - zathura
 
-packages_sway_desktop_wm:
-  - swayr
-  - sway-systemd
-
-packages_hyprland_desktop_wm:
-  - hyprland
-  - hypridle
-  - pyprland
-  - hyprland-autorename-workspaces
-  - hyprshot
-  - swaylock-effects
+packages_desktop_wm:
+  common:
+    - greetd
+    - grim
+    - kvantum
+    - mako
+    - nwg-look
+    - qt5ct
+    - qt6ct
+    - waybar
+    - xsettingsd
+  sway:
+    - kanshi
+    - sway
+    - swaybg
+    - swayr
+    - sway-systemd
+  Hyprland:
+    - hyprland
+    - hypridle
+    - pyprland
+    - swaylock-effects
