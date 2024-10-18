@@ -1,6 +1,10 @@
 ---
 - name: Localhost setup
   hosts: localhost
+  vars:
+    desktop_wm: "Hyprland"
+    dotfiles_dir: "{{ ansible_env.HOME }}/dotfiles"
+    dev_path: "{{ ansible_env.HOME }}/Development"
 
   roles:
     - common
@@ -9,9 +13,14 @@
     - asdf
     - nvim
     - stow
-    - sway
     - rofi-calc
     - greetd
     - vagrant
     - user
     - ssh
+
+  tasks:
+    - name: Include sway role
+      ansible.builtin.include_role:
+        name: sway
+      when: desktop_wm == "sway"

@@ -9,7 +9,7 @@
 
 - name: Create overriding files
   ansible.builtin.file:
-    path: "{{ ansible_env.XDG_CONFIG_HOME }}/sway/config.d/{{ item }}"
+    path: "{{ sway_config_dir }}/{{ item }}"
     state: touch
     mode: '0644'
   loop:
@@ -20,7 +20,7 @@
 
 - name: Creating overriding files
   ansible.builtin.file:
-    path: "{{ ansible_env.XDG_CONFIG_HOME }}/sway/config.d/{{ item }}"
+    path: "{{ sway_config_dir }}/{{ item }}"
     state: touch
     mode: '0644'
   loop:
@@ -31,5 +31,5 @@
 - name: Creating startup config for sway
   ansible.builtin.template:
     src: templates/30-startup.conf.j2
-    dest: "{{ ansible_env.XDG_CONFIG_HOME }}/sway/config.d/30-startup.conf"
+    dest: "{{ sway_config_dir }}/30-startup.conf"
     mode: '0644'
