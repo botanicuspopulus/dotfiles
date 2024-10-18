@@ -1,7 +1,23 @@
 ---
+- name: Find and filter directories
+  ansible.builtin.find:
+    paths: "{{ stow_dir }}"
+    recurse: true
+    file_type: directory
+    patterns: "dot-config"
+  register: found_dirs
+
 - name: Use stow to populate ~/.config
+  vars:
+    stow_dirs: "{{ found_dirs.files
+      | map(attribute='path')
+      | map('split', '/')
+      | flatten
+      | unique
+      | difference(stow_rejection_items)
+      | sort }}"
   ansible.builtin.shell: |
-    stow -d {{ common_dotfiles_dir }} -v --dotfiles {{ item }}
+    stow -d {{ stow_dir }} -t {{ ansible_env.XDG_CONFIG_HOME }} -v --dotfiles {{ item }}
   register: stow_task
-  loop: "{{ stow_packages }}"
+  loop: "{{ stow_dirs }}"
   changed_when: '"LINK" in stow_task.stdout'
