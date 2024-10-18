@@ -21,18 +21,38 @@
     dest: "{{ greetd_dir }}/{{ item }}"
     owner: "{{ greetd_user }}"
     group: "{{ greetd_group }}"
-    mode: "{{ greetd_mode }}"
+    mode: "{{ greetd_file_mode }}"
   loop:
     - gtk-dark.css
-    - "{{ desktop_wm }}.conf"
+    - "{{ desktop_wm | lower }}.conf"
 
 - name: Populate config.toml template
+  become: true
   ansible.builtin.template:
     src: templates/config.toml.j2
     dest: "{{ greetd_dir }}/config.toml"
     owner: "{{ greetd_user }}"
     group: "{{ greetd_group }}"
-    mode: "{{ greetd_mode }}"
+    mode: "{{ greetd_file_mode }}"
+
+- name: Add greetd environments
+  become: true
+  ansible.builtin.lineinfile:
+    path: "{{ greetd_dir }}/environments"
+    state: present
+    create: true
+    mode: "{{ greetd_file_mode }}"
+    owner: "{{ greetd_user }}"
+    group: "{{ greetd_group }}"
+    line: "{{ item }}"
+  loop: >
+    {{
+      [
+        ("/usr/local/bin/sway" if desktop_wm == "sway" else None),
+        ("Hyprland" if desktop_wm == "Hyprland" else None),
+        "zsh",
+      ] | select('defined')
+    }}
 
 - name: Disable SDDM
   become: true
