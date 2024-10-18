@@ -13,5 +13,17 @@
   ansible.builtin.package:
     name: "{{ packages_list }}"
 
+- name: Install Desktop Window Manager
+  become: true
+  ansible.builtin.package:
+    name: "{{ packages_sway_desktop_wm }}"
+  when: desktop_wm == "sway"
+
+- name: Install Desktop Window Manager
+  become: true
+  ansible.builtin.package:
+    name: "{{ packages_hyprland_desktop_wm }}"
+  when: desktop_wm == "Hyprland"
+
 - name: Handle Packages
   ansible.builtin.include_tasks: "{{ ansible_os_family }}.yml"
