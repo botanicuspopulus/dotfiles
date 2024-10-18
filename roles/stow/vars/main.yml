@@ -1,2 +1,2 @@
-stow_dir: "{{ ansible_env.HOME }}/dotfiles/config"
+stow_dir: "{{ dotfiles_dir }}/config"
 stow_rejection_items: "{{ stow_dir | split('/') + ['dot-config'] }}"
