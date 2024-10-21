@@ -11,10 +11,27 @@ from __future__ import (absolute_import, division, print_function)
 
 # You can import any python module as needed.
 import os
+import struct
+
+import fcntl
+import sys
+import termios
+import mmap
+import curses
+import io
+
+from subprocess import check_call, DEVNULL, CalledProcessError
+from collections import namedtuple
+from tempfile import TemporaryFile
+from pathlib import Path
+from contextlib import contextmanager
 
 # You always need to import ranger.api.commands here to get the Command class:
-from ranger.api.commands import *
+from ranger.api.commands import Command
 from ranger.core.loader import CommandLoader
+
+from ranger.core.shared import FileManagerAware
+from ranger.ext.img_display import ImageDisplayer, register_image_displayer
 
 from plugins.ranger_udisk_menu.mounter import mount
 
