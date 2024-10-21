@@ -1,0 +1,73 @@
+from _typeshed import Incomplete
+from collections.abc import Generator
+from ranger.core.shared import FileManagerAware as FileManagerAware
+from ranger.ext.human_readable import human_readable as human_readable
+from ranger.ext.safe_path import get_safe_path as get_safe_path
+from ranger.ext.signals import SignalDispatcher as SignalDispatcher
+
+HAVE_CHARDET: bool
+
+class Loadable:
+    paused: bool
+    progressbar_supported: bool
+    load_generator: Incomplete
+    description: Incomplete
+    percent: int
+    def __init__(self, gen, descr) -> None: ...
+    def get_description(self): ...
+    def pause(self) -> None: ...
+    def unpause(self) -> None: ...
+    def destroy(self) -> None: ...
+
+class CopyLoader(Loadable, FileManagerAware):
+    progressbar_supported: bool
+    copy_buffer: Incomplete
+    do_cut: Incomplete
+    original_copy_buffer: Incomplete
+    original_path: Incomplete
+    overwrite: Incomplete
+    make_safe_path: Incomplete
+    percent: int
+    one_file: Incomplete
+    def __init__(self, copy_buffer, do_cut: bool = False, overwrite: bool = False, dest: Incomplete | None = None, make_safe_path=...) -> None: ...
+    description: Incomplete
+    def generate(self) -> Generator[None]: ...
+
+class CommandLoader(Loadable, SignalDispatcher, FileManagerAware):
+    finished: bool
+    process: Incomplete
+    args: Incomplete
+    silent: Incomplete
+    read: Incomplete
+    stdout_buffer: str
+    input: Incomplete
+    kill_on_pause: Incomplete
+    popenArgs: Incomplete
+    def __init__(self, args, descr, silent: bool = False, read: bool = False, input: Incomplete | None = None, kill_on_pause: bool = False, popenArgs: Incomplete | None = None) -> None: ...
+    def generate(self) -> Generator[None]: ...
+    def pause(self) -> None: ...
+    def unpause(self) -> None: ...
+    def destroy(self) -> None: ...
+
+def safe_decode(string): ...
+
+class Loader(FileManagerAware):
+    seconds_of_work_time: float
+    throbber_chars: str
+    throbber_paused: str
+    paused: bool
+    queue: Incomplete
+    item: Incomplete
+    load_generator: Incomplete
+    throbber_status: int
+    old_item: Incomplete
+    status: Incomplete
+    def __init__(self) -> None: ...
+    def rotate(self) -> None: ...
+    def add(self, obj, append: bool = False) -> None: ...
+    def move(self, pos_src, pos_dest) -> None: ...
+    def remove(self, item: Incomplete | None = None, index: Incomplete | None = None) -> None: ...
+    def pause(self, state) -> None: ...
+    def work(self) -> None: ...
+    def has_work(self): ...
+    def destroy(self) -> None: ...
