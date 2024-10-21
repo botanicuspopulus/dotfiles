@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "ranger-sixel-render"
+version = "0.1.0"
+description = ""
+authors = ["William Smith <william@williamgsmith.co.za>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.9"
+cachetools = "^5.5.0"
+ranger-fm = "^1.9.3"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.12.1"
+pylint = "^3.3.1"
+ruff = "^0.7.0"
+pyright = "^1.1.385"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

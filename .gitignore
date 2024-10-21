@@ -11,3 +11,4 @@ sway/dot-config/sway/config.d/95-system-keyboard-config.conf
 sway/dot-config/sway/config.d/95-xdg-desktop-autostart.conf
 sway/dot-config/sway/config.d/90-bar.conf
 sway/dot-config/sway/config.d/95-autostart-policykit-agent.conf
+config/ranger/dot-config/ranger/plugins/ranger_sixel_render/poetry.lock

@@ -8,24 +8,25 @@ import curses
 import io
 import asyncio
 import concurrent.futures
-from cachetools import LRUCache, cached
 
 from subprocess import check_call, DEVNULL, CalledProcessError
-from tempfile import NamedTemporaryFile
+from tempfile import NamedTemporaryFile, _TemporaryFileWrapper
 from pathlib import Path
 from contextlib import contextmanager
 from typing import NamedTuple
 from typing import Tuple
 
+from cachetools import LRUCache, cached
+
 from ranger.core.shared import FileManagerAware
 from ranger.ext.img_display import (
-        ImageDisplayer, 
+        ImageDisplayer,
         ImageDisplayError,
         register_image_displayer,
 )
 
 
-def run_magick_command(command: list, env: dict, output_file: NamedTemporaryFile):
+def run_magick_command(command: list, env: dict, output_file: _TemporaryFileWrapper):
     """
     Run the ImageMagick command
 
@@ -46,9 +47,9 @@ def run_magick_command(command: list, env: dict, output_file: NamedTemporaryFile
             env=env,
         )
     except CalledProcessError as e:
-        raise ImageDisplayError(f"ImageMagick failed processing the SIXEL image: {e}")
-    except FileNotFoundError:
-        raise ImageDisplayError("SIXEL image preview requires ImageMagick")
+        raise ImageDisplayError(f"ImageMagick failed processing the SIXEL image: {e}") from e
+    except FileNotFoundError as e:
+        raise ImageDisplayError("SIXEL image preview requires ImageMagick") from e
 
 
 def get_terminal_size() -> Tuple[int, int, int, int]:
@@ -66,10 +67,12 @@ def get_terminal_size() -> Tuple[int, int, int, int]:
     fretint = fcntl.ioctl(fd_stdout, termios.TIOCGWINSZ, farg)
     return struct.unpack("HHHH", fretint)
 
+
 def get_font_dimensions() -> Tuple[int, int]:
     """Get the font dimensions in pixels."""
     rows, cols, xpixels, ypixels = get_terminal_size()
     return (xpixels // cols, ypixels // rows)
+
 
 def move_cursor(to_y: int, to_x: int):
     """Move the cursor to the specified position."""
@@ -85,6 +88,7 @@ def move_cursor(to_y: int, to_x: int):
         bin_stdout.write(tparm)
     else:
         bin_stdout.write(tparm.decode("utf-8"))
+
 
 @contextmanager
 def temporarily_move_cursor(to_y: int, to_x: int):
@@ -116,7 +120,7 @@ class CacheableSixelImage(NamedTuple):
 
 class CachedSixelImage(NamedTuple):
     image: mmap.mmap
-    fh: NamedTemporaryFile
+    fh: _TemporaryFileWrapper
 
 
 @register_image_displayer("sixel")
@@ -167,7 +171,7 @@ class SixelImageDisplayer(ImageDisplayer, FileManagerAware):
             fit_height = font_height * height
 
             sixel_dithering = "FloydSteinberg"
-            cached = NamedTemporaryFile("w+", prefix="ranger", suffix=path.name.replace(os.sep, "-"))
+            cached_file = NamedTemporaryFile("w+", prefix="ranger", suffix=path.name.replace(os.sep, "-"))
 
             environ = dict(os.environ)
             environ.setdefault("MAGICK_OCL_DEVICE", "true")
@@ -182,15 +186,15 @@ class SixelImageDisplayer(ImageDisplayer, FileManagerAware):
                 "sixel:-",
             ]
 
-            future = self.executor.submit(run_magick_command, command, environ, cached)
+            future = self.executor.submit(run_magick_command, command, environ, cached_file)
             future.result()
 
-            cached.flush()
+            cached_file.flush()
 
-            if os.fstat(cached.fileno()).st_size == 0:
+            if os.fstat(cached_file.fileno()).st_size == 0:
                 raise ImageDisplayError("ImageMagick produced an empty SIXEL image")
 
-            self.cache[cacheable] = CachedSixelImage(mmap.mmap(cached.fileno(), 0), cached)
+            self.cache[cacheable] = CachedSixelImage(mmap.mmap(cached_file.fileno(), 0), cached_file)
 
         return self.cache[cacheable].image
 
@@ -214,7 +218,7 @@ class SixelImageDisplayer(ImageDisplayer, FileManagerAware):
             await loop.run_in_executor(None, self.win.clear)
             await loop.run_in_executor(None, self.win.refresh)
 
-    def draw(self, path: str|Path, start_x: int, start_y: int, width: int, height: int):
+    def draw(self, path: str | Path, start_x: int, start_y: int, width: int, height: int):
         if isinstance(path, str):
             path = Path(path)
 

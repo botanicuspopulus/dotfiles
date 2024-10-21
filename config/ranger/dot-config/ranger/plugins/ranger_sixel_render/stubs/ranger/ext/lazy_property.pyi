@@ -1,0 +1,6 @@
+from _typeshed import Incomplete
+
+class lazy_property:
+    __doc__: Incomplete
+    def __init__(self, method) -> None: ...
+    def __get__(self, obj, cls: Incomplete | None = None): ...
