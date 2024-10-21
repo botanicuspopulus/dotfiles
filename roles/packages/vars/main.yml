@@ -1,23 +1,33 @@
 ---
 packages_common_packages:
   - ansifilter
+  - atool
   - cargo
+  - catdoc
   - cliphist
   - composer
   - curl
+  - djvu-libre
   - feh
   - flatpak
   - gdu
   - git
   - git-lfs
   - khard
+  - librsvg2
   - luarocks
+  - mediainfo
+  - mupdf
+  - mupdf-libs
   - neovim
+  - odt2txt
   - ranger
   - rubygems
   - rustup
   - sad
   - stow
+  - w3m
+  - w3m-img
   - wget
   - zsh
 
@@ -28,6 +38,7 @@ packages_desktop:
   - network-manager-applet
   - wine
   - zathura
+  - zathura-pdf-mupdf
 
 packages_desktop_wm:
   common:
