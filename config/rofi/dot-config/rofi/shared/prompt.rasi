@@ -1,8 +1,0 @@
-@import "colors.rasi"
-
-prompt {
-    padding:                     0.6em;
-    border-radius:               100%;
-    background-color:            @background-colour;
-    text-color:                  @foreground-colour;
-}

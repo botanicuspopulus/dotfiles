@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+dir="$HOME/.config/rofi/clipboard"
+theme='clipboard-style'
+
+## Run
+rofi_cmd() {
+  rofi \
+      -show clipboard \
+      -theme "${dir}/${theme}.rasi"
+}
+
+cliphist list | rofi_cmd | cliphist decode | wl-copy

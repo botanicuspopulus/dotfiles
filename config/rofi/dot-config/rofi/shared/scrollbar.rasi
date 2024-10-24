@@ -1,9 +1,0 @@
-@import "colors.rasi"
-
-scrollbar {
-    handle-width:                0.3em;
-    handle-color:                @handle-colour;
-    border-radius:               0.5em;
-    background-color:            @background-alt;
-}
-
