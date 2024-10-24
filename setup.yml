@@ -7,7 +7,6 @@
     dev_path: "{{ ansible_env.HOME }}/Development"
 
   roles:
-    - common
     - packages
     - flatpak
     - asdf
