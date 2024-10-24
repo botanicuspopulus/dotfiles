@@ -20,11 +20,22 @@ no='󰜺 No'
 
 # Rofi CMD
 rofi_cmd() {
-    rofi -dmenu \
-        -p "$host" \
-        -mesg "Uptime: $uptime" \
-        -theme "${dir}/${theme}.rasi"
-    }
+    rofi -dmenu -p "󰐦" \
+      -theme-str 'inputbar { children: [prompt, textbox]; }' \
+      -theme-str 'prompt { 
+                    padding: 0.5em 0.75em 0.5em 0.55em;
+                    border-radius: 100%; 
+                    text-color: @background;
+                    background-color: @red;
+                  }' \
+      -theme-str "textbox {
+                    content: 'Uptime: $uptime';
+                    padding: 0.5em;
+                  }" \
+      -theme-str 'element { children: [element-text]; }' \
+      -theme-str 'listview { scrollbar: false; lines: 6; }' \
+      -theme-str 'window { width: 25em; }'
+}
 
 # Confirmation CMD
 confirm_cmd() {

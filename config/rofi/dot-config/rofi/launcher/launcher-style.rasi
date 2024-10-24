@@ -1,3 +1,5 @@
+@theme "tokyonight"
+
 /*****----- Configuration -----*****/
 configuration {
     modi:                "drun,run,filebrowser,window,ssh";
@@ -13,18 +15,6 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import "../shared/colors.rasi"
-@import "../shared/element.rasi"
-@import "../shared/fonts.rasi"
-@import "../shared/inputbar.rasi"
-@import "../shared/listview.rasi"
-@import "../shared/mainbox.rasi"
-@import "../shared/message.rasi"
-@import "../shared/mode_switcher.rasi"
-@import "../shared/prompt.rasi"
-@import "../shared/scrollbar.rasi"
-@import "../shared/textbox-prompt-colon.rasi"
-@import "../shared/window.rasi"
 
 window {
     width: 30em;
@@ -36,8 +26,6 @@ inputbar {
 
 textbox-prompt-colon {
     str:              "";
-    background-color: inherit;
-    text-color:       inherit;
 }
 
 entry {

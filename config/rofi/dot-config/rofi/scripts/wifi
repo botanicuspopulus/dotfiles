@@ -1,0 +1,186 @@
+#!/usr/bin/env bash
+
+wireless_interfaces=$(nmcli device | awk '$2=="wifi" {print $1}')
+wireless_interfaces_product=()
+wired_interfaces=$(nmcli device | awk '$2=="ethernet" {print $1}')
+wired_interfaces_product=()
+wireless_int=0
+
+function initialize() {
+    for i in "${wireless_interfaces[@]}" 
+    do
+        wireless_interfaces_product+=("$nmcli -f general.product device show $i | awk '{print $2}')")
+    done
+
+    for i in "${wired_interfaces[@]}"
+    do
+        wired_interfaces_product+=("$nmcli -f general.product device show $i | awk '{print $2}')")
+    done
+    wireless_interfaces_state && ethernet_interface_state
+}
+
+function wireless_interface_state() {
+    if [[ ${#wireless_interfaces[@]} -eq 0 ]]
+    then
+        active_ssid=$(nmcli device status | grep "^${wireless_interfaces[wireless_int]}." | awk '{print $4}')
+        wifi_connection_state=$(nmcli device status | grep "^${wireless_interfaces[wireless_int]}." | awk '{print $3}')
+
+        if [[ "$wifi_connection_state" == "unavailable" ]]
+        then
+            wifi_list="***Wi-Fi Disabled***"
+            wifi_switch="~Wi-Fi On"
+            options="${wifi_list}\n${wifi_switch}\n~Scan\n"
+        elif [[ $wifi_connection_state =~ "connected" ]]
+        then
+            wifi_list=$(nmcli --fields SSID,SECURITY,BARS device wifi list ifname "${wireless_interfaces[wireless_int]}")
+            list_wifi
+
+            if [[ $active_ssid == "--" ]]
+            then
+                wifi_switch="~Scan\n~Manual/Hidden\n~Wi-Fi Off"
+            else
+                wifi_switch="~Scan\n~Disconnect\nManual/Hidden\n~Wi-Fi Off"
+            fi
+
+            options="${wifi_list}\n${wifi_switch}"
+        fi
+    fi
+}
+
+wifi_enabled() {
+   nmcli radio wifi
+}
+
+if [[ $(wifi_enabled) =~ "enabled" ]]; then
+    toggle="Disable Wi-Fi"
+else
+    toggle="Enable Wi-Fi"
+fi
+
+rofi_cmd() {
+    local list="$1"
+    local prompt="$2"
+    local lines;
+
+    lines=$(echo -e "$list" | wc -l)
+
+    if [[ $lines -gt 5 ]]
+    then
+        lines=5
+    fi
+
+    echo -e "$list" | rofi -dmenu \
+         -i \
+         -p "$prompt" \
+         -theme-str 'window { width: 40%; }' \
+         -no-custom \
+         -l "$lines"
+}
+
+rofi_wifi_list() {
+  local list="$1"
+  local prompt="$2"
+  local lines;
+
+  lines=$(echo -en "$list" | wc -l)
+
+  if [[ $lines -gt 5 ]]
+  then
+      lines=5
+  fi
+
+  echo -en "${list}" | rofi -dmenu \
+    -i \
+    -format 'i' \
+    -l  "$lines" \
+    -p "󰖩  Wi-Fi Networks" \
+    -theme-str 'window { width: 40%; }'
+}
+
+rofi_passwd() {
+    rofi -dmenu \
+         -prompt "Password: " \
+         -password
+}
+
+wifi_connections=$(nmcli --fields DEVICE,TYPE device status | awk '/wifi/ && !/p2p/ {print $1}')
+
+if [[ -z $wifi_connections ]]
+then
+    notify-send "No Wi-Fi connections found"
+    exit 0
+fi
+
+chosen_connection=$(rofi_cmd "$wifi_connections" "󰈀  Network Interface")
+
+wifi_list() {
+  local chosen_connection=$1
+  local fields=ACTIVE,SSID,SECURITY,BANDWIDTH,RATE,BARS
+  nmcli --terse --fields $fields device wifi list ifname "$chosen_connection" 
+}
+
+declare -a wifi_info_list
+
+readarray -t lines < <(wifi_list "$chosen_connection")
+
+for line in "${lines[@]}"
+do
+  [[ -z "$line" ]] && continue
+
+  declare -A wifi_info
+
+  IFS=':' read -r ACTIVE SSID SECURITY BANDWIDTH RATE BARS <<< "$line"
+  wifi_info["ACTIVE"]="$ACTIVE"
+  wifi_info["SSID"]="$SSID"
+  wifi_info["SECURITY"]="$SECURITY"
+  wifi_info["BANDWIDTH"]="$BANDWIDTH"
+  wifi_info["RATE"]="$RATE"
+  wifi_info["BARS"]="$BARS"
+
+  wifi_info_list+=("$(declare -p wifi_info)")
+done
+
+wifi_list_string=""
+for wifi_info in "${wifi_info_list[@]}"
+do
+  eval "$wifi_info"
+
+  active="${wifi_info[ACTIVE]}"
+  ssid="${wifi_info[SSID]}"
+  security="${wifi_info[SECURITY]}"
+  bandwidth="${wifi_info[BANDWIDTH]}"
+  rate="${wifi_info[RATE]}"
+  bars="${wifi_info[BARS]}"
+
+  wifi_list_string+="$(printf "%-4s%-10s%-30s%-10s%-15s%-5s" "$active" "$security" "$ssid" "$bandwidth" "$rate" "$bars")\n"
+done
+
+index=$(rofi_wifi_list "$wifi_list_string")
+
+eval "${wifi_info_list[$index]}"
+
+if [[ ${wifi_info[ACTIVE]} == "yes" ]]
+then
+  notify-send "Already connected to ${wifi_info[SSID]}"
+  exit 0
+fi
+
+security="${wifi_info[SECURITY]}"
+
+if [[ $security == "--" ]]
+then
+  nmcli device wifi connect "${wifi_info[SSID]}"
+elif [[ $security == "WPA2 802.1X" ]]
+then
+  identity=$(rofi -dmenu -p "Identity: ")
+  password=$(rofi_passwd)
+
+  nmcli device wifi connect "${wifi_info[SSID]}" password "$password" identity "$identity"
+elif [[ $security == "WPA2" ]]
+then
+  password=$(rofi_passwd)
+  nmcli device wifi connect "${wifi_info[SSID]}" password "$password"
+else
+  notify-send "Unsupported security type: ${wifi_info[SECURITY]}"
+  exit 1
+fi
