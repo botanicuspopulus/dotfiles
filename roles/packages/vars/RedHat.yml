@@ -7,6 +7,9 @@ packages_dnf_groups:
   - "@Sound and video"
 
 packages_list:
+  - librsvg2
+  - djvu-libre
+  - mupdf-libs
   - compat-lua
   - java-latest-openjdk
   - perl-CPAN

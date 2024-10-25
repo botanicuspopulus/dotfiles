@@ -7,18 +7,15 @@ packages_common_packages:
   - cliphist
   - composer
   - curl
-  - djvu-libre
   - feh
   - flatpak
   - gdu
   - git
   - git-lfs
   - khard
-  - librsvg2
   - luarocks
   - mediainfo
   - mupdf
-  - mupdf-libs
   - neovim
   - odt2txt
   - ranger
@@ -27,7 +24,6 @@ packages_common_packages:
   - sad
   - stow
   - w3m
-  - w3m-img
   - wget
   - zsh
 
@@ -60,5 +56,4 @@ packages_desktop_wm:
   Hyprland:
     - hyprland
     - hypridle
-    - pyprland
     - swaylock-effects
