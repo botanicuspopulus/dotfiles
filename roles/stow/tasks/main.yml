@@ -17,7 +17,7 @@
       | difference(stow_rejection_items)
       | sort }}"
   ansible.builtin.shell: |
-    stow -d {{ stow_dir }} -t {{ ansible_env.XDG_CONFIG_HOME }} -v --dotfiles {{ item }}
+    stow -d {{ stow_dir }} -t {{ ansible_env.HOME }} -v --dotfiles {{ item }}
   register: stow_task
   loop: "{{ stow_dirs }}"
   changed_when: '"LINK" in stow_task.stdout'

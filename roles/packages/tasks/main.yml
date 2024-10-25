@@ -13,6 +13,12 @@
   ansible.builtin.package:
     name: "{{ packages_list }}"
 
+- name: Install Common Desktop Window Manager Packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ packages_desktop }}"
+
+
 - name: Install Desktop Window Manager
   become: true
   ansible.builtin.package:
