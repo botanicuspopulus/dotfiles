@@ -1,6 +1,7 @@
 ---
 # tasks file for user
 - name: Change user shell to /usr/bin/zsh
+  become: true
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: /usr/bin/zsh
@@ -43,6 +44,12 @@
 - name: Ensure that the icons folder exists
   ansible.builtin.file:
     path: "{{ user_icons_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure that the fonts folder exists
+  ansible.builtin.file:
+    path: "{{ user_fonts_path }}"
     state: directory
     mode: '0755'
 
