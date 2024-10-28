@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
 ## Run
-rofi -show drun -theme-str "inputbar { children: [ prompt, entry, mode-switcher ]; }"
+rofi -show drun \
+     -theme-str "inputbar { children: [ prompt, entry, mode-switcher ]; }"
