@@ -1,0 +1,2 @@
+[pyprland]
+include = ["$XDG_CONFIG_HOME/hypr/pyprland.d"]
