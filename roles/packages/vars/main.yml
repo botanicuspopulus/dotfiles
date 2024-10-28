@@ -18,10 +18,12 @@ packages_common_packages:
   - mupdf
   - neovim
   - odt2txt
+  - podman
   - ranger
   - rubygems
   - rustup
   - sad
+  - socat
   - stow
   - w3m
   - wget
@@ -56,4 +58,6 @@ packages_desktop_wm:
   Hyprland:
     - hyprland
     - hypridle
+    - hyprpaper
+    - pyprland
     - swaylock-effects
