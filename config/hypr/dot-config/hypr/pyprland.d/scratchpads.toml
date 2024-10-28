@@ -1,0 +1,30 @@
+pyprland.plugins = ["scratchpads"]
+
+[scratchpads.term]
+animation = "fromTop"
+command = "[term_classed] dropterm"
+class = "dropterm"
+size = "75% 60%"
+max_size = "1920px 100%"
+unfocus = "hide"
+
+[scratchpads.Ferdium]
+animation = "fromRight"
+command = "flatpak run org.ferdium.Ferdium"
+match_by = "title"
+title = "re:Ferdium.*"
+multi = false
+lazy = true
+size = "50% 90%"
+
+[scratchpads.volume]
+command = "pavucontrol"
+animation = "fromTop"
+lazy = true
+size = "25% 35%"
+
+[scratchpads.bluetooth]
+command = "blueman-manager"
+animation = "fromTop"
+lazy = true
+size = "25% 35%"
