@@ -1,0 +1,6 @@
+---
+python_package:
+  - sqlite
+  - tk
+  - python-poetry
+  - patchelf

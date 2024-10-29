@@ -1,0 +1,44 @@
+---
+# tasks file for roles/pyenv
+- name: Include OS-specific variables
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install additional packages for pyenv
+  become: true
+  ansible.builtin.package:
+    name: "{{ pyenv_packages }}"
+    state: present
+
+- name: Check if pyenv is installed
+  ansible.builtin.stat:
+    path: "{{ pyenv_path }}"
+  register: pyenv_stat
+
+- name: Install pyenv
+  when: not pyenv_stat.stat.exists()
+  block:
+    - name: Download pyenv installer script
+      ansible.builtin.get_url:
+        url: https://pyenv.run
+        dest: "{{ pyenv_installer_path }}"
+        mode: '0755'
+
+    - name: Run the pyenv installer script
+      ansible.builtin.command: "{{ pyenv_installer_path }}"
+      args:
+        creates: "{{ pyenv_path }}"
+      register: result
+      changed_when: result.rc == 0
+
+    - name: Remove the installer script
+      ansible.builtin.file:
+        path: "{{ pyenv_installer_path }}"
+        state: absent
+
+- name: Add pyenv to zshrc if not already present
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    block: |
+      export PYENV_ROOT="$HOME/.pyenv"
+      [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+      eval "$(pyenv init -)"

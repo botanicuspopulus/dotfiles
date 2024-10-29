@@ -1,0 +1,4 @@
+---
+# vars file for roles/pyenv
+python_install_path: /tmp/pyenv_installer.sh
+python_path: "{{ ansible_env.HOME }}/.pyenv"
