@@ -1,53 +1,140 @@
-@import "colors.css";
-@import "battery/battery.css";
-@import "bluetooth/bluetooth.css";
-@import "clock/clock.css";
-@import "network/network.css";
-@import "pulseaudio/pulseaudio.css";
-@import "temperature/temperature.css";
-@import "custom/custom.css";
-@import "sway/workspaces.css";
+@import "css/colors.css";
 
 * {
     font-family: Lekton Nerd Font;
     font-size: 1.05em;
-    color: @foreground-color;
+    border-radius: 0;
+    border: none;
 }
 
-window#waybar {
-    background-color: transparent;
+window#waybar { 
+  background-color: transparent; 
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+window#waybar.hidden { opacity: 0.2; }
+
+#custom-powermenu {
+	color: @background-color;
+	background-color: @red-color;
+	border-radius: 1em;
+	padding-right: 1.25em;
+	padding-left: 1.05em;
 }
 
-tooltip {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: 0.5em;
-    margin-right: 0.5em; border: 0.1em solid @cyan-color;
+#battery { color: @green-color; }
+#battery.charging { color: @green-color; }
+#battery.warning { color: @warning_color; }
+#battery.critical { color: @error_color; }
+#battery.warning:not(.charging) {
+    background-color: @red-color;
+    color: @background-color;
+}
+
+#bluetooth { color: @cyan-color; }
+#bluetooth.disabled { color: @red-color; }
+
+#network.linked,.wifi { color: @green-color; }
+#network.disconnected { color: @yellow-color; }
+#network.disabled { color: @red-color; }
+#network.linked,.wifi { color: @green-color; }
+#network.disconnected { color: @yellow-color; }
+#network.disabled { color: @red-color; }
+
+#pulseaudio { color: @cyan-color; }
+
+#temperature.critical { color: @error-color; }
+
+#workspaces button {
+    background: transparent;
+    /* border: 0.05em solid @blue-color; */
     border-radius: 0.5em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    padding-right: 1em;
+}
+
+#workspaces button.focused {
+    color: @black-color;
+    background-color: @blue-color;
+}
+
+#workspaces button.active {
+    color: @black-color;
+    background-color: @blue-color;
+}
+
+#workspaces button.urgent {
+    background-color: @white-color;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    color: @background-color;
+    background-color: @cyan-color;
+}
+
+#workspaces button.focused {
+  color: @white-color;
+  background-color: @blue-color;
+}
+
+.warning {
+    color: @warning_color;
+}
+
+.error {
+    color: @error_color;
+}
+
+.normal {
+    color: @white-color;
+}
+
+.green {
+    color: @green-color;
+}
+
+.blue {
+    color: @blue-color;
+}
+
+.cyan {
+    color: @cyan-color;
+}
+
+.red {
+    color: @red-color;
+}
+
+.white {
+    color: @white-color;
+}
+
+tooltip { border: @borders; }
+
+tooltip,
+.modules-left,
+.modules-right {
+    background-color: @theme_base_color;
+    border-radius: 1em;
     padding-left: 0.5em;
     padding-right: 0.5em;
-    background-color: @black-color;
 }
 
-.modules-left,
-.modules-center,
 .modules-right {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-right: 1em;
 }
 
 .modules-left {
-    margin-left: 0.5em;
+    margin-left: 1em;
 }
 
+
 #tray {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    background-color: @background-color;
-    color: @foreground-color;
-    border-radius: 0.5em;
     min-width: 3em;
 }
 
@@ -57,23 +144,5 @@ tooltip {
 
 #tray > .needs-aatention {
   -gtk-icon-effect: highlight;
-  color: @orange-color;
-}
-
-#clock, 
-#battery, 
-#pulseaudio, 
-#network,
-#cpu,
-#bluetooth,
-#memory,
-#backlight,
-#temperature {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    background-color: @background-color;
-}
-
-#cpu-format-icon {
-    color: @yellow-color;
+  color: @warning_color;
 }

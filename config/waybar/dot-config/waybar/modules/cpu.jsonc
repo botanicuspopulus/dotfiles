@@ -1,0 +1,17 @@
+{
+    "cpu": {
+        "interval": 1,
+        "format": "  {icon}",
+        "format-icons": [
+            "<span color='white'>▁</span>", 
+            "<span color='white'>▂</span>", 
+            "<span color='white'>▃</span>", 
+            "<span color='white'>▄</span>", 
+            "<span color='orange'>▅</span>", 
+            "<span color='orange'>▆</span>", 
+            "<span color='orange'>▇</span>", 
+            "<span color='red'>█</span>"
+        ],
+        "min-length": 8
+    }
+}

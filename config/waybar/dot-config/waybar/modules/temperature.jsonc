@@ -9,8 +9,9 @@
             "",
             "",
             "", 
-            "<span color='#e0af68'></span>",
-            "<span color='#f7768e'></span>"
+            "<span color='yellow'></span>",
+            "<span color='orange'></span>",
+            "<span color='red'></span>"
         ],
         "min-length": 7
     }

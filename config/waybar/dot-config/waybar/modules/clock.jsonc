@@ -11,11 +11,11 @@
             "on-scroll": 1,
             "on-click-right": "mode",
             "format": {
-                "months" : "<span color='#9ece6a'><b>{}</b></span>",
-                "days": "<span color='#c0caf5'>{}</span>",
-                "weeks": "<span color='#c0caf5'><b>W{}</b></span>",
-                "weekdays": "<span color='#7aa2f7'><b>{}</b></span>",
-                "today": "<span color='#7dcfff'><b><u>{}</u></b></span>"
+                "months" : "<span color='green'><b>{}</b></span>",
+                "days": "<span color='white'>{}</span>",
+                "weeks": "<span color='white'><b>W{}</b></span>",
+                "weekdays": "<span color='blue'><b>{}</b></span>",
+                "today": "<span color='cyan'><b><u>{}</u></b></span>"
             }
         },
         "actions": {
