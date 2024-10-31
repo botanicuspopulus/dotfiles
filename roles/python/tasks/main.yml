@@ -6,33 +6,33 @@
 - name: Install additional packages for pyenv
   become: true
   ansible.builtin.package:
-    name: "{{ pyenv_packages }}"
+    name: "{{ python_packages }}"
     state: present
 
 - name: Check if pyenv is installed
   ansible.builtin.stat:
-    path: "{{ pyenv_path }}"
+    path: "{{ python_pyenv_path }}"
   register: pyenv_stat
 
 - name: Install pyenv
-  when: not pyenv_stat.stat.exists()
+  when: pyenv_stat is defined
   block:
     - name: Download pyenv installer script
       ansible.builtin.get_url:
         url: https://pyenv.run
-        dest: "{{ pyenv_installer_path }}"
+        dest: "{{ python_pyenv_install_path }}"
         mode: '0755'
 
     - name: Run the pyenv installer script
-      ansible.builtin.command: "{{ pyenv_installer_path }}"
+      ansible.builtin.command: "{{ python_pyenv_install_path }}"
       args:
-        creates: "{{ pyenv_path }}"
+        creates: "{{ python_pyenv_path }}"
       register: result
       changed_when: result.rc == 0
 
     - name: Remove the installer script
       ansible.builtin.file:
-        path: "{{ pyenv_installer_path }}"
+        path: "{{ python_pyenv_install_path }}"
         state: absent
 
 - name: Add pyenv to zshrc if not already present
