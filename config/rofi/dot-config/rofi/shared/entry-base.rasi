@@ -1,7 +1,0 @@
-entry {
-    padding:           0.2em 0.5em;
-    background-color:  inherit;
-    text-color:        inherit;
-    cursor:            text;
-    placeholder-color: inherit;
-}
