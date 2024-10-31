@@ -11,10 +11,10 @@
         "enable-bar-scroll": false,
         "format-icons": {
             "1": "",
-            "6": "<span color='#e0af68'>󰈹</span>",
-            "7": "<span color='#9ece6a'>󰖺</span>",
-            "8": "<span color='#9ece6a'>󰍡</span>",
-            "9": "<span color='#f7768e'>󱉺</span>",
+            "6": "<span color='orange'>󰈹</span>",
+            "7": "<span color='green'>󰖺</span>",
+            "8": "<span color='green'>󰍡</span>",
+            "9": "<span color='red'>󱉺</span>",
             "urgent": "󰈅",
             "focused": "󰷜",
             "default": "󰍹"

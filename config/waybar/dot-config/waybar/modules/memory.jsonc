@@ -1,0 +1,18 @@
+{
+    "memory": {
+        "interval": 10,
+        "format": "󰘚 {icon} {percentage}%",
+        "format-alt": "󰘚 {icon} {used:02.1f}G/{total:02.1f}G",
+        "format-icons": [
+            "<span color='white'>▁</span>",
+            "<span color='white'>▂</span>",
+            "<span color='white'>▃</span>",
+            "<span color='white'>▄</span>",
+            "<span color='orange'>▅</span>",
+            "<span color='orange'>▆</span>",
+            "<span color='orange'>▇</span>",
+            "<span color='red'>█</span>"
+        ],
+        "tooltip": false
+    }
+}
