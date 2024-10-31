@@ -1,0 +1,29 @@
+#!/bin/bash
+
+script_dir=$(dirname "$(realpath "$0")")
+
+# Determine the gpus in the system
+# Check if there are any nvidia gpus
+nvidia_gpus=$(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l)
+
+# Check if there are any amd gpus
+amd_gpus=$(lspci | grep -i amd | grep -i vga | wc -l)
+
+# Check if there are any intel gpus
+intel_gpus=$(lspci | grep -i intel | grep -i vga | wc -l)
+
+if [ $nvidia_gpus -gt 0 ]; then
+    # Get the temperature of the nvidia gpus
+    nvidia_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{print $1}')
+    echo "{\"text\": \"$nvidia_temp\", \"tooltip\": \"NVIDIA GPU\"}"
+elif [ $amd_gpus -gt 0 ]; then
+    # Get the temperature of the amd gpus
+    amd_temp=$(sensors | grep -i amdgpu | awk '{print $2}' | cut -c 2-3)
+    echo "{\"text\": \"$amd_temp\", \"tooltip\": \"AMD GPU\"}"
+elif [ $intel_gpus -gt 0 ]; then
+    # Get the temperature of the intel gpus
+    intel_temp=$(sensors | grep -i iwlwifi | awk '{print $2}' | cut -c 2-3)
+    echo "{\"text\": \"$intel_temp\", \"tooltip\": \"Intel GPU\"}"
+else
+    echo "{\"text\": \"No GPU\", \"tooltip\": \"No GPU\"}"
+fi
