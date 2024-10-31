@@ -1,5 +1,5 @@
 ---
-python_package:
+python_packages:
   - sqlite
   - tk
   - python-poetry
