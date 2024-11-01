@@ -1,8 +1,8 @@
 {
     "custom/gpu": {
         "restart-interval": 2,
-        "format": "  {}",
-        "exec": "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,nounits,noheader | sed 's/\\([0-9]\\+\\), \\([0-9]\\+\\)/\\1% 󰔏 \\2°C/g'",
-        "min-length": 8
+        "format": "󰢮 GPU",
+        "exec": "$HOME/bin/gpu_info",
+        "return-type": "json"
     }
 }

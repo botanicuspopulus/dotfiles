@@ -10,7 +10,7 @@
             "<span color='white'>▄</span>",
             "<span color='orange'>▅</span>",
             "<span color='orange'>▆</span>",
-            "<span color='orange'>▇</span>",
+            "<span color='red'>▇</span>",
             "<span color='red'>█</span>"
         ],
         "tooltip": false

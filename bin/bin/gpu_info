@@ -1,29 +1,128 @@
-#!/bin/bash
+#!/bin/zsh
 
-script_dir=$(dirname "$(realpath "$0")")
+script_dir=${0:A:h}
 
 # Determine the gpus in the system
 # Check if there are any nvidia gpus
-nvidia_gpus=$(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l)
 
-# Check if there are any amd gpus
-amd_gpus=$(lspci | grep -i amd | grep -i vga | wc -l)
+GREEN='#9ECE6A'
+YELLOW='#E0AF86'
+RED='#f7768E'
+WHITE='#C0CAF5'
 
-# Check if there are any intel gpus
-intel_gpus=$(lspci | grep -i intel | grep -i vga | wc -l)
+function color() {
+    temp=$1
+    if (( $temp < 50 )); then
+      echo -e  "<span color=\\\"${GREEN}\\\">$temp</span>"
+    elif (( $temp < 70 )); then
+      echo -e "<span color=\\\"${YELLOW}\\\">$temp</span>"
+    else
+      echo -e "<span color=\\\"${RED}\\\">$temp</span>"
+    fi
+}
 
-if [ $nvidia_gpus -gt 0 ]; then
+vga_devices=$(lspci | grep -i vga)
+amd_gpus=$(grep -ic amd <<< "$vga_devices")
+nvidia_gpus=$(grep -ic nvidia <<< "$vga_devices")
+
+output_text=''
+
+if (( $nvidia_gpus == 0 )) && (( $amd_gpus == 0 )) && (( $intel_gpus == 0 )); then
+    echo 'No GPUs found'
+    exit 0
+fi
+
+if (( $nvidia_gpus > 0 )); then
     # Get the temperature of the nvidia gpus
-    nvidia_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{print $1}')
-    echo "{\"text\": \"$nvidia_temp\", \"tooltip\": \"NVIDIA GPU\"}"
-elif [ $amd_gpus -gt 0 ]; then
+    fields=(
+      name,
+      temperature.gpu
+      utilization.gpu
+      temperature.memory
+      utilization.memory
+      memory.total
+      memory.free
+      memory.used
+      power.draw
+      clocks.gr
+      clocks.mem
+    )
+    
+    field_names=(
+      "Name"
+      "Core Temp"
+      "Core Utilization"
+      "Mem Temp"
+      "Mem Utilization"
+      "Mem Total"
+      "Mem Free"
+      "Mem Used"
+      "Power Draw"
+      "Graphics Clock"
+      "Memory Clock"
+    )
+
+    max_width=0
+    for field in "${field_names[@]}"; do
+        if (( ${#field} > max_width )); then
+            max_width=${#field}
+        fi
+    done
+    max_width=$((max_width + 2))
+    icon_width=3
+
+    for i in {1..11}; do
+      field=${field_names[$i]}
+      case $field in
+        *Temp)
+          icon="󰔏"
+          ;;
+        *Utilization)
+          icon=""
+          ;;
+        Power*)
+          icon="󱐌"
+          ;;
+        *Clock)
+          icon="󰅐"
+          ;;
+        "Mem Total" | "Mem Free" | "Mem Used")
+          icon="󰘚"
+          ;;
+      esac
+
+      field_names[$i]=$(printf "%-${icon_width}s%-${max_width}s" "${icon}" "${field}")
+    done
+
+    gpu_info=$(nvidia-smi --query-gpu="${(j:,:)fields}" --format=csv,noheader)
+    output_text+="<u>󰢮  NVIDIA GPU</u>\n"
+    while IFS= read -r line; do
+        IFS=',' read -r -A gpu_info_array <<< "$line"
+        for i in {1..11}; do
+            info=${gpu_info_array[$i]}
+            field=${field_names[$i]}
+            if [[ ${info} =~ "N/A" ]]; then
+                continue
+            fi
+
+            if [[ $field =~ ".* Temp" ]]; then
+              info="$(color $info)°C"
+            fi
+
+            if [[ $field =~ ".* Utilization" ]]; then
+              info="$(color ${info%?})%"
+            fi
+            
+            output_text+="${field}: ${info}\n"
+        done
+    done <<< "$gpu_info"
+fi
+
+if (( $amd_gpus > 0 )); then
     # Get the temperature of the amd gpus
     amd_temp=$(sensors | grep -i amdgpu | awk '{print $2}' | cut -c 2-3)
-    echo "{\"text\": \"$amd_temp\", \"tooltip\": \"AMD GPU\"}"
-elif [ $intel_gpus -gt 0 ]; then
-    # Get the temperature of the intel gpus
-    intel_temp=$(sensors | grep -i iwlwifi | awk '{print $2}' | cut -c 2-3)
-    echo "{\"text\": \"$intel_temp\", \"tooltip\": \"Intel GPU\"}"
-else
-    echo "{\"text\": \"No GPU\", \"tooltip\": \"No GPU\"}"
+    output_text+="AMD GPU\nTemperature: $amd_temp\n\n"
 fi
+
+# return the output as json
+printf '{ "text": "󰢮  GPU", "tooltip": "%s" }' "$output_text"
