@@ -12,7 +12,6 @@
             "<span color='yellow'></span>",
             "<span color='orange'></span>",
             "<span color='red'></span>"
-        ],
-        "min-length": 7
+        ]
     }
 }

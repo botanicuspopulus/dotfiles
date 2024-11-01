@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+cpu_temps=($(sensors -j | jq -r '.. | objects | to_entries[] | select(.key | test("temp[0-9]+_input")) | [.key, .value] | join("|")'))
+ 
+core_count=$(echo $cpu_temps | wc -l)
+
+
+for temp in $cpu_temps; do
+  IFS='|' read -r key value <<< $temp
+  # Change temp{0-9}+_input to Core [0-9]+
+  key=$(echo $key | sed -E 's/temp([0-9]+)_input/Core \1/')
+  echo "$key: $value"
+done
+
+echo "$output_text"
