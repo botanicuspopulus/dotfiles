@@ -3,37 +3,65 @@
 source "$HOME/bin/gradient_colors.sh"
 source "$HOME/bin/util.sh"
 
-export GREEN='#9ECE6A'
-export YELLOW='#E0AF86'
-export RED='#f7768E'
-export WHITE='#C0CAF5'
+typeset -gxr ICON_WIDTH=3
 
-export temperature_icons=("" "" "" "" "")
-export utilization_icons=("▁" "▂" "▃" "▄" "▅" "▆" "▇" "█")
+typeset -gxr GREEN='#9ECE6A'
+typeset -gxr YELLOW='#E0AF86'
+typeset -gxr BLUE='#7AA2F7'
+typeset -gxr RED='#f7768E'
+typeset -gxr WHITE='#C0CAF5'
 
-typeset -a temperature_gradient_colors
-typeset -a utilization_gradient_colors
+typeset -gxar temperature_icons=("" "" "" "" "")
+typeset -gxar utilization_icons=("▁" "▂" "▃" "▄" "▅" "▆" "▇" "█")
 
-typeset -A gradient_colors
+typeset -ir color_steps=20
 
-read -r temperature_gradient_colors <<< "$(gradient_colors $GREEN $RED ${#temperature_icons[@]})"
-read -r utilization_gradient_colors <<< "$(gradient_colors $GREEN $RED ${#utilization_icons[@]})"
-
-gradient_colors["temperature"]=$temperature_gradient_colors
-gradient_colors["utilization"]=$utilization_gradient_colors
+typeset -ar temperature_gradient=( 
+  $(calculate_gradient_colors $BLUE $GREEN $(( color_steps / 2 + 1 )))
+  $(calculate_gradient_colors $GREEN $RED $(( color_steps / 2 + 1 )))
+)
+typeset -ar utilization_gradient=( $(calculate_gradient_colors $GREEN $RED ${#utilization_icons[@]}) )
 
 function get_temperature_color() {
   local temp=$1
-  local min_temp=${2:-0}
-  local max_temp=${3:-100}
+  local min_temp=${2:=0}
+  local max_temp=${3:=100}
 
-  echo -e "$(get_color $temp $min_temp $max_temp "${gradient_colors["temperature"][@]}")"
+  local color_count=${#temperature_gradient[@]}
+  local color=$(get_index $temp $min_temp $max_temp $color_count)
+
+  print "${temperature_gradient[$color]}"
+}
+
+function get_temperature_icon() {
+  local temp=$1
+  local min_temp=${2:=0}
+  local max_temp=${3:=100}
+
+  local icon_count=${#temperature_icons[@]}
+  local icon=$(get_index $temp $min_temp $max_temp $icon_count)
+
+  print "${temperature_icons[$icon]}"
 }
 
 function get_utilization_color() {
-  local utilization=$1
-  local min_utilization=${2:-0}
-  local max_utilization=${3:-100}
+  local utilization=${1:?No utilization provided}
+  local min_utilization=${2:=0}
+  local max_utilization=${3:=100}
 
-  echo -e "$(get_color $utilization $min_utilization $max_utilization "${gradient_colors["utilization"][@]}")"
+  local color_count=${#utilization_gradient[@]}
+  local color=$(get_index $utilization $min_utilization $max_utilization $color_count)
+
+  print "${utilization_gradient[$color]}"
+}
+
+function get_utilization_icon() {
+  local utilization=${1:?No utilization provided}
+  local min_utilization=${2:=0}
+  local max_utilization=${3:=100}
+
+  local icon_count=${#utilization_icons[@]}
+  local icon=$(get_index $utilization $min_utilization $max_utilization $icon_count)
+
+  print "${utilization_icons[$icon]}"
 }
