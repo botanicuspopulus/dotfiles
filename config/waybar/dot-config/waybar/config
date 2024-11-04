@@ -25,7 +25,7 @@
         "cpu", 
         "memory", 
         "custom/gpu",
-        "temperature", 
+        "custom/temperature",
         "battery", 
         "clock",
         "custom/powermenu",

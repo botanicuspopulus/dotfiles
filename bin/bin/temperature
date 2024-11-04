@@ -1,0 +1,42 @@
+#!/bin/zsh
+
+source "$HOME/bin/theme.sh"
+source "$HOME/bin/util.sh"
+
+min_temp=${1:-0}
+max_temp=${2:-100}
+
+typeset -A temps
+while IFS='=' read -r key value; do
+  temps[$key]=$value
+done < <(sensors -j | jq -r '
+.["coretemp-isa-0000"]
+| to_entries[]
+| select(.key | capture("^Core [0-9]+$|^Package"))
+| .key as $core
+| .value
+| to_entries[]
+| select(.key | test("_input$"))
+| "\($core | gsub("Package.*"; "Package"))=\(.value)"' <<< "$coretemp_isa_entries")
+
+processor_name=$(lscpu | grep "Model name" | cut -d':' -f2 | xargs)
+
+function get_temperature_color() {
+    echo -e "$(get_color "${1}" "$min_temp" "$max_temp" "$gradient_colors[\"temperature\"]")"
+}
+
+output_text="<u><b>$processor_name</b></u>\\n"
+
+for key value in ${(kv)temps}; do
+  icon="$(get_icon "$value" "$min_temp" "$max_temp" "$temperature_icons")"
+  color="$(get_temperature_color "$value")"
+
+  output_text+=$(printf "%-8s: <span color=\\\"%s\\\">%-3s %s</span>\\\\n" "${key}" "$color" "$icon" "${value%.*}°C")
+done
+
+package_temp=$temps[Package]
+package_temp_icon=$(get_icon "$package_temp" "$min_temp" "$max_temp" "$temperature_icons")
+package_temp_color=$(get_temperature_color "$package_temp")
+text=$(printf "<span color=\\\"%s\\\">%-3s%s°C</span>" "$package_temp_color" "$package_temp_icon" "${package_temp%.*}")
+
+printf '{"text": "%s", "tooltip": "%s"}' "$text" "${output_text%\\n}"

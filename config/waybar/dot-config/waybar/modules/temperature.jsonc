@@ -1,17 +1,7 @@
 {
-    "temperature": {
-        "interval": 1,
-        "thermal-zone": 5,
-        "critical-threshold": 95,
-        "format": "{icon} {temperatureC}°C",
-        "format-critical": "⚠ {temperatureC}°C",
-        "format-icons": [
-            "",
-            "",
-            "", 
-            "<span color='yellow'></span>",
-            "<span color='orange'></span>",
-            "<span color='red'></span>"
-        ]
+    "custom/temperature": {
+        "restart-interval": 2,
+        "exec": "$HOME/bin/temperature",
+        "return-type": "json"
     }
 }
