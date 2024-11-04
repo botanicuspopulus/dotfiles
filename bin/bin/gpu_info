@@ -5,37 +5,24 @@ script_dir=${0:A:h}
 # Determine the gpus in the system
 # Check if there are any nvidia gpus
 
-GREEN='#9ECE6A'
-YELLOW='#E0AF86'
-RED='#f7768E'
-WHITE='#C0CAF5'
+source "$HOME/bin/theme.sh"
+source "$HOME/bin/util.sh"
 
-function color() {
-    temp=$1
-    if (( $temp < 50 )); then
-      echo -e  "<span color=\\\"${GREEN}\\\">$temp</span>"
-    elif (( $temp < 70 )); then
-      echo -e "<span color=\\\"${YELLOW}\\\">$temp</span>"
-    else
-      echo -e "<span color=\\\"${RED}\\\">$temp</span>"
-    fi
-}
-
-vga_devices=$(lspci | grep -i vga)
-amd_gpus=$(grep -ic amd <<< "$vga_devices")
+vga_devices=$(lspci)
 nvidia_gpus=$(grep -ic nvidia <<< "$vga_devices")
 
 output_text=''
 
-if (( $nvidia_gpus == 0 )) && (( $amd_gpus == 0 )) && (( $intel_gpus == 0 )); then
+if (( nvidia_gpus <= 0 ))
+then
     echo 'No GPUs found'
     exit 0
 fi
 
-if (( $nvidia_gpus > 0 )); then
+if (( nvidia_gpus > 0 )); then
     # Get the temperature of the nvidia gpus
     fields=(
-      name,
+      name
       temperature.gpu
       utilization.gpu
       temperature.memory
@@ -47,7 +34,7 @@ if (( $nvidia_gpus > 0 )); then
       clocks.gr
       clocks.mem
     )
-    
+
     field_names=(
       "Name"
       "Core Temp"
@@ -63,7 +50,8 @@ if (( $nvidia_gpus > 0 )); then
     )
 
     max_width=0
-    for field in "${field_names[@]}"; do
+    for field in "${field_names[@]}"
+    do
         if (( ${#field} > max_width )); then
             max_width=${#field}
         fi
@@ -71,57 +59,67 @@ if (( $nvidia_gpus > 0 )); then
     max_width=$((max_width + 2))
     icon_width=3
 
-    for i in {1..11}; do
-      field=${field_names[$i]}
-      case $field in
-        *Temp)
-          icon="󰔏"
-          ;;
-        *Utilization)
-          icon=""
-          ;;
-        Power*)
-          icon="󱐌"
-          ;;
-        *Clock)
-          icon="󰅐"
-          ;;
-        "Mem Total" | "Mem Free" | "Mem Used")
-          icon="󰘚"
-          ;;
-      esac
+    typeset -A icon_map
 
-      field_names[$i]=$(printf "%-${icon_width}s%-${max_width}s" "${icon}" "${field}")
-    done
+    icon_map["Temp"]="󰔏"
+    icon_map["Utilization"]=""
+    icon_map["Power"]="󱐌"
+    icon_map["Clock"]="󰅐"
+    icon_map["Mem"]="󰘚"
+    icon_map["Default"]="󰢮"
 
-    gpu_info=$(nvidia-smi --query-gpu="${(j:,:)fields}" --format=csv,noheader)
     output_text+="<u>󰢮  NVIDIA GPU</u>\n"
-    while IFS= read -r line; do
+
+    typeset -A formats
+    formats["default"]="%-${icon_width}s%-${max_width}s: %s\\\\n"
+    formats["colored"]="%-${icon_width}s%-${max_width}s: <span color=\\\"%s\\\">%s</span>\\\\n"
+
+    while IFS= read -r line
+    do
         IFS=',' read -r -A gpu_info_array <<< "$line"
-        for i in {1..11}; do
-            info=${gpu_info_array[$i]}
-            field=${field_names[$i]}
-            if [[ ${info} =~ "N/A" ]]; then
+
+        for (( i=1; i <= ${#gpu_info_array}; i++ ))
+        do
+            info=${gpu_info_array[i]}
+            field=${field_names[i]}
+
+            if [[ ${info} =~ "N/A" ]]
+            then
                 continue
             fi
 
-            if [[ $field =~ ".* Temp" ]]; then
-              info="$(color $info)°C"
-            fi
-
-            if [[ $field =~ ".* Utilization" ]]; then
-              info="$(color ${info%?})%"
-            fi
-            
-            output_text+="${field}: ${info}\n"
+            case $field in
+              *Temp)
+                icon=${icon_map["Temp"]}
+                color=$(get_temperature_color "${info}")
+                info="${info}°C"
+                output_text+=$(printf $formats["colored"] "${icon}" "${field}" "${color}" "${info}")
+                ;;
+              *Utilization)
+                icon=${icon_map["Utilization"]}
+                data="${info% \%}"
+                color=$(get_utilization_color "${data}")
+                output_text+=$(printf $formats["colored"] "${icon}" "${field}" "${color}" "${info}")
+                ;;
+              Power*)
+                icon=${icon_map["Power"]}
+                output_text+=$(printf $formats["default"] "${icon}" "${field}" "${info}")
+                ;;
+              "Mem Used"|"Mem Free"|"Mem Total")
+                icon=${icon_map["Mem"]}
+                output_text+=$(printf $formats["default"] "${icon}" "${field}" "${info}")
+                ;;
+              *Clock)
+                icon=${icon_map["Clock"]}
+                output_text+=$(printf $formats["default"] "${icon}" "${field}" "${info}")
+                ;;
+              *)
+                icon=${icon_map["Default"]}
+                output_text+=$(printf $formats["default"] "${icon}" "${field}" "${info}")
+                ;;
+            esac
         done
-    done <<< "$gpu_info"
-fi
-
-if (( $amd_gpus > 0 )); then
-    # Get the temperature of the amd gpus
-    amd_temp=$(sensors | grep -i amdgpu | awk '{print $2}' | cut -c 2-3)
-    output_text+="AMD GPU\nTemperature: $amd_temp\n\n"
+    done < <(nvidia-smi --query-gpu="${(j:,:)fields}" --format=csv,noheader)
 fi
 
 # return the output as json
