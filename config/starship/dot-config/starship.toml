@@ -63,7 +63,6 @@ format = '[󰉋 ](style)[$path]($style)[$read_only ]($read_only_style)'
 read_only = '󰌾 '
 home_symbol = ' '
 
-
 [git_branch]
 format = '[$symbol$branch ]($style)'
 symbol = '󰘬 '
@@ -102,16 +101,8 @@ format = '[$symbol\($version\) ]($style)'
 
 
 [docker_context]
-symbol = '󰡨 '
+symbol = ' '
 format = '[$symbol $context ]($style) $path'
-
-[java]
-symbol = '󰬷 '
-format = '[$symbol($version) ]($style)'
-
-[julia]
-symbol = 'ஃ '
-format = '[$symbol($version) ]($style)'
 
 [nodejs]
 symbol = ' '
@@ -122,7 +113,7 @@ symbol = ' '
 format = 'via [${symbol}${pyenv_prefix}\($virtualenv\) ]($style)'
 
 [rust]
-symbol = ' '
+symbol = '󱘗 '
 format = '[$symbol($version) ]($style)'
 
 [status]
