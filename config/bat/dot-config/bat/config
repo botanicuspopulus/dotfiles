@@ -1,6 +1,7 @@
 # Use "gitignore" highlighting for ".ignore" files
---map-syntax .ignore:.gitignore
---theme tokyonight_night
-
---style="changes,numbers,header,grid,snip"
+--theme="tokyonight_night"
+--style="changes,numbers,header,snip"
 --color=always
+
+--map-syntax .ignore:.gitignore
+
