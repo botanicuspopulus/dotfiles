@@ -47,6 +47,15 @@
     state: directory
     mode: '0755'
 
+- name: Add password feedback for sudo in /etc/sudoers
+  ansible.builtin.lineinfile:
+    path: "/etc/sudoers"
+    state: present
+    regexp: 'pwfeedback'
+    line: 'Defaults    pwfeedback'
+    insertafter: '^Defaults\s+env_reset'
+    validate: /usr/bin/visudo -cf %s
+
 - name: Ensure that the fonts folder exists
   ansible.builtin.file:
     path: "{{ user_fonts_path }}"
