@@ -12,6 +12,7 @@ packages_common_packages:
   - gdu
   - git
   - git-lfs
+  - glow
   - khard
   - luarocks
   - mediainfo

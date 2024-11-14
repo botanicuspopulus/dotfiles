@@ -7,6 +7,17 @@
     - rpmfusion
     - git_lfs
 
+- name: Add Charm repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: Charm
+    description: Repository to install Glow
+    baseurl: https://repo.charm.sh/yum/
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://repo.charm.sh/yum/gpg.key
+
+
 - name: Install DNF Group Packages
   become: true
   ansible.builtin.dnf:

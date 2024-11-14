@@ -6,7 +6,7 @@
     state: present
   loop: "{{ rpmfusion_repo_types }}"
 
-- name: Install RPM Fusion Repo Packates
+- name: Install RPM Fusion Repo Packages
   become: true
   vars:
     distribution: "{{ ansible_distribution | lower }}"
