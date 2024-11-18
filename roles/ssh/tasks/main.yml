@@ -5,13 +5,16 @@
     src: "files/config"
     dest: "{{ ansible_env.HOME }}/.ssh/config"
     mode: '0644'
+  tags:
+    - ssh
 
 - name: Copy systemd files to ~/.config/system/user/
   ansible.builtin.copy:
     src: "files/ssh-agent.service"
     dest: "{{ ansible_env.HOME }}/.config/systemd/user/ssh-agent.service"
     mode: '0644'
-
+  tags:
+    - ssh
 
 - name: Add SSH_AUTH_SOCK to ~/.pam-environment
   ansible.builtin.lineinfile:
@@ -20,6 +23,8 @@
     mode: '0644'
     create: true
     line: 'SSH_AUTH_SOCK DEFAULT="${XDG_RUNTIME_DIR}/ssh-agent.socket"'
+  tags:
+    - ssh
 
 - name: Make sure the ssh-agent service is started and enabled
   ansible.builtin.systemd:
@@ -28,3 +33,5 @@
     enabled: true
     daemon_reload: true
     scope: user
+  tags:
+    - ssh

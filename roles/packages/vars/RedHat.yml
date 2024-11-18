@@ -20,4 +20,17 @@ packages_list:
   - gtkgreet
   - gtk-murrine-engine
 
+packages_copr_repos_list:
+  - alebastr/swayr
+  - tofik/nwg-shell
+  - xbt573/gdu
+  - solopasha/hyprland
+
+packages_rpmfusion_base_url: "https://rpmfusion.org"
+packages_rpmfusion_keys_base_url: "{{ rpmfusion_base_url }}/keys?action=AttachFile&do=get&target="
+packages_rpmfusion_repo_base_url: "http://download1.rpmfusion.org"
+packages_rpmfusion_repo_types:
+  - "free"
+  - "nonfree"
+
 packages_crossover_url: http://crossover.codeweavers.com/redirect/crossover.rpm

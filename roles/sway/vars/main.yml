@@ -1,5 +1,0 @@
----
-sway_config_dir: "{{ ansible_env.XDG_CONFIG_DIR }}/sway/conf.d"
-sway_paths:
-  - {src: "files/sway",
-     dest: /usr/local/bin/sway}

@@ -1,2 +1,7 @@
+---
+git_user: git
+git_home: /home/git
+git_shell: /usr/bin/git-shell
+repos_dir: "{{ git_home }}/repositories"
 git_lfs_script_path: /tmp/rpm.sh
 git_lfs_repo_url: "https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh"

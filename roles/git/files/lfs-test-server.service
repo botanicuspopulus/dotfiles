@@ -1,0 +1,13 @@
+[Unit]
+Description=Git LFS Test Server
+After=network.target
+
+[Service]
+ExecStart=/opt/lfs-test-server/lfs-test-server -config=/etc/lfs-test-server/config.yml
+WorkingDirectory=/opt/lfs-test-server
+Restart=always
+User=nobody
+Group=nogroup
+
+[Install]
+WantedBy=multi-user.target

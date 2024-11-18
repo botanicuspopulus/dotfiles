@@ -9,14 +9,13 @@
   register: lua_link
 
 - name: Setup AstroNvim
-  when: lua_link is defined and lua_link.stat.islnk is not defined and not lua_link.stat.islnk
   block:
     - name: Clone AstroNvim
       ansible.builtin.git:
         repo: "{{ nvim_astronvim_url }}"
         dest: "{{ nvim_config_path }}"
         depth: 1
-        version: master
+        version: main
 
     - name: Remove unnecessary directories from ~/.config/nvim
       ansible.builtin.file:

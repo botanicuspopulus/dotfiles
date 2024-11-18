@@ -10,7 +10,8 @@
       - pulseaudio-qt
       - pulseaudio
     state: absent
-  when: ansible_os_family == 'Archlinux'
+  tags:
+    - pipewire
 
 - name: Install pipewire packages
   become: true
@@ -21,4 +22,5 @@
       - pipewire-alsa
       - wireplumber
     state: present
-  when: ansible_os_family == "Archlinux"
+  tags:
+    - pipewire

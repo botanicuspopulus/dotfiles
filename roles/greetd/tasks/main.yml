@@ -7,12 +7,16 @@
     create_home: false
     append: true
     state: present
+  tags:
+    - greetd
 
 - name: Remove existing config.toml that may have been installed
   become: true
   ansible.builtin.file:
     name: "{{ greetd_dir }}/config.toml"
     state: absent
+  tags:
+    - greetd
 
 - name: Copy files to /etc/greetd
   become: true
@@ -25,6 +29,8 @@
   loop:
     - gtk-dark.css
     - "{{ desktop_wm | lower }}.conf"
+  tags:
+    - greetd
 
 - name: Populate config.toml template
   become: true
@@ -34,25 +40,23 @@
     owner: "{{ greetd_user }}"
     group: "{{ greetd_group }}"
     mode: "{{ greetd_file_mode }}"
+  tags:
+    - greetd
 
 - name: Add greetd environments
   become: true
-  ansible.builtin.lineinfile:
+  ansible.builtin.blockinfile:
     path: "{{ greetd_dir }}/environments"
     state: present
     create: true
     mode: "{{ greetd_file_mode }}"
     owner: "{{ greetd_user }}"
     group: "{{ greetd_group }}"
-    line: "{{ item }}"
-  loop: >
-    {{
-      [
-        ("/usr/local/bin/sway" if desktop_wm == "sway" else None),
-        ("Hyprland" if desktop_wm == "Hyprland" else None),
-        "zsh",
-      ] | select('defined')
-    }}
+    block: |
+      Hyprland
+      /bin/zsh
+  tags:
+    - greetd
 
 - name: Disable SDDM
   become: true
@@ -62,9 +66,13 @@
   register: sddm_result
   failed_when: "'Could not find the requested service sddm' in sddm_result.msg"
   ignore_errors: true
+  tags:
+    - greetd
 
 - name: Enable greetd service
   become: true
   ansible.builtin.systemd:
     name: greetd
     enabled: true
+  tags:
+    - greetd

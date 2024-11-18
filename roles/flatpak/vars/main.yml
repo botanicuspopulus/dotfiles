@@ -1,5 +1,0 @@
----
-flatpak_packages:
-  - com.github.IsmaelMartinez.teams_for_linux
-  - sh.cider.Cider
-  - org.ferdium.Ferdium

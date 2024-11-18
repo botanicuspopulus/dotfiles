@@ -5,6 +5,8 @@
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: /usr/bin/zsh
+  tags:
+    - user
 
 - name: Handle Fedora Dependencies
   become: true
@@ -13,8 +15,12 @@
       - sassc
       - libsass
     state: present
+  tags:
+    - user
 
 - name: Install Tokyonight GTK Theme
+  tags:
+    - user
   vars:
     temp_dir: /tmp/tokyonight_theme
   block:
@@ -46,8 +52,11 @@
     path: "{{ user_icons_path }}"
     state: directory
     mode: '0755'
+  tags:
+    - user
 
 - name: Add password feedback for sudo in /etc/sudoers
+  become: true
   ansible.builtin.lineinfile:
     path: "/etc/sudoers"
     state: present
@@ -55,18 +64,24 @@
     line: 'Defaults    pwfeedback'
     insertafter: '^Defaults\s+env_reset'
     validate: /usr/bin/visudo -cf %s
+  tags:
+    - user
 
 - name: Ensure that the fonts folder exists
   ansible.builtin.file:
     path: "{{ user_fonts_path }}"
     state: directory
     mode: '0755'
+  tags:
+    - user
 
 - name: Download and Extract theme archive
   ansible.builtin.unarchive:
     src: "https://github.com/ljmill/tokyo-night-icons/releases/download/v0.2.0/TokyoNight-SE.tar.bz2"
     dest: "{{ user_icons_path }}"
     remote_src: true
+  tags:
+    - user
 
 - name: Extract font archive
   ansible.builtin.unarchive:
@@ -76,9 +91,13 @@
     exclude:
       - README.md
       - SIL Open Font License.txt
+  tags:
+    - user
 
 - name: Extract Cursor Theme Archive
   ansible.builtin.unarchive:
     src: "https://github.com/catppuccin/cursors/releases/download/v0.3.1/catppuccin-mocha-dark-cursors.zip"
     dest: "{{ user_icons_path }}"
     remote_src: true
+  tags:
+    - user

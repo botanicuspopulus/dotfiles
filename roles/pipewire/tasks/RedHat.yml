@@ -9,7 +9,8 @@
       - pulseaudio-zeroconf
       - pulseaudio-qt
       - pulseaudio
-  when: ansible_os_family == 'RedHat'
+  tags:
+    - pipewire
 
 - name: Install pipewire packages
   become: true
@@ -18,4 +19,5 @@
       - pipewire
       - pipewire-pulsedio
       - wireplumber
-  when: ansible_os_family == "RedHat"
+  tags:
+    - pipewire

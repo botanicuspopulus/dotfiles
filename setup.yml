@@ -7,19 +7,15 @@
     dev_path: "{{ ansible_env.HOME }}/Development"
 
   roles:
-    - packages
-    - flatpak
     - asdf
-    - nvim
-    - stow
-    - rofi-calc
+    - git
     - greetd
-    - vagrant
+    - nvim
+    - packages
+    - stow
+    - python
+    - pipewire
+    - rofi-calc
     - user
     - ssh
-
-  tasks:
-    - name: Include sway role
-      ansible.builtin.include_role:
-        name: sway
-      when: desktop_wm == "sway"
+    - vagrant
