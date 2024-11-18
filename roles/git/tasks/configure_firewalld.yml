@@ -1,0 +1,33 @@
+---
+- name: Ensure that firewalld is installed
+  ansible.builtin.package:
+    name: firewalld
+    state: present
+  tags:
+    - git
+
+- name: Start and enable firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+    enabled: true
+  tags:
+    - git
+
+- name: Open SSH port in firewalld
+  ansible.builtin.firewalld:
+    port: "{{ git_ssh_port }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: true
+  tags:
+    - git
+
+- name: Open Git port in firewalld
+  ansible.builtin.firewalld:
+    port: "{{ git_port }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: true
+  tags:
+    - git

@@ -3,9 +3,33 @@
   ansible.builtin.include_role:
     name: "{{ item }}"
   loop:
-    - copr_repos
     - rpmfusion
-    - git_lfs
+
+- name: Include OS-specific Variables
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install Fusion Repo GPG Keys
+  become: true
+  ansible.builtin.rpm_key:
+    key: "{{ packages_rpmfusion_keys_base_url }}RPM-GPG-KEY-rpmfusion-{{ item }}-{{ ansible_distribution | lower }}-2020"
+    state: present
+  loop: "{{ packages_rpmfusion_repo_types }}"
+
+- name: Install RPM Fusion Repo Packages
+  become: true
+  vars:
+    distribution: "{{ ansible_distribution | lower }}"
+  ansible.builtin.dnf:
+    name: "{{ packages_rpmfusion_repo_base_url }}/{{ item }}/{{ distribution }}/rpmfusion-{{ item }}-release-{{ ansible_distribution_version }}.noarch.rpm"
+    state: present
+  loop: "{{ packages_rpmfusion_repo_types }}"
+
+- name: Enable Copr repos
+  become: true
+  community.general.copr:
+    state: enabled
+    name: "{{ item }}"
+  loop: "{{ packages_copr_repos_list }}"
 
 - name: Add Charm repository
   become: true
@@ -17,6 +41,29 @@
     gpgcheck: true
     gpgkey: https://repo.charm.sh/yum/gpg.key
 
+- name: Install Common Packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ packages_common_packages }}"
+    state: present
+
+- name: Install OS-specific Packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ packages_list }}"
+    state: present
+
+- name: Install Common Desktop Window Manager Packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ packages_desktop }}"
+    state: present
+
+- name: Install Desktop Window Manager
+  become: true
+  ansible.builtin.package:
+    name: "{{ packages_desktop_wm[desktop_wm] }}"
+    state: present
 
 - name: Install DNF Group Packages
   become: true
@@ -29,7 +76,6 @@
   ansible.builtin.dnf:
     name: intel-media-driver
     state: present
-  when: ansible_os_family == 'RedHat'
 
 - name: Set system to use fedora-cisco-openh264
   become: true

@@ -7,6 +7,8 @@
       - vagrant
       - libvirt
     state: present
+  tags:
+    - vagrant
 
 - name: Install Arch Dependencies
   become: true
@@ -16,6 +18,8 @@
       - qemu-system-x86
     state: present
   when: ansible_os_family == 'Archlinux'
+  tags:
+    - vagrant
 
 - name: Ensure that the NFS server is enabled and started
   become: true
@@ -23,6 +27,8 @@
     name: nfs-server
     enabled: true
     state: started
+  tags:
+    - vagrant
 
 - name: Configure Firewall for NFS
   become: true
@@ -36,30 +42,40 @@
     - nfs
     - rpc-bind
     - mountd
+  tags:
+    - vagrant
 
 - name: Enable libvirt systemd service
   ansible.builtin.systemd:
     name: libvirtd
     enabled: true
     state: started
+  tags:
+    - vagrant
 
 - name: Reload firewalld
   become: true
   ansible.builtin.service:
     name: firewalld
     state: reloaded
+  tags:
+    - vagrant
 
 - name: Ensure that the 'libvirt' group exists
   become: true
   ansible.builtin.group:
     name: libvirt
     state: present
+  tags:
+    - vagrant
 
 - name: Ensure that the 'vagrant' group exists
   become: true
   ansible.builtin.group:
     name: vagrant
     state: present
+  tags:
+    - vagrant
 
 - name: Add user to the libvirt group
   become: true
@@ -67,6 +83,8 @@
     name: "{{ ansible_env.USER }}"
     groups: vagrant
     append: true
+  tags:
+    - vagrant
 
 - name: Ensure that vagrant has permissions to be able to use NFS without a password prompt
   become: true
@@ -81,6 +99,8 @@
       - /usr/bin/systemctl status --no-pager nfs-server.service
       - /usr/bin/systemctl start nfs-server.service
       - /usr/sbin/exportfs -ar
+  tags:
+    - vagrant
 
 - name: Add user to 'vagrant' group
   become: true
@@ -88,3 +108,5 @@
     name: "{{ ansible_env.USER }}"
     groups: vagrant
     append: true
+  tags:
+    - vagrant

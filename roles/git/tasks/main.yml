@@ -1,0 +1,6 @@
+---
+- name: Include GIT server tasks
+  ansible.builtin.include_tasks:
+    - install_git.yml
+    - configure_ssh.yml
+    - configure_firewall.yml

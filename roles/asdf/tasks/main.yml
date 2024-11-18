@@ -4,6 +4,8 @@
     repo: "{{ asdf_git_url }}"
     dest: "{{ asdf_dir }}"
     version: "{{ asdf_version }}"
+  tags:
+    - asdf
 
 - name: Add plugins to asdf
   ansible.builtin.shell: |
@@ -13,6 +15,8 @@
   failed_when: task.rc >= 1 and 'already added' not in task.stderr
   changed_when: false
   loop: "{{ asdf_plugins }}"
+  tags:
+    - asdf
 
 - name: Install latest version of plugins using asdf
   ansible.builtin.shell: |
@@ -22,6 +26,8 @@
   failed_when: task.rc > 0 or 'fatal' in task.stdout or 'error' in task.stdout
   changed_when: false
   loop: "{{ asdf_plugins }}"
+  tags:
+    - asdf
 
 - name: Set asdf plugin versions
   ansible.builtin.shell: |
@@ -29,3 +35,5 @@
     asdf global {{ item }} latest
   changed_when: false
   loop: "{{ asdf_plugins }}"
+  tags:
+    - asdf

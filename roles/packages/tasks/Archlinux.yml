@@ -1,6 +1,54 @@
 ---
-- name: Crossover for Linux
+- name: Create user to install AUR packages
   become: true
-  ansible.builtin.package:
-    name: crossover
+  ansible.builtin.user:
+    name: aur_builder
+
+- name: Add aur_builder to sudoers
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/aur_builder-allow-to-sudo-pacman
     state: present
+    line: aur_builder ALL=(ALL) NOPASSWD:/usr/bin/pacman
+    validate: /usr/sbin/visudo -cf %s
+    create: true
+    mode: '0644'
+
+- name: Install Common Packages
+  become: true
+  become_user: aur_builder
+  community.general.pacman:
+    name: "{{ packages_common_packages }}"
+    state: present
+    executable: yay
+    extra_args: --builddir /var/cache/yay
+
+- name: Include OS-specific Variables
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install OS-specific Packages
+  become: true
+  become_user: aur_builder
+  community.general.pacman:
+    name: "{{ packages_list }}"
+    state: present
+    executable: yay
+    extra_args: --builddir /var/cache/yay
+
+- name: Install Common Desktop Window Manager Packages
+  become: true
+  become_user: aur_builder
+  community.general.pacman:
+    name: "{{ packages_desktop }}"
+    state: present
+    executable: yay
+    extra_args: --builddir /var/cache/yay
+
+- name: Install Desktop Window Manager
+  become: true
+  become_user: aur_builder
+  community.general.pacman:
+    name: "{{ packages_desktop_wm[desktop_wm] }}"
+    state: present
+    executable: yay
+    extra_args: --builddir /var/cache/yay

@@ -1,28 +1,7 @@
 ---
-- name: Install Common Packages
-  become: true
-  ansible.builtin.package:
-    name: "{{ packages_common_packages }}"
-    state: present
-
-- name: Include OS-specific Variables
-  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
-
-- name: Install OS-specific Packages
-  become: true
-  ansible.builtin.package:
-    name: "{{ packages_list }}"
-
-- name: Install Common Desktop Window Manager Packages
-  become: true
-  ansible.builtin.package:
-    name: "{{ packages_desktop }}"
-
-
-- name: Install Desktop Window Manager
-  become: true
-  ansible.builtin.package:
-    name: "{{ packages_desktop_wm[desktop_wm] }}"
-
 - name: Handle Packages
-  ansible.builtin.include_tasks: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks:
+    - "{{ ansible_os_family }}.yml"
+    - flatpak.yml
+  tags:
+    - packages

@@ -1,0 +1,5 @@
+---
+git_port: 8080
+git_ssh_port: 22
+git_lfs_admin_user: admin
+git_lfs_admin_passwd: admin

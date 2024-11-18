@@ -2,10 +2,13 @@
 packages_common_packages:
   - ansifilter
   - atool
+  - build-devel
   - cargo
   - catdoc
   - cliphist
+  - cmake
   - composer
+  - cups
   - curl
   - feh
   - flatpak
@@ -13,12 +16,15 @@ packages_common_packages:
   - git
   - git-lfs
   - glow
-  - khard
+  - intel-ucode
+  - libva
+  - libva-intel-driver
   - luarocks
   - mediainfo
   - mupdf
   - neovim
   - odt2txt
+  - openssh
   - podman
   - ranger
   - rubygems
@@ -26,16 +32,21 @@ packages_common_packages:
   - sad
   - socat
   - stow
+  - tmux
+  - udisks2
+  - unzip
+  - usbutils
   - w3m
   - wget
+  - zip
   - zsh
 
 packages_desktop:
   - blueman
   - foot
   - khal
+  - khard
   - network-manager-applet
-  - wine
   - zathura
   - zathura-pdf-mupdf
 
@@ -50,12 +61,6 @@ packages_desktop_wm:
     - qt6ct
     - waybar
     - xsettingsd
-  sway:
-    - kanshi
-    - sway
-    - swaybg
-    - swayr
-    - sway-systemd
   Hyprland:
     - hyprland
     - hypridle

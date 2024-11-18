@@ -1,7 +1,0 @@
----
-- name: Enable Copr repos
-  become: true
-  community.general.copr:
-    state: enabled
-    name: "{{ item }}"
-  loop: "{{ copr_repos_list }}"
