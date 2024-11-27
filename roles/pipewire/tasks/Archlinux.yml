@@ -17,10 +17,13 @@
   become: true
   ansible.builtin.package:
     name:
+      - pavucontrol
       - pipewire
       - pipewire-pulse
       - pipewire-alsa
+      - pipewire-jack
       - wireplumber
+      - sof-firmware
     state: present
   tags:
     - pipewire

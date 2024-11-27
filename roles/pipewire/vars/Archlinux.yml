@@ -1,0 +1,17 @@
+---
+pipewire_install_packages:
+  - pavucontrol
+  - pipewire
+  - pipewire-pulse
+  - pipewire-alsa
+  - pipewire-jack
+  - wireplumber
+  - sof-firmware
+
+pipewire_remove_packages:
+  - pulseaudio-ctl
+  - pulseaudio-alsa
+  - pulseaudio-bluetooth
+  - pulseaudio-zeroconf
+  - pulseaudio-qt
+  - pulseaudio

@@ -1,9 +1,28 @@
 ---
-# tasks file for pipewire
+- name: Include OS-specific variables
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
 - name: Handle pulseaudio removal and installation of pipewire
   ansible.builtin.include_tasks: "{{ ansible_os_family }}.yml"
   tags:
     - pipewire
+
+- name: Handle PipeWire packages
+  become: true
+  tags:
+    - pipewire
+  block:
+    - name: Remove pulseaudio packages
+      ansible.builtin.package:
+        name:
+          - "{{ pipewire_remove_packages }}"
+        state: absent
+
+    - name: Install pipewire packages
+      ansible.builtin.package:
+        name:
+          - "{{ pipewire_install_packages }}"
+        state: present
 
 - name: Enable services
   ansible.builtin.systemd:

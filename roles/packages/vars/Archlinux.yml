@@ -1,14 +1,16 @@
 ---
 packages_list:
-  - librsvg
-  - djvulibre
-  - libmupdf
-  - lua51
-  - jdk-openjdk
+  - build-devel
   - cpanminus
-  - python-libtmux
-  - python-pip
+  - djvulibre
   - go
-  - sshfs
   - greetd-gtkgreet
   - gtk-engine-murrine
+  - jdk-openjdk
+  - libmupdf
+  - librsvg
+  - lua51
+  - otf-font-awesome
+  - python-libtmux
+  - python-pip
+  - sshfs
