@@ -1,0 +1,16 @@
+---
+pipewire_install_packages:
+  - pulseaudio-ctl
+  - pulseaudio-alsa
+  - pulseaudio-bluetooth
+  - pulseaudio-zeroconf
+  - pulseaudio-qt
+  - pulseaudio
+
+pipewire_remove_packages:
+  - alsa-sof-firmware
+  - pipewire
+  - pipewire-alsa
+  - pipewire-jack-audio-connection-kit
+  - pipewire-pulseaudio
+  - wireplumber

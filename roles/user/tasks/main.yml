@@ -2,27 +2,32 @@
 # tasks file for user
 - name: Change user shell to /usr/bin/zsh
   become: true
+  tags:
+    - user
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: /usr/bin/zsh
+
+- name: Handle Dependencies
+  become: true
   tags:
     - user
-
-- name: Handle Fedora Dependencies
-  become: true
   ansible.builtin.package:
     name:
       - sassc
       - libsass
     state: present
-  tags:
-    - user
 
 - name: Install Tokyonight GTK Theme
   tags:
     - user
   vars:
     temp_dir: /tmp/tokyonight_theme
+    theme_color: dark
+    theme_tweaks:
+      - storm
+      - outline
+      - macos
   block:
     - name: Clone Repo
       ansible.builtin.git:
@@ -32,13 +37,10 @@
         dest: "{{ temp_dir }}"
 
     - name: Install Tokyonight GTK Theme
-      vars:
-        theme_color: dark
-        theme_tweaks:
-          - storm
-          - outline
-          - macos
-      ansible.builtin.command: "{{ temp_dir }}/themes/install.sh --color {{ theme_color }} --tweaks {{ theme_tweaks | join(' ') }} --libadwaita"
+      ansible.builtin.command: |
+        {{ temp_dir }}/themes/install.sh --color {{ theme_color }} \
+        --tweaks {{ theme_tweaks | join(' ') }} \
+        --libadwaita
       args:
         creates: "{{ ansible_env.HOME }}/.themes/Tokyonight-Dark-Storm"
 
@@ -48,42 +50,32 @@
         state: absent
 
 - name: Ensure that the icons folder exists
+  tags:
+    - user
   ansible.builtin.file:
     path: "{{ user_icons_path }}"
     state: directory
     mode: '0755'
-  tags:
-    - user
-
-- name: Add password feedback for sudo in /etc/sudoers
-  become: true
-  ansible.builtin.lineinfile:
-    path: "/etc/sudoers"
-    state: present
-    regexp: 'pwfeedback'
-    line: 'Defaults    pwfeedback'
-    insertafter: '^Defaults\s+env_reset'
-    validate: /usr/bin/visudo -cf %s
-  tags:
-    - user
 
 - name: Ensure that the fonts folder exists
+  tags:
+    - user
   ansible.builtin.file:
     path: "{{ user_fonts_path }}"
     state: directory
     mode: '0755'
-  tags:
-    - user
 
 - name: Download and Extract theme archive
+  tags:
+    - user
   ansible.builtin.unarchive:
     src: "https://github.com/ljmill/tokyo-night-icons/releases/download/v0.2.0/TokyoNight-SE.tar.bz2"
     dest: "{{ user_icons_path }}"
     remote_src: true
-  tags:
-    - user
 
 - name: Extract font archive
+  tags:
+    - user
   ansible.builtin.unarchive:
     src: "{{ user_nerdfonts_url }}"
     dest: "{{ user_fonts_path }}"
@@ -91,13 +83,24 @@
     exclude:
       - README.md
       - SIL Open Font License.txt
-  tags:
-    - user
 
 - name: Extract Cursor Theme Archive
+  tags:
+    - user
   ansible.builtin.unarchive:
     src: "https://github.com/catppuccin/cursors/releases/download/v0.3.1/catppuccin-mocha-dark-cursors.zip"
     dest: "{{ user_icons_path }}"
     remote_src: true
+
+- name: Add password feedback for sudo in /etc/sudoers
+  become: true
   tags:
     - user
+  ansible.builtin.lineinfile:
+    path: "/etc/sudoers"
+    state: present
+    regexp: 'pwfeedback'
+    line: 'Defaults    pwfeedback'
+    insertafter: '^Defaults\s+env_reset'
+    validate: /usr/bin/visudo -cf %s
+

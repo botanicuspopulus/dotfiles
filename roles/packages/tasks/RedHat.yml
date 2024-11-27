@@ -1,13 +1,4 @@
 ---
-- name: Include Fedora specific roles
-  ansible.builtin.include_role:
-    name: "{{ item }}"
-  loop:
-    - rpmfusion
-
-- name: Include OS-specific Variables
-  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
-
 - name: Install Fusion Repo GPG Keys
   become: true
   ansible.builtin.rpm_key:
@@ -41,72 +32,49 @@
     gpgcheck: true
     gpgkey: https://repo.charm.sh/yum/gpg.key
 
-- name: Install Common Packages
-  become: true
-  ansible.builtin.package:
-    name: "{{ packages_common_packages }}"
-    state: present
-
-- name: Install OS-specific Packages
-  become: true
-  ansible.builtin.package:
-    name: "{{ packages_list }}"
-    state: present
-
-- name: Install Common Desktop Window Manager Packages
-  become: true
-  ansible.builtin.package:
-    name: "{{ packages_desktop }}"
-    state: present
-
-- name: Install Desktop Window Manager
-  become: true
-  ansible.builtin.package:
-    name: "{{ packages_desktop_wm[desktop_wm] }}"
-    state: present
-
-- name: Install DNF Group Packages
-  become: true
-  ansible.builtin.dnf:
-    name: "{{ packages_dnf_groups }}"
-    state: present
-
-- name: Install Intel Media Driver for Intel Integrated GPU
-  become: true
-  ansible.builtin.dnf:
-    name: intel-media-driver
-    state: present
-
 - name: Set system to use fedora-cisco-openh264
-  become: true
   community.general.dnf_config_manager:
     name: fedora-cisco-openh264
     state: enabled
 
-- name: Remove ffmpeg-free
+- name: Install Packages
   become: true
-  ansible.builtin.dnf:
-    name: ffmpeg-free
-    state: absent
+  block:
+    - name: Install Common Packages
+      ansible.builtin.package:
+        name:
+          - "{{ packages_common_packages }}"
+          - "{{ packages_list }}"
+          - "{{ packages_desktop }}"
+          - "{{ packages_desktop_wm[desktop_wm] }}"
+          - intel-media-driver
+        state: present
 
-- name: Install ffmpeg
-  become: true
-  ansible.builtin.dnf:
-    name: ffmpeg
-    state: present
-    allowerasing: true
+    - name: Install DNF Group Packages
+      ansible.builtin.dnf:
+        name: "{{ packages_dnf_groups }}"
+        state: present
 
-- name: Update multimedia group
-  become: true
-  ansible.builtin.dnf:
-    name: "@multimedia"
-    state: present
-    install_weak_deps: false
-    exclude: PackageKit-gstreamer-plugin
+    - name: Remove ffmpeg-free
+      ansible.builtin.dnf:
+        name: ffmpeg-free
+        state: absent
 
-- name: Install Crossover for Linux
-  become: true
-  ansible.builtin.dnf:
-    name: "{{ packages_crossover_url }}"
-    state: present
-    disable_gpg_check: true
+    - name: Install ffmpeg
+      ansible.builtin.dnf:
+        name: ffmpeg
+        state: present
+        allowerasing: true
+
+    - name: Update multimedia group
+      ansible.builtin.dnf:
+        name: "@multimedia"
+        state: present
+        install_weak_deps: false
+        exclude: PackageKit-gstreamer-plugin
+
+    - name: Install Crossover for Linux
+      ansible.builtin.dnf:
+        name: "{{ packages_crossover_url }}"
+        state: present
+        disable_gpg_check: true

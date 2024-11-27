@@ -16,8 +16,11 @@
   become: true
   ansible.builtin.package:
     name:
+      - alsa-sof-firmware
       - pipewire
-      - pipewire-pulsedio
+      - pipewire-alsa
+      - pipewire-jack-audio-connection-kit
+      - pipewire-pulseaudio
       - wireplumber
   tags:
     - pipewire

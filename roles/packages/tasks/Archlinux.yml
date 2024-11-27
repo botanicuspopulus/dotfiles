@@ -14,41 +14,16 @@
     create: true
     mode: '0644'
 
-- name: Install Common Packages
+- name: Install Packages
   become: true
   become_user: aur_builder
-  community.general.pacman:
-    name: "{{ packages_common_packages }}"
-    state: present
-    executable: yay
-    extra_args: --builddir /var/cache/yay
-
-- name: Include OS-specific Variables
-  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
-
-- name: Install OS-specific Packages
-  become: true
-  become_user: aur_builder
-  community.general.pacman:
-    name: "{{ packages_list }}"
-    state: present
-    executable: yay
-    extra_args: --builddir /var/cache/yay
-
-- name: Install Common Desktop Window Manager Packages
-  become: true
-  become_user: aur_builder
-  community.general.pacman:
-    name: "{{ packages_desktop }}"
-    state: present
-    executable: yay
-    extra_args: --builddir /var/cache/yay
-
-- name: Install Desktop Window Manager
-  become: true
-  become_user: aur_builder
-  community.general.pacman:
-    name: "{{ packages_desktop_wm[desktop_wm] }}"
-    state: present
-    executable: yay
-    extra_args: --builddir /var/cache/yay
+  block:
+    - name: Install Common Packages
+      community.general.pacman:
+        name:
+          - "{{ packages_common_packages }}"
+          - "{{ packages_list }}"
+          - "{{ packages_desktop }}"
+          - "{{ packages_desktop_wm[desktop_wm] }}"
+        state: present
+        executable: yay
