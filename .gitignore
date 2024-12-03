@@ -12,3 +12,17 @@ sway/dot-config/sway/config.d/95-xdg-desktop-autostart.conf
 sway/dot-config/sway/config.d/90-bar.conf
 sway/dot-config/sway/config.d/95-autostart-policykit-agent.conf
 config/ranger/dot-config/ranger/plugins/ranger_sixel_render/poetry.lock
+bin/bin/excel
+bin/bin/excel
+bin/bin/lync
+bin/bin/msaccess
+bin/bin/msoev
+bin/bin/msotd
+bin/bin/mspub
+bin/bin/ocpubmgr
+bin/bin/onedrive
+bin/bin/onenote
+bin/bin/outlook
+bin/bin/powerpnt
+bin/bin/setlang
+bin/bin/winword
