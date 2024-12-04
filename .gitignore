@@ -26,3 +26,4 @@ bin/bin/outlook
 bin/bin/powerpnt
 bin/bin/setlang
 bin/bin/winword
+config/direnv/dot-config/direnv/lib/use_asdf.sh
