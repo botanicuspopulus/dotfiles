@@ -50,9 +50,9 @@ threshold = 99
 style = 'bold green'
 
 [character]
-success_symbol = '[󰅂](bold bright-blue)[󰅂](bold blue)'
-error_symbol = '[󰅂](bold bright-red)[󰅂](bold blue)'
-vimcmd_symbol = '[󰅁](bold bright-cyan)[󰅁](bold blue)'
+success_symbol = '[](bold bright-blue)[](bold blue)'
+error_symbol = '[](bold bright-red)[](bold blue)'
+vimcmd_symbol = '[](bold bright-cyan)[](bold blue)'
 
 [directory]
 truncation_length = 2
@@ -61,7 +61,7 @@ truncate_to_repo = true
 style = 'bold blue'
 format = '[󰉋 ](style)[$path]($style)[$read_only ]($read_only_style)'
 read_only = '󰌾 '
-home_symbol = ' '
+home_symbol = '󰋜 '
 
 [git_branch]
 format = '[$symbol$branch ]($style)'
@@ -94,27 +94,6 @@ ssh_symbol = ' '
 trim_at = '.'
 format = '[$ssh_symbol$hostname ]($style)'
 disabled = false
-
-[c]
-symbol = ''
-format = '[$symbol\($version\) ]($style)'
-
-
-[docker_context]
-symbol = ' '
-format = '[$symbol $context ]($style) $path'
-
-[nodejs]
-symbol = ' '
-format = '[$symbol($version) ]($style)'
-
-[python]
-symbol = ' '
-format = 'via [${symbol}${pyenv_prefix}\($virtualenv\) ]($style)'
-
-[rust]
-symbol = '󱘗 '
-format = '[$symbol($version) ]($style)'
 
 [status]
 disabled = false
