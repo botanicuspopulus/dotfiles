@@ -7,7 +7,6 @@ asdf_plugins:
   - bat
   - bottom
   - cheat
-  - cmake
   - delta
   - deno
   - direnv
