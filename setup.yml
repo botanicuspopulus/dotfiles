@@ -8,14 +8,13 @@
 
   roles:
     - asdf
-    - git
-    - greetd
-    - nvim
     - packages
+    - nvim
     - stow
     - python
     - pipewire
     - rofi-calc
     - user
+    - greetd
     - ssh
     - vagrant
