@@ -2,13 +2,19 @@
 - name: Printing nvim_config_path
   ansible.builtin.debug:
     msg: "{{ nvim_config_path }}"
+  tags:
+    - nvim
 
 - name: Check if nvim has already received its config
   ansible.builtin.stat:
     path: "{{ nvim_config_path }}/lua"
   register: lua_link
+  tags:
+    - nvim
 
 - name: Setup AstroNvim
+  tags:
+    - nvim
   block:
     - name: Clone AstroNvim
       ansible.builtin.git:
