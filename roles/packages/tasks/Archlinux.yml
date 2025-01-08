@@ -25,10 +25,13 @@
     name: "{{ item }}"
     state: present
     executable: yay
-  with_items: 
-    - "{{ packages_common_packages }}"
+  with_items:
+    - "{{ packages_common['common'] }}"
+    - "{{ packages_common['development'] }}"
+    - "{{ packages_common['drivers'] }}"
+    - "{{ packages_common['terminal'] }}"
     - "{{ packages_list }}"
-    - "{{ packages_desktop }}"
-    - "{{ packages_desktop_wm[desktop_wm] }}"
+    - "{{ packages_common['desktop'] }}"
+    - "{{ packages_common['wm'] }}"
   tags:
     - packages
