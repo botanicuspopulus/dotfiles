@@ -1,17 +1,64 @@
 ---
-packages_desktop:
-  - blueman
-  - bluez
-  - foot
-  - khal
-  - khard
-  - network-manager-applet
-  - zathura
-  - zathura-pdf-mupdf
-
-
-packages_desktop_wm:
-  Common:
+packages_common:
+  common:
+    - ansifilter
+    - atool
+    - catdoc
+    - cliphist
+    - cups
+    - curl
+    - feh
+    - firewalld
+    - flatpak
+    - gdu
+    - libva
+    - mediainfo
+    - mupdf
+    - odt2txt
+    - openssh
+    - udisks2
+    - unzip
+    - usbutils
+    - wget
+    - zip
+  desktop:
+    - blueman
+    - bluez
+    - foot
+    - khal
+    - khard
+    - network-manager-applet
+    - zathura
+    - zathura-pdf-mupdf
+  development:
+    - cargo
+    - cmake
+    - composer
+    - git
+    - git-lfs
+    - luarocks
+    - podman
+    - rubygems
+    - rustup
+  drivers:
+    - intel-ucode
+    - libva-intel-driver
+  hyprland:
+    - hyprland
+    - hypridle
+    - hyprpaper
+    - pyprland
+  terminal:
+    - glow
+    - neovim
+    - ranger
+    - sad
+    - socat
+    - stow
+    - tmux
+    - w3m
+    - zsh
+  wm:
     - greetd
     - grim
     - kvantum
@@ -23,8 +70,3 @@ packages_desktop_wm:
     - waybar
     - xsettingsd
     - swaylock-effects
-  Hyprland:
-    - hyprland
-    - hypridle
-    - hyprpaper
-    - pyprland
