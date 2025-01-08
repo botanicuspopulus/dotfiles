@@ -1,6 +1,5 @@
 ---
 packages_list:
-  - build-devel
   - cpanminus
   - djvulibre
   - go

@@ -9,8 +9,9 @@ packages_desktop:
   - zathura
   - zathura-pdf-mupdf
 
+
 packages_desktop_wm:
-  common:
+  Common:
     - greetd
     - grim
     - kvantum
@@ -18,11 +19,12 @@ packages_desktop_wm:
     - nwg-look
     - qt5ct
     - qt6ct
+    - rofi-wayland
     - waybar
     - xsettingsd
+    - swaylock-effects
   Hyprland:
     - hyprland
     - hypridle
     - hyprpaper
     - pyprland
-    - swaylock-effects
