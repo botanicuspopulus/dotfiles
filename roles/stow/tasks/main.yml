@@ -6,6 +6,8 @@
     file_type: directory
     patterns: "dot-config"
   register: found_dirs
+  tags:
+    - stow
 
 - name: Use stow to populate ~/.config
   vars:
@@ -21,3 +23,5 @@
   register: stow_task
   loop: "{{ stow_dirs }}"
   changed_when: '"LINK" in stow_task.stdout'
+  tags:
+    - stow
