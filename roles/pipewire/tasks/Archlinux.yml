@@ -2,28 +2,30 @@
 - name: Remove pulseaudio packages
   become: true
   ansible.builtin.package:
-    name:
-      - pulseaudio-ctl
-      - pulseaudio-alsa
-      - pulseaudio-bluetooth
-      - pulseaudio-zeroconf
-      - pulseaudio-qt
-      - pulseaudio
+    name: "{{ item }}"
     state: absent
+  with_items:
+    - pulseaudio-ctl
+    - pulseaudio-alsa
+    - pulseaudio-bluetooth
+    - pulseaudio-zeroconf
+    - pulseaudio-qt
+    - pulseaudio
   tags:
     - pipewire
 
 - name: Install pipewire packages
   become: true
   ansible.builtin.package:
-    name:
-      - pavucontrol
-      - pipewire
-      - pipewire-pulse
-      - pipewire-alsa
-      - pipewire-jack
-      - wireplumber
-      - sof-firmware
+    name: "{{ item }}"
     state: present
+  with_items:
+    - pavucontrol
+    - pipewire
+    - pipewire-pulse
+    - pipewire-alsa
+    - pipewire-jack
+    - wireplumber
+    - sof-firmware
   tags:
     - pipewire
