@@ -7,7 +7,7 @@ Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
 # Display required for ssh-askpass to work
 Environment=DISPLAY=:0
 ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
-ExecStartPort=/usr/bin/ssh-add $HOME/.ssh/id_rsa
+ExecStartPort=/usr/bin/ssh-add $HOME/.ssh/id_ed25519
 
 [Install]
 WantedBy=default.target
