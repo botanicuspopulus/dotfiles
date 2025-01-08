@@ -1,4 +1,9 @@
 ---
+- name: Include Flatpak Package variables
+  ansible.builtin.include_vars: flatpak.yml
+  tags:
+    - flatpak
+
 - name: Add flathub flatpak remote
   community.general.flatpak_remote:
     name: flathub
