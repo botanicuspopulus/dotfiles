@@ -22,14 +22,14 @@ $git_branch\
 $git_status\
 $git_metrics\
 $git_state\
-$git_commit\
+$git_commit
 """
 
 [battery]
-full_symbol = '󰁹 '
-charging_symbol = '󰂄 '
-discharging_symbol = '󰂃 '
-empty_symbol = '󰂎 '
+full_symbol = '󰁹'
+charging_symbol = '󰂄'
+discharging_symbol = '󰂃'
+empty_symbol = '󰂎'
 format='[$symbol\($percentage\) ]($style)'
 
 [[battery.display]]
