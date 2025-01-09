@@ -4,18 +4,17 @@ scan_timeout = 10
 continuation_prompt = '󰁔 '
 
 format="""
-$battery\
 $username\
 $hostname\
+$battery\
 $directory\
 $cmake\
-$nodejs\
 $python\
 $vagrant\
 $docker_context\
 $env_var\
 $time\
-$status\
+$status
 $character"""
 
 right_format = """
@@ -89,11 +88,8 @@ style = 'bold white'
 tag_symbol = '󰓹 '
 
 [hostname]
-ssh_only = true
-ssh_symbol = ' '
-trim_at = '.'
-format = '[$ssh_symbol$hostname ]($style)'
-disabled = false
+ssh_only = false
+disabled = true
 
 [status]
 disabled = false
@@ -104,5 +100,5 @@ style_user = "green bold"
 style_root = "black bold"
 format = "[$user ]($style)"
 disabled = false
-show_always = false
+show_always = true
 
