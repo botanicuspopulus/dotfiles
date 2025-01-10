@@ -1,21 +1,33 @@
 ---
 packages_common:
   common:
+    - 7zip
     - ansifilter
     - atool
+    - bc
     - catdoc
     - cliphist
     - cups
     - curl
+    - dhcpcd
+    - efibootmgr
     - feh
     - firewalld
     - flatpak
     - gdu
+    - grub
+    - hwinfo
+    - less
     - libva
+    - linux
+    - linux-firmware
     - mediainfo
     - mupdf
     - odt2txt
     - openssh
+    - otf-font-awesome
+    - sudo
+    - syncthing
     - udisks2
     - unzip
     - usbutils
@@ -24,6 +36,7 @@ packages_common:
   desktop:
     - blueman
     - bluez
+    - firefox
     - foot
     - khal
     - khard
@@ -31,15 +44,25 @@ packages_common:
     - zathura
     - zathura-pdf-mupdf
   development:
+    - ansible
+    - base-devel
+    - boost
+    - boost-libs
     - cargo
+    - ccache
+    - clang
     - cmake
     - composer
+    - cpanimus
     - git
     - git-lfs
+    - lua51
     - luarocks
     - podman
     - rubygems
     - rustup
+    - tree-sitter-cli
+    - yamllint
   drivers:
     - intel-ucode
     - libva-intel-driver
@@ -49,12 +72,14 @@ packages_common:
     - hyprpaper
     - pyprland
   terminal:
+    - cheat
     - glow
     - neovim
     - ranger
     - sad
     - socat
     - stow
+    - tldr
     - tmux
     - w3m
     - zsh
