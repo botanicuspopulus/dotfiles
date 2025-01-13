@@ -1,0 +1,59 @@
+---
+- name: Get all the PCI devices connected
+  ansible.builtin.command:
+    cmd: lspci -nn
+  register: pci_entries
+  tags:
+    - gpu
+
+- name: Parse GPU information
+  ansible.builtin.set_fact:
+    gpus: "{{ pci_entries.stdout_lines | select('search', 'VGA|3D|Display') | list }}"
+  when: pci_entries.rc == 0
+  tags:
+    - gpu
+
+- name: Print available GPUs
+  ansible.builtin.debug:
+    msg: "{{ gpus }}"
+  tags:
+    - gpu
+    - debug
+
+- name: Determine if there are Nvidia GPUs installed
+  ansible.builtin.set_fact:
+    nvidia_gpu_available: "{{ gpus | select('search', 'NVIDIA') | list | length > 0 }}"
+  tags:
+    - gpu
+
+- name: Determine if there are Intel GPUs installed
+  ansible.builtin.set_fact:
+    intel_gpu_available: "{{ gpus | select('search', 'Intel') | list | length > 0 }}"
+  tags:
+    - gpu
+
+- name: Install the Nvidia Proprietary Drivers and CUDA if there is an Nvidia GPU attached
+  ansible.builtin.package:
+    name: "{{ item }}"
+  with_items:
+    - nvidia
+    - nvidia-utils
+    - nvidia-settings
+    - cuda
+    - libvdpau
+    - libxnvctrl
+    - opencl-nvidia
+    - lib32-opencl-nvidia
+  when: nvidia_gpu_available
+  tags:
+    - gpu
+
+- name: Install Intel Drivers
+  ansible.builtin.package:
+    name: "{{ item }}"
+  with_items:
+    - vulkan-intel
+    - lib32-vulkan-intel
+    - intel-media-driver
+    - intel-opencl
+    - linux-firmware
