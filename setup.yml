@@ -7,12 +7,14 @@
     dev_path: "{{ ansible_env.HOME }}/Development"
 
   roles:
+    - setup
     - asdf
     - packages
+    - pipewire
+    - gpu
     - nvim
     - stow
     - python
-    - pipewire
     - rofi-calc
     - user
     - greetd

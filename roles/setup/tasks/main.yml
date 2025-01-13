@@ -1,0 +1,18 @@
+---
+- name: Uncomment [multilib] and its Include line in /etc/pacman.conf
+  become: true
+  ansible.builtin.replace:
+    path: /etc/pacman.conf
+    regexp: '^#\s*\[multilib\]'
+    replace: '[multilib]'
+  tags:
+    - setup
+
+- name: Uncomment Include line under [multilib] in /etc/pacman.conf
+  become: true
+  ansible.builtin.replace:
+    path: /etc/pacman.conf
+    regexp: '^#\s*Include\s*=\s*/etc/pacman.d/mirrorlist'
+    replace: 'Include = /etc/pacman.d/mirrorlist'
+  tags:
+    - setup

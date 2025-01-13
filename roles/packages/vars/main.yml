@@ -65,7 +65,6 @@ packages_common:
     - yamllint
   drivers:
     - intel-ucode
-    - libva-intel-driver
   hyprland:
     - hyprland
     - hypridle
