@@ -1,13 +1,26 @@
+clock
+screenshots
 ignore-empty-password
-show-failed-attempts
 
-color=24283b
+effect-blur=7x6
+effect-vignette=0.5:0.5
+effect-pixelate=4
+
+fade-in=2
+
+font="Lekton Nerd Font"
+font-size=32
+
+indicator
 indicator-caps-lock
 indicator-radius=100em
-line-uses-ring
-font="Lekton Nerd Font 20em"
-font-size=32
 indicator-thickness=10em
+
+datestr=%a, %d %b %Y
+timestr=%H:%M
+
+color=1a1b26
+line-uses-ring
 key-hl-color=bb9af7
 
 inside-color=1d202f
