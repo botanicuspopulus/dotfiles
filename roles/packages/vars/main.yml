@@ -61,6 +61,7 @@ packages_common:
     - nodejs
     - npm
     - podman
+    - fuse-overlayfs
     - rubygems
     - rustup
     - tree-sitter-cli
