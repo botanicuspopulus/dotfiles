@@ -1,5 +1,5 @@
 # Use "gitignore" highlighting for ".ignore" files
---theme="tokyonight_storm"
+--theme="Catppuccin Macchiato"
 --style="changes,numbers,header,snip"
 --color=always
 
