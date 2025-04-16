@@ -23,3 +23,6 @@
 [submodule "ranger/plugins/ranger_fzf_filter"]
 	path = config/ranger/dot-config/ranger/plugins/ranger_fzf_filter
 	url = git@github.com:MuXiu1997/ranger-fzf-filter.git
+[submodule "config/tmux/dot-config/tmux/plugins/catppuccin/tmux"]
+	path = config/tmux/dot-config/tmux/plugins/catppuccin/tmux
+	url = https://github.com/catppuccin/tmux.git
