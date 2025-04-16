@@ -16,8 +16,8 @@ set guioptions ""
 set incremental-search "true"
 
 set font "Lekton Nerd Font 12"
-include tokyonight_storm.zathurarc
 set selection-clipboard "clipboard"
 
 set render-loading "false"
 
+include catppuccin-macchiato
