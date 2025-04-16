@@ -1,148 +1,194 @@
-@import "css/colors.css";
+@import "css/catppuccin_macchiato.css";
 
 * {
-    font-family: Lekton Nerd Font;
-    font-size: 1.05em;
-    border-radius: 0;
-    border: none;
+  font-family: Lekton Nerd Font;
+  font-size: 1.05em;
+  border-radius: 0;
+  border: none;
 }
 
-window#waybar { 
-  background-color: transparent; 
+window#waybar {
+  background: transparent;
   margin-top: 1em;
   margin-bottom: 1em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
-window#waybar.hidden { opacity: 0.2; }
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
 
 #custom-powermenu {
-	color: @background-color;
-	background-color: @red-color;
-	border-radius: 1em;
-	padding-right: 1.25em;
-	padding-left: 1.05em;
+  color: @base;
+  background: @red;
+  border-radius: 1em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  padding-right: 1.25em;
+  padding-left: 1.05em;
 }
 
-#battery { color: @green-color; }
-#battery.charging { color: @green-color; }
-#battery.warning { color: @warning_color; }
-#battery.critical { color: @error_color; }
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning {
+  color: @warning_color;
+}
+
+#battery.critical {
+  color: @error_color;
+}
+
 #battery.warning:not(.charging) {
-    background-color: @red-color;
-    color: @background-color;
+  background: @red;
+  color: @base;
 }
 
-#bluetooth { color: @cyan-color; }
-#bluetooth.disabled { color: @red-color; }
+#bluetooth {
+  color: @sapphire;
+}
 
-#network.linked,.wifi { color: @green-color; }
-#network.disconnected { color: @yellow-color; }
-#network.disabled { color: @red-color; }
-#network.linked,.wifi { color: @green-color; }
-#network.disconnected { color: @yellow-color; }
-#network.disabled { color: @red-color; }
+#bluetooth.disabled {
+  color: @red;
+}
 
-#pulseaudio { color: @cyan-color; }
+#network.linked,
+.wifi {
+  color: @green;
+}
 
-#temperature.critical { color: @error-color; }
+#network.disconnected {
+  color: @yellow;
+}
+
+#network.disabled {
+  color: @red;
+}
+
+#network.linked,
+.wifi {
+  color: @green;
+}
+
+#network.disconnected {
+  color: @yellow;
+}
+
+#network.disabled {
+  color: @red;
+}
+
+#pulseaudio {
+  color: @cyan;
+}
+
+#temperature.critical {
+  color: @error_color;
+}
 
 #workspaces button {
-    background: transparent;
-    /* border: 0.05em solid @blue-color; */
-    border-radius: 0.5em;
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
-    padding-right: 1em;
+  background: transparent;
+  /* border: 0.05em solid @blue; */
+  border-radius: 0.5em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  padding-right: 1em;
 }
 
 #workspaces button.focused {
-    color: @black-color;
-    background-color: @blue-color;
+  color: @mantle;
+  background-color: @blue;
 }
 
 #workspaces button.active {
-    color: @black-color;
-    background-color: @blue-color;
+  color: @mantle;
+  background-color: @blue;
 }
 
 #workspaces button.urgent {
-    background-color: @white-color;
+  background: @text;
 }
 
 #workspaces button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
-    color: @background-color;
-    background-color: @cyan-color;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  color: @base;
+  background: @teal;
 }
 
 #workspaces button.focused {
-  color: @white-color;
-  background-color: @blue-color;
+  color: @text;
+  background-color: @blue;
 }
 
 .warning {
-    color: @warning_color;
+  color: @warning_color;
 }
 
 .error {
-    color: @error_color;
+  color: @error_color;
 }
 
 .normal {
-    color: @white-color;
+  color: @text;
 }
 
 .green {
-    color: @green-color;
+  color: @green;
 }
 
 .blue {
-    color: @blue-color;
+  color: @blue;
 }
 
 .cyan {
-    color: @cyan-color;
+  color: @cyan;
 }
 
 .red {
-    color: @red-color;
+  color: @red;
 }
 
 .white {
-    color: @white-color;
+  color: @text;
 }
 
-tooltip { border: @borders; }
+tooltip {
+  border: @borders;
+}
 
 tooltip,
 .modules-left,
 .modules-right {
-    background-color: @theme_base_color;
-    border-radius: 1em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+  background: @theme_base_color;
+  border-radius: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .modules-right {
-    margin-right: 1em;
+  margin-right: 1em;
 }
 
 .modules-left {
-    margin-left: 1em;
+  margin-left: 1em;
 }
-
 
 #tray {
-    min-width: 3em;
+  min-width: 3em;
 }
 
-#tray > .passive {
-    -gtk-icon-effect: dim;
+#tray>.passive {
+  -gtk-icon-effect: dim;
 }
 
-#tray > .needs-aatention {
+#tray>.needs-aatention {
   -gtk-icon-effect: highlight;
   color: @warning_color;
 }
