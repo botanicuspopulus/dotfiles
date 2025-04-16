@@ -1,153 +1,67 @@
-@import "colors.rasi"
+/* Import color-scheme from `colors` directory */
 
-configuration {
-  show-icons:           true;
-  icon-theme:           "TokyoNight-SE";
-  display-drun:         "";
-  display-run:          "";
-  display-filebrowser:  "";
-  display-window:       "";
-  display-ssh:          "󰣀";
-  display-calc:         "󰃬";
-  display-wifi:         "󰤨";
-}
+* {
+    blue:                        #7AA2F7FF;
+    blue0:                       #3D59A1FF;
+    blue1:                       #2AC3DEFF;
+    blue2:                       #0DB9D7FF;
+    blue5:                       #89DDFFFF;
+    blue6:                       #B4F9F8FF;
+    blue7:                       #394B70FF;
+    comment:                     #565F89FF;
+    cyan:                        #7DCFFFFF;
+    dark3:                       #545C7EFF;
+    dark5:                       #737AA2FF;
+    green:                       #9ECE6AFF;
+    green1:                      #73DACAFF;
+    green2:                      #41A6B5FF;
+    magenta:                     #BB9AF7FF;
+    magenta2:                    #FF007CFF;
+    orange:                      #FF9E64FF;
+    purple:                      #9D7CD8FF;
+    red:                         #F7768EFF;
+    red1:                        #DB4B4BFF;
+    teal:                        #1ABC9CFF;
+    terminal-black:              #414868FF;
+    yellow:                      #E0AF68FF;
 
-*{
-  textbox-padding:    0.25em 0.5em;
-  textbox-radius:     0.1em;
-  font:               "Lekton Nerd Font 14";
-}
+    background:                  #24283BFF;
+    background-alt:              #1F2335E6;
 
-button {
-    padding: 0.25em 0.75em 0.25em 0.35em;
-    border-radius: 0.30em;
-    cursor: pointer;
-}
+    foreground:                  #C0CAF5FF;
+    foreground-alt:              #A9B1D6FF;
 
-button selcted {
-  background-color:   @selected;
-  text-color:         @selected-alt;
-}
+    selected:                    @blue;
+    selected-alt:                #292E42FF;
 
-button,
-element,
-element-icon,
-element-text,
-entry,
-error-message,
-inputbar,
-listview,
-mainbox,
-message,
-mode-switcher,
-prompt,
-scrollbar,
-textbox,
-textbox-password {
-  background-color:   inherit;
-  text-color:         inherit;
-}
+    active:                      @terminal-black;
+    urgent:                      @red;
 
-element {
-  spacing:            0.1em;
-  border:             0em solid;
-  border-radius:      0.3em;
-  padding:            0.25em 0.5em;
-  margin:             0em 0.5em 0em 0em;
-  cursor:             pointer;
-}
+    border:                      @blue;
+    handle:                      @blue;
+    alternate-background:        @background-alt;
+    normal-background:           @background;
+    normal-foreground:           @foreground;
 
-element normal, element selected, element alternate {
-  background-color:   @background;
-  text-color:         @foreground;
-}
+    urgent-background:           @urgent;
+    urgent-foreground:           @background;
 
-element normal active, element seletex active {
-  background-color:   @active;
-}
+    active-background:           @active;
+    active-foreground:           @foreground;
 
-element normal.urgent {
-  background-color:   @urgent;
-  text-color:         @selected-alt;
-}
+    selected-normal-background:  @selected;
+    selected-normal-foreground:  @selected-alt;
 
-element selected.normal {
-  background-color:   @selected;
-  text-color:         @selected-alt;
-}
+    selected-urgent-background:  @active;
+    selected-urgent-foreground:  @foreground;
 
-element seleted.urgent {
-  background-color:   @urgent;
-}
+    selected-active-background:  @urgent;
+    selected-active-foreground:  @foreground;
 
-element alternate.normal {
-  background-color:   @background-alt;
-}
-
-element alternate.active {
-  background-color:   @active;
-}
-
-element alternate.urgent {
-  background-color:   @urgent;
-}
-
-element-icon {
-  size:               1.5em;
-  margin:             0em 0.5em 0em 0em;
-}
-
-element-text {
-  vertical-align:     0.5;
-}
-
-entry {
-  vertical-align:     0.5;
-}
-
-listview {
-  cycle:              true;
-  scrollbar:          true;
-  dynamic:            true;
-  padding:            1em 0em;
-}
-
-mainbox {
-  padding: 0.5em;
-}
-
-mode-switcher {
-  spacing:           0.5em;
-}
-
-prompt {
-  padding:            0.5em 0.75em 0.5em 0.55em;
-  border-radius:      30%;
-}
-
-scrollbar {
-  handle-width:       0.5em;
-  handle-color:       @handle;
-  border-radius:      50%;
-  background-color:   @background-alt;
-}
-
-textbox,
-textbox-password {
-  padding:            @textbox-padding;
-  border-radius:      @textbox-radius;
-}
-
-textbox {
-  blink:              true;
-  placeholder-color:  @foreground-alt;
-  vertical-align:     0.5;
-}
-
-window {
-  border:             0.15em solid;
-  border-radius:      0.6em;
-  border-color:       @border;
-  background-color:   @background;
-  text-color:         @foreground;
+    alternate-normal-background: @background;
+    alternate-normal-foreground: @foreground;
+    alternate-urgent-background: @urgent;
+    alternate-urgent-foreground: @foreground;
+    alternate-active-background: @active;
+    alternate-active-foreground: @foreground;
 }

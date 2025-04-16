@@ -124,4 +124,4 @@ configuration {
   kb-cancel:                  "Escape,Control+g,Control+bracketleft";
 }
 
-@theme "tokyonight"
+@theme "theme"
