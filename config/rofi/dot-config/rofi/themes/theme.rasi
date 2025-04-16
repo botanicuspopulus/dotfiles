@@ -1,0 +1,153 @@
+@import "catppuccin_macchiato"
+
+configuration {
+  show-icons:           true;
+  icon-theme:           "TokyoNight-SE";
+  display-drun:         "";
+  display-run:          "";
+  display-filebrowser:  "";
+  display-window:       "";
+  display-ssh:          "󰣀";
+  display-calc:         "󰃬";
+  display-wifi:         "󰤨";
+}
+
+*{
+  textbox-padding:    0.25em 0.5em;
+  textbox-radius:     0.1em;
+  font:               "Lekton Nerd Font 14";
+}
+
+button {
+    padding: 0.25em 0.75em 0.25em 0.35em;
+    border-radius: 0.30em;
+    cursor: pointer;
+}
+
+button selcted {
+  background-color:   @selected;
+  text-color:         @selected-alt;
+}
+
+button,
+element,
+element-icon,
+element-text,
+entry,
+error-message,
+inputbar,
+listview,
+mainbox,
+message,
+mode-switcher,
+prompt,
+scrollbar,
+textbox,
+textbox-password {
+  background-color:   inherit;
+  text-color:         inherit;
+}
+
+element {
+  spacing:            0.1em;
+  border:             0em solid;
+  border-radius:      0.3em;
+  padding:            0.25em 0.5em;
+  margin:             0em 0.5em 0em 0em;
+  cursor:             pointer;
+}
+
+element normal, element selected, element alternate {
+  background-color:   @background;
+  text-color:         @foreground;
+}
+
+element normal active, element seletex active {
+  background-color:   @active;
+}
+
+element normal.urgent {
+  background-color:   @urgent;
+  text-color:         @selected-alt;
+}
+
+element selected.normal {
+  background-color:   @selected;
+  text-color:         @selected-alt;
+}
+
+element seleted.urgent {
+  background-color:   @urgent;
+}
+
+element alternate.normal {
+  background-color:   @background-alt;
+}
+
+element alternate.active {
+  background-color:   @active;
+}
+
+element alternate.urgent {
+  background-color:   @urgent;
+}
+
+element-icon {
+  size:               1.5em;
+  margin:             0em 0.5em 0em 0em;
+}
+
+element-text {
+  vertical-align:     0.5;
+}
+
+entry {
+  vertical-align:     0.5;
+}
+
+listview {
+  cycle:              true;
+  scrollbar:          true;
+  dynamic:            true;
+  padding:            1em 0em;
+}
+
+mainbox {
+  padding: 0.5em;
+}
+
+mode-switcher {
+  spacing:           0.5em;
+}
+
+prompt {
+  padding:            0.5em 0.75em 0.5em 0.55em;
+  border-radius:      30%;
+}
+
+scrollbar {
+  handle-width:       0.5em;
+  handle-color:       @handle;
+  border-radius:      50%;
+  background-color:   @background-alt;
+}
+
+textbox,
+textbox-password {
+  padding:            @textbox-padding;
+  border-radius:      @textbox-radius;
+}
+
+textbox {
+  blink:              true;
+  placeholder-color:  @foreground-alt;
+  vertical-align:     0.5;
+}
+
+window {
+  border:             0.15em solid;
+  border-radius:      0.6em;
+  border-color:       @border;
+  background-color:   @background;
+  text-color:         @foreground;
+}
