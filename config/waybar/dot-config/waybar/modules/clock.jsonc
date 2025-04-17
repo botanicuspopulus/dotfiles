@@ -1,27 +1,27 @@
 {
-    "clock": {
-        "interval": 1,
-        "format": "󰅐 {:%H:%M:%S}",
-        "format-alt": "󰃭 {:%a %b %d %Y}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "mode" : "year",
-            "mode-mon-col": 3,
-            "week-pos": "right",
-            "on-scroll": 1,
-            "on-click-right": "mode",
-            "format": {
-                "months" : "<span color='green'><b>{}</b></span>",
-                "days": "<span color='white'>{}</span>",
-                "weeks": "<span color='white'><b>W{}</b></span>",
-                "weekdays": "<span color='blue'><b>{}</b></span>",
-                "today": "<span color='cyan'><b><u>{}</u></b></span>"
-            }
-        },
-        "actions": {
-            "on-click-right": "mode",
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
-        }
-    }
+  "clock": {
+    "interval": 1,
+    "format": "󱑎  {:%H:%M:%S}",
+    "format-alt": "󰃭 {:%a %b %d %Y}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "week-pos": "right",
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='red'><b>{}</b></span>",
+        "days": "<span color='white'>{}</span>",
+        "weeks": "<span color='white'><b>W{}</b></span>",
+        "weekdays": "<span color='blue'><b>{}</b></span>",
+        "today": "<span color='cyan'><b><u>{}</u></b></span>",
+      },
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+    },
+  },
 }

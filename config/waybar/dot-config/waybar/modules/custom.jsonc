@@ -1,9 +1,9 @@
 {
-    "custom/powermenu": {
-        "return-type": "json",
-        "format": "<span font=\"Lekton Nerd Font 14\">󰐥</span>",
-        "interval": 3600,
-        "escape": true,
-        "on-click": "$XDG_CONFIG_HOME/rofi/scripts/powermenu"
-    }
+  "custom/powermenu": {
+    "return-type": "json",
+    "format": "<span>󰐥</span>",
+    "interval": 3600,
+    "escape": true,
+    "on-click": "$XDG_CONFIG_HOME/rofi/scripts/powermenu",
+  },
 }
