@@ -9,7 +9,7 @@ on-button-right=dismiss-all
 on-touch=dismiss
 on-notify=none
 
-font=Lekton Nerd Font 14
+font=Ioveska NFP Light 14
 format=<b>%a ▸ </b> %s\n%b
 width=350
 height=175

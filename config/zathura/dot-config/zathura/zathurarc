@@ -15,7 +15,7 @@ set guioptions ""
 
 set incremental-search "true"
 
-set font "Lekton Nerd Font 12"
+set font "Ioveska NFP Light 12"
 set selection-clipboard "clipboard"
 
 set render-loading "false"
