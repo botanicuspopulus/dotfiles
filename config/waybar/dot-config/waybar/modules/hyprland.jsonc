@@ -1,16 +1,34 @@
-
 {
-    "hyprland/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-            "1": "",
-            "6": "<span color='orange'>󰈹</span>",
-            "7": "<span color='green'>󰖺</span>",
-            "8": "<span color='green'>󰍡</span>",
-            "9": "<span color='red'>󱉺</span>",
-            "urgent": "󰈅",
-            "active": "󰷜",
-            "default": "󰍹"
-        }
-    }
+  "hyprland/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace r-1",
+    "on-scroll-down": "hyprctl dispatch workspace r+1",
+    "on-click": "activate",
+    "active-only": false,
+    "all-outputs": true,
+    "format": "{}",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": "",
+    },
+    "persistent-workspaces": {
+      "*": 5,
+    },
+  },
+  "hyprland/window": {
+    "max-length": 60,
+    "rewrite": {
+      "(.*) - Mozilla Firefox": "$1",
+    },
+    "separate-outputs": true,
+  },
+  "custom/hypridle": {
+    "format": "󰌾",
+    "return-type": "json",
+    "escape": true,
+    "exec-on-event": true,
+    "interval": 60,
+    "exec": "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/hypridle.sh status",
+    "on-click": "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/hypridle.sh toggle",
+  },
 }
