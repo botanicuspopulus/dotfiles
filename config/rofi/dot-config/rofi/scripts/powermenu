@@ -6,94 +6,93 @@
 uptime="$(uptime -p | sed -e 's/up //g')"
 
 # Options
-shutdown='󰐥 Shutdown'
-reboot='󰜉 Reboot'
-lock='󰌾 Lock'
-suspend='󰒲 Suspend'
-hibernate="󰋊 hibernate"
-logout='󰍃 Logout'
+shutdown='󰐥  Shutdown'
+reboot='󰜉  Reboot'
+lock='󰌾  Lock'
+suspend='󰒲  Suspend'
+hibernate="󰋊  hibernate"
+logout='󰍃  Logout'
 yes=' 󰄬 Yes'
 no='󰜺 No'
 
 # Rofi CMD
 rofi_cmd() {
-    rofi -dmenu -p "󰐦" \
-      -theme-str 'inputbar { children: [prompt, textbox]; }' \
-      -theme-str 'prompt { 
+  rofi -dmenu -p "󰐦" \
+    -theme-str 'inputbar { children: [prompt, textbox]; }' \
+    -theme-str 'prompt { 
                     padding: 0.5em 0.75em 0.5em 0.55em;
                     border-radius: 100%; 
                     text-color: @background;
                     background-color: @red;
                   }' \
-      -theme-str 'element { children: [element-text]; }' \
-      -theme-str 'listview { scrollbar: false; lines: 6; }' \
-      -theme-str 'window { width: 25em; }'
+    -theme-str 'element { children: [element-text]; }' \
+    -theme-str 'listview { scrollbar: false; lines: 6; }' \
+    -theme-str 'window { width: 25em; }'
 }
 
 # Confirmation CMD
 confirm_cmd() {
-    rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 20em;}' \
-         -theme-str 'mainbox {children: [ message, listview ];}' \
-         -theme-str 'listview {columns: 2; lines: 1; scrollbar: false; }' \
-         -theme-str 'button text {horizontal-align: 0.5;}' \
-         -theme-str 'textbox {horizontal-align: 0.5;}' \
-         -dmenu \
-         -p 'Confirmation' \
-         -mesg 'Are you Sure?'
+  rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 20em;}' \
+    -theme-str 'mainbox {children: [ message, listview ];}' \
+    -theme-str 'listview {columns: 2; lines: 1; scrollbar: false; }' \
+    -theme-str 'button text {horizontal-align: 0.5;}' \
+    -theme-str 'textbox {horizontal-align: 0.5;}' \
+    -dmenu \
+    -p 'Confirmation' \
+    -mesg 'Are you Sure?'
 }
 
 # Ask for confirmation
 confirm_exit() {
-    echo -e "$yes\n$no" | confirm_cmd
+  echo -e "$yes\n$no" | confirm_cmd
 }
 
 # Pass variables to rofi dmenu
 run_rofi() {
-    echo -e "$lock\n$suspend\n$hibernate\n$logout\n$reboot\n$shutdown" | rofi_cmd
+  echo -e "$lock\n$suspend\n$hibernate\n$logout\n$reboot\n$shutdown" | rofi_cmd
 }
 
 # Execute Command
 run_cmd() {
-    selected="$(confirm_exit)"
-    if [[ "$selected" == "$yes" ]]; then
-        if [[ $1 == '--shutdown' ]]; then
-            systemctl poweroff
-        elif [[ $1 == '--reboot' ]]; then
-            systemctl reboot
-        elif [[ $1 == '--suspend' ]]; then
-            systemctl suspend
-        elif [[ $1 == '--hibernate' ]]; then
-        	systemctl hibernate
-        elif [[ $1 == '--logout' ]]; then
-        	loginctl terminate-session "${XDG_SESSION_ID}"
-        fi
-    else
-        exit 0
+  selected="$(confirm_exit)"
+  if [[ "$selected" == "$yes" ]]; then
+    if [[ $1 == '--shutdown' ]]; then
+      systemctl poweroff
+    elif [[ $1 == '--reboot' ]]; then
+      systemctl reboot
+    elif [[ $1 == '--suspend' ]]; then
+      systemctl suspend
+    elif [[ $1 == '--hibernate' ]]; then
+      systemctl hibernate
+    elif [[ $1 == '--logout' ]]; then
+      loginctl terminate-session "$XDG_SESSION_ID"
     fi
+  else
+    exit 0
+  fi
 }
 
 # Actions
 
 chosen="$(run_rofi)"
 case ${chosen} in
-    "$shutdown")
-        run_cmd --shutdown
-        ;;
-    "$reboot")
-        run_cmd --reboot
-        ;;
-    "$lock")
-        if [[ -x /usr/bin/swaylock ]] && [[ -x $HOME/bin/screen_lock ]]
-        then
-            sh "$HOME/bin/screen_lock"
-        else
-        	notify-send "swaylock is not installed"
-        fi
-        ;;
-    "$suspend")
-        run_cmd --suspend
-        ;;
-    "$logout")
-        run_cmd --logout
-        ;;
+"$shutdown")
+  run_cmd --shutdown
+  ;;
+"$reboot")
+  run_cmd --reboot
+  ;;
+"$lock")
+  if [[ -x /usr/bin/swaylock ]] && [[ -x $HOME/bin/screen_lock ]]; then
+    sh "$HOME/bin/screen_lock"
+  else
+    notify-send "swaylock is not installed"
+  fi
+  ;;
+"$suspend")
+  run_cmd --suspend
+  ;;
+"$logout")
+  run_cmd --logout
+  ;;
 esac
