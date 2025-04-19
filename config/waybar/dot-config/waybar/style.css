@@ -1,18 +1,20 @@
 @import "css/catppuccin_macchiato.css";
 
 * {
-  font-family: Ioveska NFP Light;
+  font-family: Iosevka NFP Light;
   font-size: 1.05em;
-  border-radius: 0;
+  border-radius: 0.5em;
   border: none;
+  background: transparent;
 }
 
-window#waybar {
+#window {
+  background: @base;
+  padding: 0.25em 1em;
+}
+
+window#waybar.empty #window {
   background: transparent;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
 }
 
 window#waybar.hidden {
@@ -22,90 +24,22 @@ window#waybar.hidden {
 #custom-powermenu {
   color: @base;
   background: @red;
-  border-radius: 1em;
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
-  padding-right: 1.25em;
-  padding-left: 1.05em;
+  border-radius: 0.75em;
+  padding: 0 1.05em;
 }
 
-#battery {
-  color: @green;
-}
-
-#battery.charging {
-  color: @green;
-}
-
-#battery.warning {
-  color: @warning_color;
-}
-
-#battery.critical {
-  color: @error_color;
-}
-
-#battery.warning:not(.charging) {
-  background: @red;
-  color: @base;
-}
-
-#bluetooth {
-  color: @sapphire;
-}
-
-#bluetooth.disabled {
-  color: @red;
-}
-
-#network.linked,
-.wifi {
-  color: @green;
-}
-
-#network.disconnected {
-  color: @yellow;
-}
-
-#network.disabled {
-  color: @red;
-}
-
-#network.linked,
-.wifi {
-  color: @green;
-}
-
-#network.disconnected {
-  color: @yellow;
-}
-
-#network.disabled {
-  color: @red;
-}
-
-#pulseaudio {
-  color: @cyan;
-}
-
-#temperature.critical {
-  color: @error_color;
+#workspaces {
+  /* border: 0.05em solid @blue; */
+  font-weight: bold;
+  padding: 0.25em 0;
 }
 
 #workspaces button {
-  background: transparent;
-  /* border: 0.05em solid @blue; */
-  border-radius: 0.5em;
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
-  padding-right: 1em;
+  transition: all 0.3s ease-in-out;
+  padding: 0.25em 0.25em 0em 0.25em;
 }
 
-#workspaces button.focused {
-  color: @mantle;
-  background-color: @blue;
-}
-
+#workspaces button.focused,
 #workspaces button.active {
   color: @mantle;
   background-color: @blue;
@@ -122,9 +56,50 @@ window#waybar.hidden {
   background: @teal;
 }
 
-#workspaces button.focused {
-  color: @text;
-  background-color: @blue;
+#disk,
+#memory,
+#cpu,
+#custom-temperature,
+#custom-gpu {
+  padding: 0 0.5em;
+}
+
+#battery,
+#battery.charging,
+#network.linked,
+.wifi {
+  color: @green;
+}
+
+#battery.warning {
+  color: @warning_color;
+}
+
+#battery.critical,
+#temperate.critical {
+  color: @error_color;
+}
+
+#battery.warning:not(.charging) {
+  background: @red;
+  color: @base;
+}
+
+#bluetooth {
+  color: @sapphire;
+}
+
+#bluetooth.disabled,
+#network.disabled {
+  color: @red;
+}
+
+#network.disconnected {
+  color: @yellow;
+}
+
+#pulseaudio {
+  color: @cyan;
 }
 
 .warning {
@@ -166,18 +141,16 @@ tooltip {
 tooltip,
 .modules-left,
 .modules-right {
-  background: @theme_base_color;
-  border-radius: 1em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  background: @base;
+  padding: 0 0.5em;
 }
 
 .modules-right {
-  margin-right: 1em;
+  margin-right: 0.5em;
 }
 
 .modules-left {
-  margin-left: 1em;
+  margin-left: 0.5em;
 }
 
 #tray {
@@ -188,7 +161,7 @@ tooltip,
   -gtk-icon-effect: dim;
 }
 
-#tray>.needs-aatention {
+#tray>.needs-attention {
   -gtk-icon-effect: highlight;
   color: @warning_color;
 }

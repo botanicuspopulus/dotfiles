@@ -5,28 +5,36 @@
     "margin-top": 5,
     "position": "top",
     "include": [
+        "$XDG_CONFIG_HOME/waybar/modules/pulseaudio.jsonc",
+        "$XDG_CONFIG_HOME/waybar/modules/network.jsonc",
+        "$XDG_CONFIG_HOME/waybar/modules/bluetooth.jsonc",
         "$XDG_CONFIG_HOME/waybar/modules/battery.jsonc",
         "$XDG_CONFIG_HOME/waybar/modules/temperature.jsonc",
         "$XDG_CONFIG_HOME/waybar/modules/custom.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/pulseaudio.jsonc",
         "$XDG_CONFIG_HOME/waybar/modules/clock.jsonc",
         "$XDG_CONFIG_HOME/waybar/modules/hyprland.jsonc",
         "$XDG_CONFIG_HOME/waybar/modules/cpu.jsonc",
         "$XDG_CONFIG_HOME/waybar/modules/memory.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/gpu.jsonc"
+        "$XDG_CONFIG_HOME/waybar/modules/gpu.jsonc",
+        "$XDG_CONFIG_HOME/waybar/modules/group-hardware.jsonc",
+        "$XDG_CONFIG_HOME/waybar/modules/group-sensor.jsonc",
+        "$XDG_CONFIG_HOME/waybar/modules/power-profiles-daemon.jsonc"
+
     ],
     "modules-left": [ 
         "hyprland/workspaces", 
-        "hyprland/submap"
+    ],
+    "modules-center": [
+        "hyprland/window"
     ],
     "modules-right": [ 
-        "tray", 
+        "custom/hypridle",
         "pulseaudio", 
-        "cpu", 
-        "memory", 
-        "custom/gpu",
-        "custom/temperature",
-        "battery", 
+        "network",
+        "bluetooth",
+        "group/hardware",
+        "group/sensor",
+        "power-profiles-daemon",
         "clock",
         "custom/powermenu",
     ],
