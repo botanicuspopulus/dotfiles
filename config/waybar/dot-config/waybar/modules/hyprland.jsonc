@@ -22,13 +22,4 @@
     },
     "separate-outputs": true,
   },
-  "custom/hypridle": {
-    "format": "󰌾",
-    "return-type": "json",
-    "escape": true,
-    "exec-on-event": true,
-    "interval": 60,
-    "exec": "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/hypridle.sh status",
-    "on-click": "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/hypridle.sh toggle",
-  },
 }

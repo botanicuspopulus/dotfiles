@@ -1,0 +1,18 @@
+#battery,
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning {
+  color: @peach;
+}
+
+#battery.critical,
+#temperate.critical {
+  color: @red;
+}
+
+#battery.warning:not(.charging) {
+  background-color: @red;
+  color: @base;
+}

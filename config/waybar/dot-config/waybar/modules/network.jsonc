@@ -1,13 +1,13 @@
 {
-    "network": {
-        "interval": 2,
-        "format-wifi": "󰖩  {essid}",
-        "format-ethernet": "󰈀 {ifname}: {ipaddr}/{cidr}",
-        "format-linked": "󰌹 {ifname} (No IP)",
-        "format-disconnected": "󰌙  Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "family": "ipv4",
-        "tooltip-format-wifi": "󰖩  {ifname} @ {essid}\nIP:\t\t{ipaddr}\nStrength:\t{signalStrength}% ({signaldBm} dBm)\nFrequency:\t{frequency} GHz\n 󰳡 {bandwidthUpBits} 󰳛 {bandwidthDownBits}",
-        "tooltip-format-ethernet": "󰈀 {ifname}\nIP: {ipaddr}\n󰳡 {bandwidthUpBits} 󰳛 {bandwidthDownBits}"
-    }
+  "network": {
+    "interval": 2,
+    "format-wifi": "󰖩  {essid}",
+    "format-ethernet": "󰈀 {ifname}: {ipaddr}/{cidr}",
+    "format-linked": "󰌹 {ifname} (No IP)",
+    "format-disconnected": "󰌙  Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "family": "ipv4",
+    "tooltip-format-wifi": "󰖩  {ifname} @ {essid}\nIP:\t\t{ipaddr}\nStrength:\t{signalStrength}% ({signaldBm} dBm)\nFrequency:\t{frequency} GHz\n 󰳡 {bandwidthUpBits} 󰳛 {bandwidthDownBits}",
+    "tooltip-format-ethernet": "󰈀 {ifname}\nIP: {ipaddr}\n󰳡 {bandwidthUpBits} 󰳛 {bandwidthDownBits}",
+  },
 }

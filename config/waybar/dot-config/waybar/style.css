@@ -1,15 +1,20 @@
 @import "css/catppuccin_macchiato.css";
+@import "css/workspaces.css";
+@import "css/battery.css";
+@import "css/network.css";
+@import "css/bluetooth.css";
 
 * {
   font-family: Iosevka NFP Light;
-  font-size: 1.05em;
+  font-size: 1.02em;
   border-radius: 0.5em;
   border: none;
-  background: transparent;
+  background-color: transparent;
+  min-height: 1.1em;
 }
 
 #window {
-  background: @base;
+  background-color: @mantle;
   padding: 0.25em 1em;
 }
 
@@ -23,134 +28,66 @@ window#waybar.hidden {
 
 #custom-powermenu {
   color: @base;
-  background: @red;
+  background-color: @red;
   border-radius: 0.75em;
   padding: 0 1.05em;
-}
-
-#workspaces {
-  /* border: 0.05em solid @blue; */
-  font-weight: bold;
-  padding: 0.25em 0;
-}
-
-#workspaces button {
-  transition: all 0.3s ease-in-out;
-  padding: 0.25em 0.25em 0em 0.25em;
-}
-
-#workspaces button.focused,
-#workspaces button.active {
-  color: @mantle;
-  background-color: @blue;
-}
-
-#workspaces button.urgent {
-  background: @text;
-}
-
-#workspaces button:hover {
-  box-shadow: inherit;
-  text-shadow: inherit;
-  color: @base;
-  background: @teal;
 }
 
 #disk,
 #memory,
 #cpu,
+#clock,
+#battery,
+#temperature,
+#bluetooth,
+#network,
+#pulseaudio,
+#idle_inhibitor,
+#power-profiles-daemon,
 #custom-temperature,
 #custom-gpu {
-  padding: 0 0.5em;
-}
-
-#battery,
-#battery.charging,
-#network.linked,
-.wifi {
-  color: @green;
-}
-
-#battery.warning {
-  color: @warning_color;
-}
-
-#battery.critical,
-#temperate.critical {
-  color: @error_color;
-}
-
-#battery.warning:not(.charging) {
-  background: @red;
-  color: @base;
-}
-
-#bluetooth {
-  color: @sapphire;
-}
-
-#bluetooth.disabled,
-#network.disabled {
-  color: @red;
-}
-
-#network.disconnected {
-  color: @yellow;
+  background-color: @mantle;
+  padding: 0 0.5em 0 0.5em;
+  margin: 0;
 }
 
 #pulseaudio {
   color: @cyan;
 }
 
-.warning {
-  color: @warning_color;
-}
-
-.error {
-  color: @error_color;
-}
-
-.normal {
-  color: @text;
-}
-
-.green {
-  color: @green;
-}
-
-.blue {
-  color: @blue;
-}
-
-.cyan {
-  color: @cyan;
-}
-
-.red {
-  color: @red;
-}
-
-.white {
-  color: @text;
-}
-
 tooltip {
-  border: @borders;
+  border: @blue;
+  border-width: 5px;
 }
 
 tooltip,
 .modules-left,
+.modules-right,
 .modules-right {
-  background: @base;
   padding: 0 0.5em;
 }
 
+tooltip,
+.modules-center,
+.modules-left {
+  background-color: @crust;
+}
+
 .modules-right {
-  margin-right: 0.5em;
+  background-color: transparent;
 }
 
 .modules-left {
   margin-left: 0.5em;
+}
+
+.modules-center {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+.module {
+  margin: 0;
 }
 
 #tray {
@@ -163,5 +100,5 @@ tooltip,
 
 #tray>.needs-attention {
   -gtk-icon-effect: highlight;
-  color: @warning_color;
+  color: @peach;
 }

@@ -1,44 +1,44 @@
 {
-    "reload_style_on_change": true,
+  "reload_style_on_change": true,
     "layer": "top",
-    "spacing": 20,
+    "spacing": 2,
     "margin-top": 5,
     "position": "top",
     "include": [
-        "$XDG_CONFIG_HOME/waybar/modules/pulseaudio.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/network.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/bluetooth.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/battery.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/temperature.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/custom.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/clock.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/hyprland.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/cpu.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/memory.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/gpu.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/group-hardware.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/group-sensor.jsonc",
-        "$XDG_CONFIG_HOME/waybar/modules/power-profiles-daemon.jsonc"
-
+      "$XDG_CONFIG_HOME/waybar/modules/pulseaudio.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/network.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/bluetooth.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/battery.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/temperature.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/custom.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/clock.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/hyprland.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/cpu.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/memory.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/gpu.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/group-hardware.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/temperature.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/power-profiles-daemon.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/idle_inhibitor.jsonc",
+      "$XDG_CONFIG_HOME/waybar/modules/disk.jsonc"
     ],
     "modules-left": [ 
-        "hyprland/workspaces", 
+      "hyprland/workspaces", 
     ],
     "modules-center": [
-        "hyprland/window"
+      "hyprland/window"
     ],
     "modules-right": [ 
-        "custom/hypridle",
-        "pulseaudio", 
-        "network",
-        "bluetooth",
-        "group/hardware",
-        "group/sensor",
-        "power-profiles-daemon",
-        "clock",
-        "custom/powermenu",
+      "idle_inhibitor",
+      "pulseaudio", 
+      "network",
+      "bluetooth",
+      "group/hardware",
+      "power-profiles-daemon",
+      "clock",
+      "custom/powermenu",
     ],
     "tray": {
-        "icon-size": 22
+      "icon-size": 22
     }
 }

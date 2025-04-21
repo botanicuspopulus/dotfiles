@@ -1,0 +1,12 @@
+#network.linked,
+.wifi {
+  color: @green;
+}
+
+#network.disabled {
+  color: @red;
+}
+
+#network.disconnected {
+  color: @peach;
+}

@@ -1,6 +1,7 @@
 {
   "bluetooth": {
     "format": " {status}",
+    "format-connected": "󰂯 󰌷",
     "format-disabled": "",
     "format-off": "",
     "format-no-controller": "",
