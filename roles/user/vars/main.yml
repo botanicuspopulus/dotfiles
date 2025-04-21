@@ -1,7 +1,6 @@
----
 # defaults file for user
-user_font: Lekton
-user_nerdfonts_url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ user_font }}.tar.xz"
-user_tokyonight_gtk_theme_url: "https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme.git"
+user_font: Iosevka
+user_nerdfonts_url: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ user_font }}.tar.xz
+user_gtk_theme_url: https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme.git
 user_icons_path: "{{ ansible_env.XDG_DATA_HOME | default('$HOME/.local/share') }}/icons"
 user_fonts_path: "{{ ansible_env.XDG_DATA_HOME | default('$HOME/.local/share') }}/fonts"
