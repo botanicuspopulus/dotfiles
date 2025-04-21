@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # Current Theme
 
 # CMDs
-uptime="$(uptime -p | sed -e 's/up //g')"
+uptime=${${(f)$(uptime -p)}/up /}
 
 # Options
 shutdown='󰐥  Shutdown'
@@ -12,15 +12,15 @@ lock='󰌾  Lock'
 suspend='󰒲  Suspend'
 hibernate="󰋊  hibernate"
 logout='󰍃  Logout'
-yes=' 󰄬 Yes'
-no='󰜺 No'
+yes='󰄬  Yes'
+no='󰜺  No'
 
 # Rofi CMD
 rofi_cmd() {
-  rofi -dmenu -p "󰐦" \
+  rofi -dmenu -p "󰤆" \
+    -mesg "${${(f)$(uptime -p)}/up /}" \
     -theme-str 'inputbar { children: [prompt, textbox]; }' \
     -theme-str 'prompt { 
-                    padding: 0.5em 0.75em 0.5em 0.55em;
                     border-radius: 100%; 
                     text-color: @background;
                     background-color: @red;
@@ -56,17 +56,13 @@ run_rofi() {
 run_cmd() {
   selected="$(confirm_exit)"
   if [[ "$selected" == "$yes" ]]; then
-    if [[ $1 == '--shutdown' ]]; then
-      systemctl poweroff
-    elif [[ $1 == '--reboot' ]]; then
-      systemctl reboot
-    elif [[ $1 == '--suspend' ]]; then
-      systemctl suspend
-    elif [[ $1 == '--hibernate' ]]; then
-      systemctl hibernate
-    elif [[ $1 == '--logout' ]]; then
-      loginctl terminate-session "$XDG_SESSION_ID"
-    fi
+    case "$1" in
+      --shutdown) systemctl poweroff;;
+      --reboot) systemctl reboot;;
+      --suspend) systemctl suspend;;
+      --hibernate) systemctl hibernate;;
+      --logout) loginctl terminate-session "$XDG_SESSION_ID"
+    ;; esac
   else
     exit 0
   fi
@@ -76,12 +72,8 @@ run_cmd() {
 
 chosen="$(run_rofi)"
 case ${chosen} in
-"$shutdown")
-  run_cmd --shutdown
-  ;;
-"$reboot")
-  run_cmd --reboot
-  ;;
+"$shutdown") run_cmd --shutdown ;;
+"$reboot") run_cmd --reboot ;;
 "$lock")
   if [[ -x /usr/bin/swaylock ]] && [[ -x $HOME/bin/screen_lock ]]; then
     sh "$HOME/bin/screen_lock"
@@ -89,10 +81,6 @@ case ${chosen} in
     notify-send "swaylock is not installed"
   fi
   ;;
-"$suspend")
-  run_cmd --suspend
-  ;;
-"$logout")
-  run_cmd --logout
-  ;;
+"$suspend") run_cmd --suspend ;;
+"$logout") run_cmd --logout ;;
 esac
