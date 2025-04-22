@@ -5,7 +5,7 @@
 --follow
 
 # Exclude directories
---glob=!{.git,.svn.Trash,node_modules,submodules/**,tealdeer,vender}
+--glob=!{.git,.svn.Trash,node_modules,submodules/**,tealdeer,vender,__pycache__,.venv}
 
 # Exclude file types
 --glob=!*.{lock}
