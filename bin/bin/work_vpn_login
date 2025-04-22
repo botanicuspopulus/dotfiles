@@ -1,0 +1,26 @@
+#!/usr/bin/env expect
+
+set bw_entry ""
+set vpn ""
+
+stty -echo
+send_user "Enter Bitwarden master password: "
+expect_user -re "(.*)\n"
+stty echo
+send_user "\n"
+set master_pwd $expect_out(1,string)
+
+set env(BW_PASSWORD) $master_pwd
+
+set session [exec bw unlock --raw --passwordenv BW_PASSWORD]
+
+unset env(BW_PASSWORD)
+
+set password [exec bw get password $bw_entry --session $session]
+set totp [exec bw get totp $bw_entry --session $session]
+
+spawn nmcli connection up $vpn --ask
+expect {
+  -re "(?i)Password.*:" { send "$totp$password\r" }
+}
+expect eof
