@@ -1,9 +1,8 @@
----
 packages_list:
   - cpanminus
   - djvulibre
   - go
-  - greetd-gtkgreet
+  - greetd-tuigreet
   - gtk-engine-murrine
   - jdk-openjdk
   - libmupdf

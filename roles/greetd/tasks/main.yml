@@ -1,63 +1,40 @@
----
 - name: Create a greeter user and add them to the 'video' group
   become: true
   ansible.builtin.user:
-    name: "{{ greetd_user }}"
-    groups: "{{ greetd_group }}"
+    name: '{{ greetd_user }}'
+    groups: '{{ greetd_group }}'
     create_home: false
     append: true
     state: present
-  tags:
-    - greetd
-
+  tags: [greetd]
 - name: Remove existing config.toml that may have been installed
   become: true
   ansible.builtin.file:
-    name: "{{ greetd_dir }}/config.toml"
+    name: '{{ greetd_dir }}/config.toml'
     state: absent
-  tags:
-    - greetd
-
-- name: Copy files to /etc/greetd
-  become: true
-  ansible.builtin.copy:
-    src: "files/{{ item }}"
-    dest: "{{ greetd_dir }}/{{ item }}"
-    owner: "{{ greetd_user }}"
-    group: "{{ greetd_group }}"
-    mode: "{{ greetd_file_mode }}"
-  loop:
-    - gtk-dark.css
-    - "{{ desktop_wm | lower }}.conf"
-  tags:
-    - greetd
-
+  tags: [greetd]
 - name: Populate config.toml template
   become: true
   ansible.builtin.template:
     src: templates/config.toml.j2
-    dest: "{{ greetd_dir }}/config.toml"
-    owner: "{{ greetd_user }}"
-    group: "{{ greetd_group }}"
-    mode: "{{ greetd_file_mode }}"
-  tags:
-    - greetd
-
+    dest: '{{ greetd_dir }}/config.toml'
+    owner: '{{ greetd_user }}'
+    group: '{{ greetd_group }}'
+    mode: '{{ greetd_file_mode }}'
+  tags: [greetd]
 - name: Add greetd environments
   become: true
   ansible.builtin.blockinfile:
-    path: "{{ greetd_dir }}/environments"
+    path: '{{ greetd_dir }}/environments'
     state: present
     create: true
-    mode: "{{ greetd_file_mode }}"
-    owner: "{{ greetd_user }}"
-    group: "{{ greetd_group }}"
+    mode: '{{ greetd_file_mode }}'
+    owner: '{{ greetd_user }}'
+    group: '{{ greetd_group }}'
     block: |
       Hyprland
       /bin/zsh
-  tags:
-    - greetd
-
+  tags: [greetd]
 - name: Disable SDDM
   become: true
   ansible.builtin.systemd:
@@ -66,13 +43,10 @@
   register: sddm_result
   failed_when: "'Could not find the requested service sddm' in sddm_result.msg"
   ignore_errors: true
-  tags:
-    - greetd
-
+  tags: [greetd]
 - name: Enable greetd service
   become: true
   ansible.builtin.systemd:
     name: greetd
     enabled: true
-  tags:
-    - greetd
+  tags: [greetd]
