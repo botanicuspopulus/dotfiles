@@ -1,26 +1,106 @@
 #!/usr/bin/env expect
 
-set bw_entry ""
-set vpn ""
-
-stty -echo
-send_user "Enter Bitwarden master password: "
-expect_user -re "(.*)\n"
-stty echo
-send_user "\n"
-set master_pwd $expect_out(1,string)
-
-set env(BW_PASSWORD) $master_pwd
-
-set session [exec bw unlock --raw --passwordenv BW_PASSWORD]
-
-unset env(BW_PASSWORD)
-
-set password [exec bw get password $bw_entry --session $session]
-set totp [exec bw get totp $bw_entry --session $session]
-
-spawn nmcli connection up $vpn --ask
-expect {
-  -re "(?i)Password.*:" { send "$totp$password\r" }
+proc abort {} {
+  send_user "Process timed out or encountered an error\n"
+  exit 1
 }
-expect eof
+
+proc bitwarden_vault_status {} {
+  spawn sh -c "bw status | jq -r .status"
+  expect {
+    -re "((un)?locked)\r\n" { return $expect_out(1,string) }
+    "unauthenticated" { 
+      send_user "Bitwarden is not currently logged in. Log in before you attempt to unlock"
+      exit 1
+    }
+  }
+}
+
+proc bitwarden_unlock {} {
+  set vault_status [bitwarden_vault_status]
+
+  if {$vault_status == ""} {
+    send_user "Bitwarden Vault Status Unknown. Exiting."
+    exit 1
+  }
+
+  if {[info exists ::env(BW_SESSION)] && $vault_status == "unlocked"} {
+    return $::env(BW_SESSION)
+  }
+
+  stty -echo
+  send_user "Enter Bitwarden Master Password: "
+  expect_user -re "(.*)\n"
+  send_user "\n"
+  stty echo
+
+  set ::env(BW_PASS) $expect_out(1,string)
+  spawn bw unlock --raw --passwordenv BW_PASS
+  expect {
+    -re "(.*)\n" { set session $expect_out(buffer) }
+    "Invalid master password." { exit 1 }
+    timeout abort
+  }
+  unset ::env(BW_PASS)
+
+  if {$session == "" && [info exists ::env(BW_SESSION)]} {
+    unset ::env(BW_SESSION)
+  } else {
+    set ::env(BW_SESSION) $session
+  }
+
+  return $session
+}
+
+proc select_bw_entry {} {
+  if {$vault_status == "" } {
+    send_user "Bitwarden Vault Status Unknown. Exiting."
+    exit 1
+  }
+
+  if {$vault_status == "locked"} {
+    bitwarden_unlock
+  }
+
+  set match_max 10000000
+  set vault_items {}
+
+  spawn bash -c "bw --nointeraction list items | jq --unbuffered --raw-output '.\[\].name'"
+  expect {
+    {Vault is locked.} { 
+      send_user "Bitwarden Vault is locked"
+      exit 1 
+    }
+    -re {(.*)\r\n} { append vault_items $expect_out(1,string); exp_continue }
+  }
+
+  set bw_entry [exec sh -c "echo \"$vault_items\" | fzf --reverse --height 40%"]
+
+  return $bw_entry
+}
+
+proc select_vpn_connection {} {
+  set vpn_name [exec sh -c "nmcli -t -f NAME,TYPE connection show | grep vpn | cut -d: -f1 | fzf --reverse --height 40%"]
+  return $vpn_name
+}
+
+log_user 0
+set config_file "$env(HOME)/.vpn_config"
+
+expect_before {
+  timeout { abort }
+  eof { abort }
+}
+
+set vpn_name [select_vpn_connection]
+set bw_entry [select_bw_entry]
+
+set password [exec bw get password $bw_entry]
+set totp [exec bw get totp $bw_entry]
+
+spawn nmcli connection up $vpn_name --ask
+expect {
+  -re "(?i)Password.*:" { send "$totp$password\r" ; exp_continue }
+  -re "(?i)Connection successfully activated(.*)" { send_user "VPN Connection Successful" }
+  "Error: Connection activation failed: Connection '$vpn_name' is already active" { send_user "VPN Connection Already Active" }
+}
