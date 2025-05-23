@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-source "$HOME/bin/gradient_colors.sh"
-source "$HOME/bin/util.sh"
+source "$HOME/bin/lib/waybar/gradient_colors.sh"
+source "$HOME/bin/lib/waybar/util.sh"
 
 typeset -gxr ICON_WIDTH=3
 
