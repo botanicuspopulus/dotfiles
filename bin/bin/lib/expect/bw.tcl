@@ -46,6 +46,8 @@ proc bitwarden_unlock {} {
 }
 
 proc select_bw_entry {} {
+  set vault_status [bitwarden_vault_status]
+
   if {$vault_status == "" } {
     send_user "Bitwarden Vault Status Unknown. Exiting."
     exit 1

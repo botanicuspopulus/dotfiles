@@ -1,5 +1,5 @@
 #!/usr/bin/env expect
-source ./lib/expect/bw.tcl
+source "$env(HOME)/bin/lib/expect/bw.tcl"
 
 proc abort {} {
   send_user "Process timed out or encountered an error\n"
