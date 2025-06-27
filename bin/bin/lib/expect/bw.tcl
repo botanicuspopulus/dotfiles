@@ -23,6 +23,7 @@ proc bitwarden_unlock {} {
 
   stty -echo
   send_user "Enter Bitwarden Master Password: "
+  set timeout -1
   expect_user -re "(.*)\n"
   send_user "\n"
   stty echo
@@ -60,7 +61,7 @@ proc select_bw_entry {} {
   set match_max 10000000
   set vault_items {}
 
-  spawn bash -c "bw --nointeraction list items | jq --unbuffered --raw-output '.\[\].name'"
+  spawn bash -c "bw --nointeraction list items --search vpn | jq --unbuffered --raw-output '.\[\].name'"
   expect {
     {Vault is locked.} { 
       send_user "Bitwarden Vault is locked"
