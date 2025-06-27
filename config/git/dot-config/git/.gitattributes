@@ -1,1 +1,47 @@
+# Handle all files as text by default and normalize line endings
+text=auto
+
+# Shell scripts should have LF line endings
 *.sh text eol=lf
+
+# Source code should normalize line endings
+*.js text
+*.ts text
+*.py text
+*.rb text
+*.php text
+*.html text
+*.css text
+*.c text
+*.cpp text
+*.h text
+*.hpp text
+
+# Documentation should normalize line endings
+*.md text
+*.txt text
+*.markdown text
+
+# Binary files should not be modified or diffed
+*.png binary
+*.jpg binary
+*.gif binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.o binary
+*.a binary
+*.so binary
+
+# Lock files: treat as text, but don't diff
+package-lock.json -diff
+yarn.lock -diff
+pnpm-lock.yaml -diff
+
+# Config and env files
+*.env text
+*.json text
+*.yaml text
+*.yml text
+*.toml text
