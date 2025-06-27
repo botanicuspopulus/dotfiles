@@ -1,5 +1,5 @@
 [init]
-  defaultBranch=master
+  defaultBranch=main
 
 [credential]
  helper = store
@@ -7,20 +7,15 @@
  # for 60 seconds (requires git 1.7.9+)
  helper = cache --timeout 60
 
-[commit]
-  verbose = true
-  template = ~/.config/git/.gittemplates/commit
+[help]
+  autocorrect = prompt # Prompt before autocorrecting typos
 
 [user]
  name = William Smith
  email = william@williamgsmith.co.za
 
-[push]
-  default = current
-  followTags = true
-  recurseSubmodules = check # See: https://stackoverflow.com/questions/5814319/git-submodules-push
-
 [core]
+  editor = nvim
   pager = delta
   whitespace = trailing-space,space-before-tab
   excludesfile = ~/.config/git/.gitignore
@@ -29,12 +24,46 @@
   editor = nvim
   attributesFile = ~/.config/git/gitattributes
 
+[push]
+  default = current
+  autoSetupRemote = true
+  followTags = true
+  recurseSubmodules = check # See: https://stackoverflow.com/questions/5814319/git-submodules-push
+
+[commit]
+  verbose = true
+  template = ~/.config/git/.gittemplates/commit
+
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  renames = copies
+  mnemonicprefix = true # [i]index, [w]ord tree, [c]ommit, [o]bjec
+
+[grep]
+  lineNumber = true
+
+[interactive]
+  diffFilter = delta --color-only
+
+[merge]
+  conflictstyle = zdiff3 # Improved merge conflict markers (Git >= 2.35)
+  ff = false
+  stat = true
+  tool = mergetool
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = version:refname
+
 [advice]
   statusHints = false
   pushNonFastFastforward = false
 
 [log]
- mailmap = true
+  mailmap = true
 
 [alias]
   prune = fetch --prune
@@ -83,24 +112,6 @@
   hunk-header-style = file line-number syntax
   grep-file-style = red
 
-[diff]
-  renames = copies
-  mnemonicprefix = true # [i]index, [w]ord tree, [c]ommit, [o]bjec
-  colorMoved = default
-  algorithm = histogram
-
-[grep]
-  lineNumber = true
-
-[interactive]
-  diffFilter = delta --color-only
-
-[merge]
-  ff = false
-  stat = true
-  conflictstyle = diff3
-  tool = mergetool
-
 [mergetool "mergetool"]
   cmd = nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
   trustExitCode = true
@@ -115,17 +126,21 @@
 [fetch]
   # https://spin.atomic.com/2020/05/05/git-configurations-default
   prune = true
+  pruneTags = true
+  all = true
 
 [pull]
   # https://spin.atomic.com/2020/05/05/git-configurations-default
   rebase = true
 
 [rebase]
-  autoStash = false
-
+  autoSquash = true # Autosquash fixup! and squash! commits
+  autoStash = false # Automatically stash/stash pop before and after rebase
+  updateRefs = true # Update local refs after rebase
 
 [rerere] # See rerere docs at https://git-scm.com/blog/2010/03/08/rerere.html
-  enabled = true
+  enabled = true # Remember how you resolved conflicts
+  autoupdate = true # Automatically update the index if conflicts are found
 
 [status]
   showUntrackedFiles = all
