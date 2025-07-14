@@ -30,6 +30,7 @@
     ],
     "modules-right": [ 
       "idle_inhibitor",
+      "battery",
       "pulseaudio", 
       "network",
       "bluetooth",
