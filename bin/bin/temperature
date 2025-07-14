@@ -1,7 +1,6 @@
 #!/bin/zsh
 
 source "$HOME/bin/lib/waybar/theme.sh"
-source "$HOME/bin/lib/waybar/util.sh"
 
 min_temp=${1:=0}
 max_temp=${2:=100}

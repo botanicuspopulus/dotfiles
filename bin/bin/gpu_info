@@ -6,7 +6,6 @@ script_dir=${0:A:h}
 # Check if there are any nvidia gpus
 
 source "$HOME/bin/lib/waybar/theme.sh"
-source "$HOME/bin/lib/waybar/util.sh"
 
 vga_devices=$(lspci)
 nvidia_gpus=$(grep -ic nvidia <<< "$vga_devices")
