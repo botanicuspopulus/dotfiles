@@ -1,18 +1,26 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-wifi_enabled() {
-   nmcli radio wifi
+set -o pipefail
+set -o errexit
+
+function scan_networks() {
+  local chosen_connection=$1
+
+  local active ssid security bars bandwidth rate request_fields
+  local request_fields=ACTIVE,SSID,SECURITY,BARS,RATE,BANDWIDTH
+
+  local networks=$(nmcli --fields $request_fields device wifi list ifname "$chosen_connection" | jc --nmcli)
+
+  echo "$networks"
 }
 
-rofi_cmd() {
-    local list="$1"
-    local prompt="$2"
-    local lines;
+function rofi_cmd() {
+    local list=$1
+    local prompt=$2
 
-    lines=$(echo -e "$list" | wc -l)
+    local lines=$(echo -e "$list" | wc -l)
 
-    if [[ $lines -gt 5 ]]
-    then
+    if ((lines > 5)); then
         lines=5
     fi
 
@@ -24,110 +32,179 @@ rofi_cmd() {
          -l "$lines"
 }
 
-rofi_wifi_list() {
-  local list="$1"
-  local prompt="$2"
-  local lines;
+function get_identity() {
+  local ssid=$1
+  local identity=$(printf "" | rofi -dmenu -theme minimal_prompt -p "󰍀  Identity for $ssid:")
+  if [[ -z $identity ]]; then
+    notify-send "No identity provided"
+    return 1
+  fi
+  echo "$identity"
+}
 
-  lines=$(echo -en "$list" | wc -l)
+function get_password() {
+  local ssid=$1
+  local password=$(printf "" | rofi -dmenu -theme minimal_prompt -password -p "󰍀  Password for $ssid:")
+  if [[ -z $password ]]; then
+    notify-send "No password provided"
+    return 1
+  fi
+  echo "$password"
+}
 
-  if [[ $lines -gt 5 ]]
-  then
-      lines=5
+function get_device() {
+  local devices=$(nmcli --fields DEVICE,TYPE device status | awk '/wifi/ && !/p2p/ {print $1}')
+  if [[ -z $devices ]]; then
+    notify-send "No Wi-Fi connections found"
+    return 1
   fi
 
-  echo -en "${list}" | rofi -dmenu \
-    -i \
-    -format 'i' \
-    -l  "$lines" \
-    -p "󰖩  Wi-Fi Networks" \
-    -theme-str 'window { width: 40%; }'
+  local selected_device=$(rofi_cmd "$devices" "󰈀  Network Interface")
+
+  echo "$selected_device"
 }
 
-rofi_passwd() {
-    rofi -dmenu \
-         -prompt "Password: " \
-         -password
+function get_network_index() {
+  local networks=$1
+  local network_count=$(jq -r '. | length' <<< "$networks")
+
+  ((network_count > 5)) && network_count=5
+
+  jq -r '
+    def pad(n): . + (" " * (n - length));
+
+    def is_active(a): if a == "yes" then "󰖩 " else "󰖪 " end;
+
+    def security_icon(s):
+      if s == null then "󰣯 "
+      elif s | test("WPA3") then "󰍁 "
+      elif s | test("WPA2") then "󰍁 "
+      elif s | test("WPA") then "󰍁 "
+      elif s | test("WEP") then "󰍀 "
+      elif s | test("802.1X") then " "
+      elif s == "--" then "󱄙 "
+      else "󰣯 " end;
+
+      sort_by([-(if .active == "yes" then 1 else 0 end), (.bars|length)]) 
+      | .[] 
+      | (
+          "\(is_active(.active) | pad(4)) " +
+          "\(.ssid | pad(30)) " +
+          "\(security_icon(.security)) " +
+          "\(.bandwidth | pad(10)) " +
+          "\(.rate | pad(10)) " + 
+          "\(.bars | pad(5))"
+        )
+    ' <<< "$networks" | rofi -dmenu \
+      -i -no-custom \
+      -format 'i' \
+      -l "$network_count" \
+      -p "󱄙  Wi-Fi Networks" \
+      -theme-str 'window { width: 40%; }'
 }
 
-wifi_connections=$(nmcli --fields DEVICE,TYPE device status | awk '/wifi/ && !/p2p/ {print $1}')
+function connect_to_8021x() {
+  if [[ -z $1 ]]; then
+    notify-send "No network provided"
+    return 1
+  fi
 
-if [[ -z $wifi_connections ]]
-then
-    notify-send "No Wi-Fi connections found"
-    exit 0
-fi
+  local network=$1
 
-chosen_connection=$(rofi_cmd "$wifi_connections" "󰈀  Network Interface")
+  local ssid=$(jq -r '.ssid' <<< "$network")
+  local identity=$(get_identity "$ssid")
+  if [[ $identity == "" ]]; then
+    return 1
+  fi
 
-wifi_list() {
-  local chosen_connection=$1
-  local fields=ACTIVE,SSID,SECURITY,BANDWIDTH,RATE,BARS
-  nmcli --terse --fields $fields device wifi list ifname "$chosen_connection" 
+  local password=$(get_password "$ssid")
+  if [[ $password == "" ]]; then
+    return 1
+  fi
+
+  if nmcli connection show "$ssid" >/dev/null 2>&1; then
+    nmcli connection modify "$ssid" \
+      802-1x.identity "$identity" \
+      802-1x.password "$password" \
+      802-1x.eap peap
+    notify-send "Updated connection for $ssid"
+  else
+    nmcli connection add type wifi con-name "$ssid" \
+      802-11-wireless.ssid "$ssid" \
+      802-11-wireless-security.key-mgmt wpa-eap \
+      802-1x.identity "$identity" \
+      802-1x.password "$password" \
+      802-1x.eap peap \
+      802-1x.phase2-auth mschapv2
+    notify-send "Added connection for $ssid"
+  fi
+
+  sudo tee "/etc/NetworkManager/system-connections/$ssid" > /dev/null <<EOF
+[connection]
+id=$ssid
+
+[802-1x]
+password=$password
+EOF
+
+  sudo chmod 600 "/etc/NetworkManager/system-connections/$ssid"
+
+  sudo systemctl restart NetworkManager
+  sleep 2
+  nmcli connection up "$ssid"
 }
 
-declare -a wifi_info_list
+function connect_to_wpa() {
+  if [[ -z $1 ]]; then
+    notify-send "No network provided"
+    return 1
+  fi
 
-readarray -t lines < <(wifi_list "$chosen_connection")
+  local network=$1
 
-for line in "${lines[@]}"
-do
-  [[ -z "$line" ]] && continue
+  local ssid=$(jq -r '.ssid' <<< "$network")
+  local password=$(get_password "$ssid")
+  if [[ $? -ne 0 ]]; then
+    exit 1
+  fi
 
-  declare -A wifi_info
+  nmcli device wifi connect "$ssid" password "$password"
+}
 
-  IFS=':' read -r ACTIVE SSID SECURITY BANDWIDTH RATE BARS <<< "$line"
-  wifi_info["ACTIVE"]="$ACTIVE"
-  wifi_info["SSID"]="$SSID"
-  wifi_info["SECURITY"]="$SECURITY"
-  wifi_info["BANDWIDTH"]="$BANDWIDTH"
-  wifi_info["RATE"]="$RATE"
-  wifi_info["BARS"]="$BARS"
+function main() {
+  local selected_device=$(get_device)
+  if [[ -z $selected_device ]]; then
+    notify-send "No device selected"
+    return 1
+  fi
 
-  wifi_info_list+=("$(declare -p wifi_info)")
-done
+  local available_networks=$(scan_networks "$selected_device")
+  if [[ -z $available_networks ]]; then
+    notify-send "No networks found"
+    return 1
+  fi
 
-wifi_list_string=""
-for wifi_info in "${wifi_info_list[@]}"
-do
-  eval "$wifi_info"
+  local network_index=$(get_network_index "$available_networks")
+  if [[ -z $network_index ]]; then
+    notify-send "No network selected"
+    return 1
+  fi
 
-  active="${wifi_info[ACTIVE]}"
-  ssid="${wifi_info[SSID]}"
-  security="${wifi_info[SECURITY]}"
-  bandwidth="${wifi_info[BANDWIDTH]}"
-  rate="${wifi_info[RATE]}"
-  bars="${wifi_info[BARS]}"
+  local network=$(jq -r --argjson "index" "$network_index" '.[$index]' <<< "$available_networks")
+  local security=$(jq -r '.security' <<< "$network")
 
-  wifi_list_string+="$(printf "%-4s%-10s%-30s%-10s%-15s%-5s" "$active" "$security" "$ssid" "$bandwidth" "$rate" "$bars")\n"
-done
+  case $security in
+    WPA3|WPA2|WPA)
+      connect_to_wpa "$network"
+      ;;
+    *"802.1X"*)
+      connect_to_8021x "$network"
+      ;;
+    *)
+      notify-send "No authentication method found"
+      return 1
+      ;;
+  esac
+}
 
-index=$(rofi_wifi_list "$wifi_list_string")
-
-eval "${wifi_info_list[$index]}"
-
-if [[ ${wifi_info[ACTIVE]} == "yes" ]]
-then
-  notify-send "Already connected to ${wifi_info[SSID]}"
-  exit 0
-fi
-
-security="${wifi_info[SECURITY]}"
-
-if [[ $security == "--" ]]
-then
-  nmcli device wifi connect "${wifi_info[SSID]}"
-elif [[ $security == "WPA2 802.1X" ]]
-then
-  identity=$(rofi -dmenu -p "Identity: ")
-  password=$(rofi_passwd)
-
-  nmcli device wifi connect "${wifi_info[SSID]}" password "$password" identity "$identity"
-elif [[ $security == "WPA2" ]]
-then
-  password=$(rofi_passwd)
-  nmcli device wifi connect "${wifi_info[SSID]}" password "$password"
-else
-  notify-send "Unsupported security type: ${wifi_info[SECURITY]}"
-  exit 1
-fi
+main

@@ -1,0 +1,13 @@
+@import "theme.rasi"
+window {
+  width: 40%;
+}
+
+listview {
+  background-color:   @background;
+  enabled: false;
+}
+
+message {
+  enabled: false;
+}
