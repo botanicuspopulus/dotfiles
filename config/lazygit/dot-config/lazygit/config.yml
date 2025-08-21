@@ -51,7 +51,6 @@ git:
   autoRefresh: true
   fetchAll: true
   branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=short --pretty=full --oneline {{branchName}} --
-  allBranchesLogCmd: git log --graph --all --color=always --abbrev-commit --decorate --date=short  --pretty=full
   diffContextSize: 3
   overrideGpg: false
   disableForcePushing: false
@@ -61,6 +60,8 @@ git:
     order: topo-order
     showGraph: always
     showWholeGraph: true
+  allBranchesLogCmds:
+    - git log --graph --all --color=always --abbrev-commit --decorate --date=short  --pretty=full
 update:
   method: prompt
   days: 14
