@@ -15,7 +15,7 @@ configuration {
 *{
   textbox-padding:    0.25em 0.5em;
   textbox-radius:     0.1em;
-  font:               "Ioveska NFP Light 12";
+  font:               "Iosevka NFP Light 12";
 }
 
 button {
