@@ -36,10 +36,10 @@ gui:
   authorColors:
     "*": "#b7bdf8"
 git:
-  paging:
-    colorArg: always
-    pager: delta --paging=never
-    useConfig: false
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never
+      useConfig: false
   commit:
     signOff: false
   merging:
@@ -145,7 +145,7 @@ keybinding:
     viewResetOptions: D
     fetch: f
     toggleTreeView: "`"
-    openMergeTool: M
+    openMergeOptions: M
     openStatusFilter: <c-b>
   branches:
     createPullRequest: o
