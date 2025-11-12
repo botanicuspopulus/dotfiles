@@ -8,23 +8,28 @@ size = "75% 60%"
 max_size = "1920px 100%"
 unfocus = "hide"
 
-[scratchpads.Ferdium]
-animation = "fromRight"
-command = "flatpak run org.ferdium.Ferdium"
+[scratchpads.Outlook]
+command = "firefox --new-window 'ext+container:name=Work&url=https://outlook.office365.com'"
 match_by = "title"
-title = "re:Ferdium.*"
-multi = false
-lazy = true
+title = "re:.*Outlook.*Mozilla Firefox"
 size = "50% 90%"
+lazy = true
+
+[scratchpads.Teams]
+command = "firefox --new-window 'ext+container:name=Work&url=https://teams.microsoft.com'"
+size = "50% 90%"
+match_by = "title"
+title = "re:.*Microsoft Teams.*Mozilla Firefox"
+lazy = true
 
 [scratchpads.volume]
 command = "pavucontrol"
 animation = "fromTop"
-lazy = true
 size = "25% 35%"
+lazy = true
 
 [scratchpads.bluetooth]
 command = "blueman-manager"
 animation = "fromTop"
-lazy = true
 size = "25% 35%"
+lazy = true
