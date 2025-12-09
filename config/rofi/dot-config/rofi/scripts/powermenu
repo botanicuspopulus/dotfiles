@@ -75,8 +75,8 @@ case ${chosen} in
 "$shutdown") run_cmd --shutdown ;;
 "$reboot") run_cmd --reboot ;;
 "$lock")
-  if [[ -x /usr/bin/swaylock ]] && [[ -x $HOME/bin/screen_lock ]]; then
-    sh "$HOME/bin/screen_lock"
+  if command -v swaylock &> /dev/null; then
+    swaylock
   else
     notify-send "swaylock is not installed"
   fi
