@@ -70,15 +70,16 @@ run_cmd() {
 
 # Actions
 
+lock_application="hyprlock"
 chosen="$(run_rofi)"
 case ${chosen} in
 "$shutdown") run_cmd --shutdown ;;
 "$reboot") run_cmd --reboot ;;
 "$lock")
-  if command -v swaylock &> /dev/null; then
-    swaylock
+  if command -v "$lock_application" &> /dev/null; then
+    pidof "$lock_application" || "$lock_application"
   else
-    notify-send "swaylock is not installed"
+    notify-send "$lock_application not found"
   fi
   ;;
 "$suspend") run_cmd --suspend ;;
