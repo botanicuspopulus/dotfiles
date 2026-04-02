@@ -23,8 +23,8 @@ expect_before {
 set vpn_name [select_vpn_connection]
 set bw_entry [select_bw_entry]
 
-set password [exec bw get password $bw_entry]
-set totp [exec bw get totp $bw_entry]
+set password [exec rbw get $bw_entry]
+set totp [exec rbw totp $bw_entry]
 
 spawn nmcli connection up $vpn_name --ask
 expect {
