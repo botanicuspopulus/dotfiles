@@ -34,7 +34,7 @@ if handle ~= nil then
 
 	has_nvidia = gpus:lower():find("nvidia") ~= nil
 	has_intel = gpus:lower():find("intel") ~= nil
-	has_amd = gpus:lower():find("amd") ~= nil or gpus:lower():find("ati") ~= nil
+	has_amd = gpus:lower():find("amd") ~= nil
 end
 
 if has_nvidia and (has_intel or has_amd) then
