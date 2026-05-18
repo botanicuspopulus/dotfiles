@@ -10,5 +10,3 @@
   block:
     - name: Handle OS specific packages
       ansible.builtin.include_tasks: "{{ ansible_os_family }}.yml"
-    - name: Handle Flatpak packages
-      ansible.builtin.include_tasks: flatpak.yml

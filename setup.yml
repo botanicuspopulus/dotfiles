@@ -8,15 +8,10 @@
 
   roles:
     - setup
-    - asdf
     - packages
     - pipewire
     - gpu
-    - nvim
     - stow
     - python
-    - rofi-calc
     - user
     - greetd
-    - ssh
-    - vagrant

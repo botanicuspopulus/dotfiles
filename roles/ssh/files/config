@@ -1,6 +1,0 @@
-AddKeysToAgent yes
-
-Host github.com
-  HostName github.com
-  User botanicuspopulus
-  IdentityFile ~/.ssh/id_ed25519

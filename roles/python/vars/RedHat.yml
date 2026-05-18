@@ -1,7 +1,0 @@
----
-python_packages:
-  - tk-devel
-  - sqlite-devel
-  - sqlite-libs
-  - poetry
-  - patchelf

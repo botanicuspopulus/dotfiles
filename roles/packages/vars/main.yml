@@ -113,4 +113,4 @@ packages_common:
     - rofi-wayland
     - waybar
     - xsettingsd
-    - swaylock-effects
+    - hyprlock
