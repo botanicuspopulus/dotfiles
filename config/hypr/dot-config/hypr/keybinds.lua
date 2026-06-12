@@ -43,6 +43,8 @@ hl.bind(vars.mainMod .. " + SHIFT + bracketleft", hl.dsp.group.move_window({ for
 hl.bind(vars.mainMod .. " + SHIFT + bracketright", hl.dsp.group.move_window({ forward = false }))
 hl.bind(vars.mainMod .. " + SHIFT + ALT + H", hl.dsp.window.move({ into_or_create_group = "l" }))
 hl.bind(vars.mainMod .. " + SHIFT + ALT + L", hl.dsp.window.move({ into_or_create_group = "r" }))
+hl.bind(vars.mainMod .. " + ALT + H", hl.dsp.group.prev())
+hl.bind(vars.mainMod .. " + ALT + L", hl.dsp.group.next())
 hl.bind(vars.mainMod .. " + T", hl.dsp.group.toggle())
 
 hl.bind(vars.mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
