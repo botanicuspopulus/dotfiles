@@ -1,0 +1,110 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "lsp": true,
+  "model": "my-local-llm/ornith_1_0",
+  "permission": {
+    "lsp": "allow",
+    "bash": {
+      "*": "ask",
+      "ls *": "allow",
+      "find *": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "fd *": "allow",
+      "jq *": "allow",
+      "cat *": "allow",
+      "tree *": "allow",
+      "tail *": "allow",
+      "head *": "allow",
+      "sort *": "allow",
+      "wc *": "allow",
+      "awk *": "allow",
+      "objdump *": "allow",
+      "readelf *": "allow",
+      "rm *": "deny",
+      "git status *": "allow",
+      "git diff *": "allow",
+      "git log *": "allow",
+      "git show *": "allow",
+      "git stash *": "allow",
+      "git commit *": "allow",
+      "git push *": "deny",
+      "sudo *": "deny",
+      "rmdir *": "deny",
+      "chmod *": "deny",
+      "chown *": "deny",
+      "dd *": "deny",
+      "mkfs *": "deny",
+      "fdisk *": "deny",
+      "shutdown *": "deny",
+      "reboot *": "deny",
+      "iptables *": "deny",
+      "ssh *": "deny",
+      "scp *": "deny",
+      "rsync *": "deny",
+      "nc *": "deny",
+      "curl *": "ask",
+      "wget *": "ask",
+    },
+    "read": {
+      "*": "allow",
+      "**/.env": "deny",
+      "**/.env.*": "deny",
+      "**/.key": "deny",
+      "**/*.pem": "deny"
+    },
+    "websearch": "allow",
+    "webfetch": "allow",
+    "doom_loop": "ask",
+    "external_directory": {
+      "~/.config/opencode/**": "allow",
+      "~/.mempalace/**": "allow"
+    }
+  },
+  "provider": {
+    "my-local-llm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "My Local LLM",
+      "options": {
+        "baseURL": "http://10.8.0.1:3000/v1",
+        "apiKey": "dummy-key"
+      },
+      "models": {
+        "qwen36_moe": {
+          "name": "Qwen3.6-35B-A3B Q4_K_M"
+        },
+        "ornith_1_0": {
+          "name": "Ornith 1.0-35B IQ4_XS"
+        }
+      }
+    }
+  },
+  "mcp": {
+    "mempalace": {
+      "type": "local",
+      "command": [
+        "mempalace-mcp"
+      ],
+      "enabled": true
+    }
+  },
+  "instructions": [
+    "AGENTS.md",
+    "~/.mempalace/identity.txt"
+  ],
+  "watcher": {
+    "ignore": [
+      "build/**",
+      "cmake-build-*/**",
+      ".git/**",
+      "node_modules/**",
+      "*.o",
+      "*.obj"
+    ]
+  },
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "reserved": 10000
+  }
+}
